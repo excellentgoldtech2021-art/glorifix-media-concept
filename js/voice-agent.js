@@ -35,7 +35,7 @@
     },
     {
       keywords: ['social media', 'social', 'starter', 'growth', 'page management', 'instagram management', 'posts'],
-      answer: "Our monthly Social Media Management packages are: Starter Package at ₦50,000 for 2 platforms and 12 posts, Growth Package at ₦120,000 for 3 platforms and 20 posts, and Premium Package at ₦240,000 for 5 platforms with full digital dominance.",
+      answer: "Our monthly Social Media Management packages are: Starter Package at ₦50,000 for 2 platforms and 12 posts, Growth Package at ₦120,000 for 3 platforms and 20 posts, and Premium Package at ₦240,000 for 4 platforms with full digital dominance.",
       whatsappText: "Hello Glorifix! I am interested in Social Media Management packages"
     },
     {
