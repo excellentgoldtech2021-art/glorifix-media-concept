@@ -34,6 +34,11 @@
       whatsappText: "Hello Glorifix! I want to run Facebook and Instagram Ads"
     },
     {
+      keywords: ['social media', 'social', 'starter', 'growth', 'page management', 'instagram management', 'posts'],
+      answer: "Our monthly Social Media Management packages are: Starter Package at ₦50,000 for 2 platforms and 12 posts, Growth Package at ₦120,000 for 3 platforms and 20 posts, and Premium Package at ₦240,000 for 5 platforms with full digital dominance.",
+      whatsappText: "Hello Glorifix! I am interested in Social Media Management packages"
+    },
+    {
       keywords: ['phone', 'call', 'contact', 'whatsapp', 'number', 'address', 'office', 'where'],
       answer: "You can reach Glorifix directly on 09050278999 or email glorifixmediaconcept@gmail.com. Our office is located Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, with client support in Abuja.",
       whatsappText: "Hello Glorifix! I would like to speak with a consultant"
@@ -45,7 +50,7 @@
     },
     {
       keywords: ['pricing', 'price', 'cost', 'how much', 'packages'],
-      answer: "Our core services: CAC Business Name is ₦35,000, Limited Company is ₦75,000, NGO Trustee is ₦150,000, Website design starts from ₦100,000, and Meta Ads from ₦60,000.",
+      answer: "Our core services: CAC Business Name is ₦35,000, Limited Company is ₦75,000, NGO Trustee is ₦150,000, Social Media packages are ₦50,000 (Starter), ₦120,000 (Growth), ₦240,000 (Premium), Website design starts from ₦100,000, and Meta Ads from ₦60,000.",
       whatsappText: "Hello Glorifix! Please send me your complete pricing brochure"
     }
   ];
