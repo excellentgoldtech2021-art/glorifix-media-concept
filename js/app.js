@@ -236,21 +236,19 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const payload = {
+        Full_Name: name,
+        Email_Address: email,
+        Phone_Number: phone,
+        Service_Requested: service,
+        Appointment_Date: selectedDate,
+        Appointment_Time: selectedSlot,
+        Project_Notes: notes || "None provided",
         _subject: `📅 New Appointment Booking: ${name} - ${service}`,
-        _replyto: email,
-        _template: 'table',
-        _captcha: 'false',
-        "Client Name": name,
-        "Email Address": email,
-        "Phone / WhatsApp": phone,
-        "Service Requested": service,
-        "Scheduled Date": selectedDate,
-        "Scheduled Time": selectedSlot,
-        "Project Goals / Notes": notes || "None provided",
-        "Submitted At": new Date().toLocaleString()
+        _replyto: email
       };
 
-      fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
+      // Primary: Post to Glorifix Inquiries API (saves to dashboard + emails customer & Ezekiel)
+      fetch('api/contact.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -258,7 +256,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(payload)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('API server unavailable');
+        return res.json();
+      })
       .then(data => {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -270,12 +271,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statusDiv) {
           statusDiv.innerHTML = `
-            <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left; line-height: 1.55;">
-              <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">🎉 Appointment Sent to Email!</strong>
-              Thank you, <strong>${escapeHtml(name)}</strong>! Your appointment request for <strong>${escapeHtml(selectedDate)} at ${escapeHtml(selectedSlot)}</strong> has been delivered directly to <strong>glorifixmediaconcept@gmail.com</strong>.<br>
-              <span style="font-size: 0.88rem; color: #2E7D32;">We will review your project brief and reply to <strong>${escapeHtml(email)}</strong> or <strong>${escapeHtml(phone)}</strong> promptly.</span>
-              <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed #A5D6A7; font-size: 0.88rem;">
-                Prefer instant confirmation? <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" style="color: #00796B; font-weight: 700; text-decoration: underline;">Click here to also notify us on WhatsApp &rarr;</a>
+            <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 16px; border-radius: 8px; text-align: left; line-height: 1.6;">
+              <strong style="font-size: 1.05rem; color: #1B5E20; display: block; margin-bottom: 6px;">🎉 Consultation Booked Successfully!</strong>
+              Thank you, <strong>${escapeHtml(name)}</strong>! A confirmation receipt has been sent to your email (<strong>${escapeHtml(email)}</strong>).<br>
+              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${data.id || 'GLF-BOOK'}</strong> &bull; Ezekiel and our team have received your booking in our dashboard and will contact you within 24 hours.</span>
+              <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #A5D6A7; font-size: 0.9rem;">
+                Prefer instant WhatsApp confirmation? <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" style="color: #00796B; font-weight: 700; text-decoration: underline;">Click here to chat directly with Ezekiel &rarr;</a>
               </div>
             </div>
           `;
@@ -284,32 +285,44 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBookingSummary();
       })
       .catch(err => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = origText;
-        }
-
-        const mailtoUrl = `mailto:glorifixmediaconcept@gmail.com?subject=${encodeURIComponent('Appointment Booking: ' + name)}&body=${encodeURIComponent('Client Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + phone + '\nService: ' + service + '\nDate: ' + selectedDate + ' at ' + selectedSlot + '\nNotes: ' + notes)}`;
-        const whatsappMsg = `Hello Glorifix Media Concept! I want to book an appointment:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}`;
-        const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
-
-        if (statusDiv) {
-          statusDiv.innerHTML = `
-            <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px; text-align: left; line-height: 1.55;">
-              <strong style="font-size: 1rem; color: #E65100; display: block; margin-bottom: 4px;">Direct Delivery Backup</strong>
-              Your device network took longer to connect. Please click below to send your appointment details directly via your email client or WhatsApp:<br>
-              <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="${mailtoUrl}" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">Send via Email App</a>
-                <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">Confirm on WhatsApp</a>
+        // Fallback to FormSubmit if API endpoint unavailable
+        fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(() => {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left;">
+                <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">🎉 Appointment Sent!</strong>
+                Thank you, <strong>${escapeHtml(name)}</strong>! Your appointment has been sent to <strong>glorifixmediaconcept@gmail.com</strong>. We will reply to <strong>${escapeHtml(email)}</strong> promptly.
               </div>
-            </div>
-          `;
-        }
+            `;
+          }
+          bookingForm.reset();
+          updateBookingSummary();
+        })
+        .catch(() => {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+          const whatsappMsg = `Hello Glorifix! I want to book an appointment:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}`;
+          const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
+                <strong>Please confirm on WhatsApp:</strong><br>
+                <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Confirm on WhatsApp &rarr;</a>
+              </div>
+            `;
+          }
+        });
       });
     });
   }
 
-  // 5. Contact Form Submission — Delivered Directly to glorifixmediaconcept@gmail.com
+  // 5. Contact Form Submission — Customer & Admin Notifications
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -333,26 +346,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const origText = submitBtn ? submitBtn.innerHTML : 'Send Direct Message to Email';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = 'Sending to Email... ⏳';
+        submitBtn.innerHTML = 'Sending to Email &amp; Dashboard... ⏳';
       }
       if (statusDiv) {
         statusDiv.style.display = 'block';
-        statusDiv.innerHTML = '<div style="color: #6A3040; font-size: 0.9rem;">Transmitting inquiry to glorifixmediaconcept@gmail.com...</div>';
+        statusDiv.innerHTML = '<div style="color: #6A3040; font-size: 0.9rem;">Transmitting inquiry to dashboard and email...</div>';
       }
 
       const payload = {
-        _subject: `📩 New Website Inquiry from: ${name}`,
-        _replyto: email,
-        _template: 'table',
-        _captcha: 'false',
-        "Sender Name": name,
-        "Email Address": email,
-        "Phone / WhatsApp": phone || "Not provided",
-        "Inquiry / Message": message,
-        "Submitted At": new Date().toLocaleString()
+        Sender_Name: name,
+        Email_Address: email,
+        Phone_Number: phone || "Not provided",
+        Message: message,
+        Subject: `📩 New Website Inquiry from: ${name}`
       };
 
-      fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
+      // Primary: Post to Glorifix Inquiries API
+      fetch('api/contact.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -360,7 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         body: JSON.stringify(payload)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('API server unavailable');
+        return res.json();
+      })
       .then(data => {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -369,37 +382,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statusDiv) {
           statusDiv.innerHTML = `
-            <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left; line-height: 1.55;">
-              <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">✅ Message Delivered to Email!</strong>
-              Thank you, <strong>${escapeHtml(name)}</strong>! Your note has been delivered directly to <strong>glorifixmediaconcept@gmail.com</strong>.<br>
-              <span style="font-size: 0.88rem; color: #2E7D32;">We will review your inquiry and reply to <strong>${escapeHtml(email)}</strong> promptly.</span>
+            <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 16px; border-radius: 8px; text-align: left; line-height: 1.6;">
+              <strong style="font-size: 1.05rem; color: #1B5E20; display: block; margin-bottom: 6px;">✅ Message Delivered Successfully!</strong>
+              Thank you, <strong>${escapeHtml(name)}</strong>! A confirmation email has been sent to <strong>${escapeHtml(email)}</strong>.<br>
+              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${data.id || 'GLF-INQ'}</strong> &bull; Your note is logged in our admin dashboard and Ezekiel will review it promptly.</span>
             </div>
           `;
         }
         contactForm.reset();
       })
       .catch(err => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = origText;
-        }
-
-        const mailtoUrl = `mailto:glorifixmediaconcept@gmail.com?subject=${encodeURIComponent('Inquiry from: ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nPhone: ' + (phone || 'N/A') + '\n\nMessage:\n' + message)}`;
-        const whatsappMsg = `Hello Glorifix Media Concept! Inquiry from ${name} (${email}):\n${message}`;
-        const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
-
-        if (statusDiv) {
-          statusDiv.innerHTML = `
-            <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px; text-align: left; line-height: 1.55;">
-              <strong style="font-size: 1rem; color: #E65100; display: block; margin-bottom: 4px;">Direct Delivery Backup</strong>
-              If direct dispatch took longer than expected, please send your message directly via your email client or WhatsApp:<br>
-              <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="${mailtoUrl}" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">Send via Email App</a>
-                <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">Chat on WhatsApp</a>
+        // Fallback to FormSubmit
+        fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(() => {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left;">
+                <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">✅ Message Delivered to Email!</strong>
+                Thank you, <strong>${escapeHtml(name)}</strong>! Your note has been delivered to <strong>glorifixmediaconcept@gmail.com</strong>.
               </div>
-            </div>
-          `;
-        }
+            `;
+          }
+          contactForm.reset();
+        })
+        .catch(() => {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+          const whatsappMsg = `Hello Glorifix Media Concept! Inquiry from ${name} (${email}):\n${message}`;
+          const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
+          if (statusDiv) {
+            statusDiv.innerHTML = `
+              <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
+                <strong>Please chat with us directly:</strong><br>
+                <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Chat on WhatsApp &rarr;</a>
+              </div>
+            `;
+          }
+        });
       });
     });
   }

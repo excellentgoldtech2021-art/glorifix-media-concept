@@ -1,0 +1,60 @@
+{
+  "company": {
+    "name": "Glorifix Media Concept Limited",
+    "tagline": "Transforming Brands, Elevating Businesses with Exceptional Digital & Legal Solutions",
+    "phone_primary": "09050278999",
+    "phone_display": "0905 027 8999",
+    "whatsapp_number": "2349050278999",
+    "email_address": "glorifixmediaconcept@gmail.com",
+    "office_address": "Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State",
+    "support_hub": "Abuja Client Operations",
+    "working_hours": "Monday - Saturday: 8:00 AM - 6:00 PM"
+  },
+  "hero": {
+    "badge": "🚀 Premium Digital Agency & CAC Legal Partners",
+    "headline": "Transforming Brands, Elevating Businesses with Exceptional Digital & Legal Solutions",
+    "subtitle": "Glorifix Media Concept Limited is your trusted partner for high-performance website design, Meta advertising, CAC business registration, and comprehensive brand transformation in Nigeria and beyond.",
+    "stat_projects": "500+",
+    "stat_clients": "350+",
+    "stat_satisfaction": "98%",
+    "stat_revenue": "₦50M+"
+  },
+  "pricing": {
+    "cac_business_name_price": "35,000",
+    "cac_business_name_sub": "3–5 working days delivery",
+    "cac_llc_price": "75,000",
+    "cac_llc_sub": "5–7 working days delivery",
+    "cac_trustee_price": "150,000",
+    "cac_trustee_sub": "7–14 working days delivery",
+    "social_starter_price": "50,000",
+    "social_starter_platforms": "2 platforms managed",
+    "social_starter_posts": "12 posts per month",
+    "social_growth_price": "120,000",
+    "social_growth_platforms": "3 platforms managed",
+    "social_growth_posts": "20 posts per month",
+    "social_premium_price": "240,000",
+    "social_premium_platforms": "4 platforms managed",
+    "social_premium_posts": "30+ posts per month",
+    "ads_basic_price": "60,000",
+    "ads_growth_price": "120,000",
+    "ads_premium_price": "180,000",
+    "web_basic_price": "100,000",
+    "web_business_price": "150,000",
+    "web_premium_price": "300,000",
+    "app_web_price": "200,000",
+    "app_mobile_price": "350,000",
+    "app_enterprise_price": "650,000"
+  },
+  "about": {
+    "founder_name": "Soje Ezekiel",
+    "founder_role": "CEO & Lead Digital Strategist",
+    "founder_bio": "Leading Glorifix Media Concept Limited with a vision to empower African enterprises with modern digital technology, high-converting digital advertising, and compliant corporate registration.",
+    "mission": "To empower businesses, startups, and institutions across Nigeria and Africa with world-class digital solutions, compliant corporate formations, and ROI-driven marketing.",
+    "vision": "To be Africa's foremost full-suite digital agency and business advisory partner, turning ideas into thriving, legally established enterprises."
+  },
+  "voice_agent": {
+    "cac_response": "CAC Business Name registration is ₦35,000, Limited Liability Company is ₦75,000, and NGO Trustee is ₦150,000.",
+    "social_response": "Our monthly Social Media Management packages are: Starter ₦50,000 (2 platforms), Growth ₦120,000 (3 platforms), and Premium ₦240,000 (4 platforms).",
+    "web_response": "Our website packages start at ₦100,000 for Basic, ₦150,000 for Business, and ₦300,000 for Premium."
+  }
+}

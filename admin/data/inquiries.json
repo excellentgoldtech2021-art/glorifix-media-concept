@@ -1,0 +1,16 @@
+[
+  {
+    "id": "INQ-7FA862",
+    "timestamp": "2026-11-12 06:31:55",
+    "type": "Consultation Booking",
+    "name": "Chioma Eze",
+    "email": "chioma@example.com",
+    "phone": "08012345678",
+    "service": "CAC Business Registration",
+    "appointment_date": "Nov 15, 2026",
+    "appointment_time": "11:00 AM",
+    "notes": "Need to register a pharmacy store",
+    "status": "new",
+    "read": false
+  }
+]

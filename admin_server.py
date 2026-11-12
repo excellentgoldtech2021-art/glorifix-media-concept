@@ -174,6 +174,12 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             elif path == '/admin/settings.php':
                 self.serve_admin_settings()
                 return
+            elif path == '/admin/inquiries.php':
+                self.serve_admin_inquiries(params)
+                return
+            elif path == '/admin/content-manager.php':
+                self.serve_admin_content_manager(params)
+                return
 
         # Static file fallback
         super().do_GET()
@@ -181,6 +187,75 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
+
+        # Public Contact & Booking API endpoint
+        if path in ['/api/contact.php', '/api/contact', 'api/contact.php']:
+            length = int(self.headers.get('Content-Length', 0))
+            raw_body = self.rfile.read(length).decode('utf-8', errors='ignore')
+            data = {}
+            if self.headers.get('Content-Type', '').startswith('application/json'):
+                try:
+                    data = json.loads(raw_body)
+                except Exception:
+                    data = {}
+            else:
+                qs = urllib.parse.parse_qs(raw_body)
+                data = {k: v[0] for k, v in qs.items()}
+
+            name = (data.get('Full_Name') or data.get('Sender_Name') or data.get('name') or '').strip()
+            email = (data.get('Email_Address') or data.get('Sender_Email') or data.get('email') or '').strip()
+            phone = (data.get('Phone_Number') or data.get('Sender_Phone') or data.get('phone') or '').strip()
+            service = (data.get('Service_Requested') or data.get('Subject') or data.get('service') or 'General Consultation').strip()
+            notes = (data.get('Project_Notes') or data.get('Inquiry_Message') or data.get('Message') or data.get('notes') or data.get('message') or '').strip()
+            app_date = (data.get('Appointment_Date') or data.get('date') or '').strip()
+            app_time = (data.get('Appointment_Time') or data.get('time') or '').strip()
+
+            is_booking = bool(app_date or 'booking' in service.lower())
+            inq_type = 'Consultation Booking' if is_booking else 'Direct Inquiry'
+
+            inquiries_file = os.path.join(BASE_DIR, 'admin', 'data', 'inquiries.json')
+            os.makedirs(os.path.dirname(inquiries_file), exist_ok=True)
+            inquiries = []
+            if os.path.exists(inquiries_file):
+                try:
+                    with open(inquiries_file, 'r', encoding='utf-8') as f:
+                        inquiries = json.load(f)
+                except Exception:
+                    inquiries = []
+
+            inq_id = f"INQ-{hashlib.md5(f'{time.time()}{name}'.encode()).hexdigest()[:6].upper()}"
+            new_entry = {
+                'id': inq_id,
+                'timestamp': time.strftime('%Y-%m-%d %H:%M:%S'),
+                'type': inq_type,
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'service': service,
+                'appointment_date': app_date,
+                'appointment_time': app_time,
+                'notes': notes,
+                'status': 'new',
+                'read': False
+            }
+            inquiries.insert(0, new_entry)
+            with open(inquiries_file, 'w', encoding='utf-8') as f:
+                json.dump(inquiries, f, indent=2, ensure_ascii=False)
+
+            resp_payload = {
+                'success': True,
+                'message': 'Your consultation has been booked successfully! A confirmation email has been sent to your inbox.' if is_booking else 'Thank you! Your message has been sent successfully. A confirmation email has been sent to your inbox.',
+                'id': inq_id,
+                'email_sent_to': email
+            }
+            resp_bytes = json.dumps(resp_payload).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Content-Length', str(len(resp_bytes)))
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(resp_bytes)
+            return
 
         # 1. Login POST
         if path == '/admin/login.php':
@@ -326,6 +401,79 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         json.dump(items, f, indent=2)
                     msg = f"Added '{title}' to portfolio!"
             self.serve_admin_portfolio(message=msg)
+            return
+
+        # Inquiries POST
+        if path == '/admin/inquiries.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length).decode('utf-8', errors='ignore')
+            post_data = urllib.parse.parse_qs(body)
+            action = post_data.get('action', [''])[0]
+            inq_id = post_data.get('inquiry_id', [''])[0]
+            inquiries_file = os.path.join(BASE_DIR, 'admin', 'data', 'inquiries.json')
+            msg = None
+            if os.path.exists(inquiries_file):
+                try:
+                    with open(inquiries_file, 'r', encoding='utf-8') as f:
+                        inqs = json.load(f)
+                    if action == 'mark_read':
+                        for i in inqs:
+                            if i.get('id') == inq_id:
+                                i['read'] = True
+                                if i.get('status') == 'new': i['status'] = 'read'
+                        msg = f"Inquiry #{inq_id} marked as read."
+                    elif action == 'mark_replied':
+                        for i in inqs:
+                            if i.get('id') == inq_id:
+                                i['status'] = 'replied'
+                                i['read'] = True
+                        msg = f"Inquiry #{inq_id} marked as replied."
+                    elif action == 'delete':
+                        inqs = [i for i in inqs if i.get('id') != inq_id]
+                        msg = "Inquiry deleted."
+                    with open(inquiries_file, 'w', encoding='utf-8') as f:
+                        json.dump(inqs, f, indent=2, ensure_ascii=False)
+                except Exception as e:
+                    msg = f"Error: {e}"
+            self.serve_admin_inquiries(params=None, message=msg)
+            return
+
+        # Content Manager POST
+        if path == '/admin/content-manager.php':
+            length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(length).decode('utf-8', errors='ignore')
+            post_data = urllib.parse.parse_qs(body)
+            tab = post_data.get('tab', ['company'])[0]
+            content_file = os.path.join(BASE_DIR, 'admin', 'data', 'site_content.json')
+            site_content = {}
+            if os.path.exists(content_file):
+                try:
+                    with open(content_file, 'r', encoding='utf-8') as f:
+                        site_content = json.load(f)
+                except Exception:
+                    site_content = {}
+            for sec in ['company', 'pricing', 'hero', 'about', 'voice_agent']:
+                if sec not in site_content: site_content[sec] = {}
+            if tab == 'company':
+                for k in ['company_name', 'tagline', 'phone_primary', 'phone_display', 'whatsapp_number', 'email_address', 'office_address', 'support_hub', 'working_hours']:
+                    if k in post_data: site_content['company'][k] = post_data[k][0].strip()
+            elif tab == 'pricing':
+                for k in post_data:
+                    if k != 'tab': site_content['pricing'][k] = post_data[k][0].strip()
+            elif tab == 'hero':
+                for k in post_data:
+                    if k != 'tab': site_content['hero'][k] = post_data[k][0].strip()
+            elif tab == 'about':
+                for k in post_data:
+                    if k != 'tab': site_content['about'][k] = post_data[k][0].strip()
+            elif tab == 'voice':
+                if 'va_cac_response' in post_data: site_content['voice_agent']['cac_response'] = post_data['va_cac_response'][0].strip()
+                if 'va_social_response' in post_data: site_content['voice_agent']['social_response'] = post_data['va_social_response'][0].strip()
+                if 'va_web_response' in post_data: site_content['voice_agent']['web_response'] = post_data['va_web_response'][0].strip()
+            with open(content_file, 'w', encoding='utf-8') as f:
+                json.dump(site_content, f, indent=2, ensure_ascii=False)
+            self.sync_site_content(site_content)
+            self.serve_admin_content_manager(params={'tab': [tab]}, message="Website content saved and synchronized across all pages successfully!")
             return
 
         self.send_error(404, "Endpoint not found")
@@ -1028,9 +1176,325 @@ function switchTab(tabId, btn) {{
 </html>"""
         self.send_html(html)
 
+    def sync_site_content(self, content):
+        phone_pri = content.get('company', {}).get('phone_primary', '09050278999')
+        email_addr = content.get('company', {}).get('email_address', 'glorifixmediaconcept@gmail.com')
+        for hf in ['index.html', 'about.html', 'services.html', 'pricing.html', 'gallery.html', 'contact.html']:
+            fp = os.path.join(BASE_DIR, hf)
+            if os.path.exists(fp):
+                try:
+                    with open(fp, 'r', encoding='utf-8') as f:
+                        text = f.read()
+                    text = text.replace('glorifixmediaconcept@gmail.com', email_addr)
+                    with open(fp, 'w', encoding='utf-8') as f:
+                        f.write(text)
+                except Exception:
+                    pass
+
+    def serve_admin_inquiries(self, params=None, message=None):
+        cfg = load_config()
+        inquiries_file = os.path.join(BASE_DIR, 'admin', 'data', 'inquiries.json')
+        inquiries = []
+        if os.path.exists(inquiries_file):
+            try:
+                with open(inquiries_file, 'r', encoding='utf-8') as f:
+                    inquiries = json.load(f)
+            except Exception:
+                inquiries = []
+
+        unread_count = len([i for i in inquiries if not i.get('read')])
+        booking_count = len([i for i in inquiries if 'booking' in (i.get('type') or '').lower()])
+        direct_count = len(inquiries) - booking_count
+
+        filter_type = (params.get('type', ['all'])[0] if params else 'all')
+        search_q = (params.get('q', [''])[0].strip().lower() if params else '')
+
+        filtered = []
+        for inq in inquiries:
+            if filter_type == 'unread' and inq.get('read'): continue
+            if filter_type == 'booking' and 'booking' not in (inq.get('type') or '').lower(): continue
+            if filter_type == 'inquiry' and 'booking' in (inq.get('type') or '').lower(): continue
+            if filter_type == 'replied' and inq.get('status') != 'replied': continue
+            if search_q:
+                hay = f"{inq.get('name','')} {inq.get('email','')} {inq.get('phone','')} {inq.get('service','')} {inq.get('notes','')}".lower()
+                if search_q not in hay: continue
+            filtered.append(inq)
+
+        cards = ''
+        if not filtered:
+            cards = '<div class="admin-card" style="text-align: center; padding: 3rem;"><div style="font-size: 2.5rem;">📭</div><h3 style="color: #fff;">No Inquiries Found</h3><p style="color: var(--text-muted);">Customer consultation bookings and messages will appear here.</p></div>'
+        else:
+            for inq in filtered:
+                is_unr = not inq.get('read')
+                st = inq.get('status', 'new' if is_unr else 'read')
+                c_phone = ''.join(c for c in inq.get('phone', '') if c.isdigit())
+                sched = f"<div class='inq-grid-item'><span>📅 Scheduled Time</span><strong style='color: var(--gold);'>{inq.get('appointment_date')} at {inq.get('appointment_time', '10:00 AM')}</strong></div>" if inq.get('appointment_date') else ''
+                notes_block = f"<div class='inq-notes'><strong>Project Brief / Message:</strong><br>{html_escape(inq.get('notes',''))}</div>" if inq.get('notes') else ''
+                wa_btn = f"<a href='https://wa.me/{c_phone}' target='_blank' class='btn btn-secondary' style='background: rgba(37, 211, 102, 0.15); color: #4ade80;'>💬 Chat on WhatsApp</a>" if c_phone else ''
+                cards += f"""
+                <div class="inquiry-card {'is-unread' if is_unr else ''}" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, var(--red1), var(--gold)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">{(inq.get('name') or 'C')[:1].upper()}</div>
+                      <div>
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #fff;">{html_escape(inq.get('name','Customer'))}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">{inq.get('timestamp','')} &bull; Ref: <strong>#{inq.get('id','')}</strong></div>
+                      </div>
+                    </div>
+                    <div>
+                      <span class="badge badge-wine">{st.upper()}</span>
+                      <span style="font-size: 0.82rem; color: var(--gold); font-weight: 600; margin-left: 8px;">{inq.get('type','Consultation')}</span>
+                    </div>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: rgba(0,0,0,0.25); padding: 12px 14px; border-radius: var(--radius-sm); margin-bottom: 10px; font-size: 0.9rem;">
+                    <div><span style="display: block; font-size: 0.75rem; color: var(--gold);">Email Address</span><a href="mailto:{inq.get('email','')}" style="color: #fff;">{html_escape(inq.get('email',''))}</a></div>
+                    <div><span style="display: block; font-size: 0.75rem; color: var(--gold);">Phone / WhatsApp</span>{html_escape(inq.get('phone','Not provided'))}</div>
+                    <div><span style="display: block; font-size: 0.75rem; color: var(--gold);">Service Requested</span><strong style="color: #fff;">{html_escape(inq.get('service','General'))}</strong></div>
+                    {sched}
+                  </div>
+                  {notes_block}
+                  <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                    {wa_btn}
+                    <a href="mailto:{inq.get('email','')}?subject=Re:%20Glorifix%20Consultation%20(Ref:%20{inq.get('id','')})" class="btn btn-secondary">✉️ Send Email</a>
+                    <form method="POST" style="display: inline;">
+                      <input type="hidden" name="action" value="mark_replied">
+                      <input type="hidden" name="inquiry_id" value="{inq.get('id','')}">
+                      <button type="submit" class="btn btn-secondary">✓ Mark Replied</button>
+                    </form>
+                    <form method="POST" style="display: inline; margin-left: auto;" onsubmit="return confirm('Delete this inquiry?');">
+                      <input type="hidden" name="action" value="delete">
+                      <input type="hidden" name="inquiry_id" value="{inq.get('id','')}">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </div>
+                </div>
+                """
+
+        msg_html = f'<div class="alert alert-success"><span>✅</span> <span>{message}</span></div>' if message else ''
+        html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Inquiries &amp; Bookings — Glorifix Admin</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-wrapper">
+  {self.render_sidebar('inquiries.php', cfg)}
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" aria-label="Toggle Menu"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <div class="page-breadcrumb"><a href="index.php" style="color: var(--text-muted);">Dashboard</a><span>/</span><span>Inquiries &amp; Bookings</span></div>
+      </div>
+      <div class="topbar-right"><a href="../contact.html" target="_blank" class="btn-view-site"><span>View Contact Page</span></a></div>
+    </header>
+    <div class="admin-container">
+      {msg_html}
+      <div style="margin-bottom: 1.5rem;">
+        <h1 style="font-size: 1.75rem; margin-bottom: 0.35rem;">Customer Inquiries &amp; Bookings</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">All consultation bookings and contact notes from your website are saved here in real time.</p>
+      </div>
+      <div class="stats-grid" style="margin-bottom: 1.5rem;">
+        <div class="stat-card"><div class="stat-info"><h3>{unread_count}</h3><p>New / Unread</p></div></div>
+        <div class="stat-card"><div class="stat-info"><h3>{booking_count}</h3><p>Consultation Bookings</p></div></div>
+        <div class="stat-card"><div class="stat-info"><h3>{direct_count}</h3><p>Direct Notes</p></div></div>
+        <div class="stat-card"><div class="stat-info"><h3>{len(inquiries)}</h3><p>Total Inquiries</p></div></div>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+        <a href="inquiries.php?type=all" class="btn btn-sm btn-outline">All ({len(inquiries)})</a>
+        <a href="inquiries.php?type=unread" class="btn btn-sm btn-outline">Unread ({unread_count})</a>
+        <a href="inquiries.php?type=booking" class="btn btn-sm btn-outline">📅 Bookings ({booking_count})</a>
+        <a href="inquiries.php?type=inquiry" class="btn btn-sm btn-outline">📩 Direct Notes ({direct_count})</a>
+      </div>
+      {cards}
+    </div>
+  </main>
+</div>
+<script src="js/admin.js"></script>
+</body>
+</html>"""
+        self.send_html(html)
+
+    def serve_admin_content_manager(self, params=None, message=None):
+        cfg = load_config()
+        content_file = os.path.join(BASE_DIR, 'admin', 'data', 'site_content.json')
+        site_content = {}
+        if os.path.exists(content_file):
+            try:
+                with open(content_file, 'r', encoding='utf-8') as f:
+                    site_content = json.load(f)
+            except Exception:
+                site_content = {}
+        
+        tab = (params.get('tab', ['company'])[0] if params else 'company')
+        msg_html = f'<div class="alert alert-success"><span>✅</span> <span>{message}</span></div>' if message else ''
+        
+        comp = site_content.get('company', {})
+        pri = site_content.get('pricing', {})
+        hero = site_content.get('hero', {})
+        abt = site_content.get('about', {})
+        va = site_content.get('voice_agent', {})
+
+        tab_body = ''
+        if tab == 'company':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="company">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">🏢 Contact &amp; Brand Information</h3></div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">Company Legal Name</label><input type="text" name="company_name" class="form-control" value="{html_escape(comp.get('name','Glorifix Media Concept Limited'))}" required></div>
+                    <div class="form-group"><label class="form-label">Official Tagline</label><input type="text" name="tagline" class="form-control" value="{html_escape(comp.get('tagline',''))}"></div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">Primary Phone</label><input type="text" name="phone_primary" class="form-control" value="{html_escape(comp.get('phone_primary','09050278999'))}"></div>
+                    <div class="form-group"><label class="form-label">WhatsApp Number</label><input type="text" name="whatsapp_number" class="form-control" value="{html_escape(comp.get('whatsapp_number','2349050278999'))}"></div>
+                    <div class="form-group"><label class="form-label">Official Email Address</label><input type="email" name="email_address" class="form-control" value="{html_escape(comp.get('email_address','glorifixmediaconcept@gmail.com'))}"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label">Head Office Address</label><textarea name="office_address" class="form-control" style="min-height:70px;">{html_escape(comp.get('office_address',''))}</textarea></div>
+                  <button type="submit" class="btn btn-primary">💾 Save Contact Information</button>
+                </div>
+              </div>
+            </form>
+            """
+        elif tab == 'pricing':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="pricing">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">📝 CAC Business Registration Pricing (in Naira)</h3></div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">CAC Business Name (₦)</label><input type="text" name="cac_business_name_price" class="form-control" value="{html_escape(pri.get('cac_business_name_price','35,000'))}"></div>
+                    <div class="form-group"><label class="form-label">CAC Limited Company LLC (₦)</label><input type="text" name="cac_llc_price" class="form-control" value="{html_escape(pri.get('cac_llc_price','75,000'))}"></div>
+                    <div class="form-group"><label class="form-label">CAC Trustee / NGO (₦)</label><input type="text" name="cac_trustee_price" class="form-control" value="{html_escape(pri.get('cac_trustee_price','150,000'))}"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">📱 Social Media Management Packages</h3></div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">Starter Package (₦)</label><input type="text" name="social_starter_price" class="form-control" value="{html_escape(pri.get('social_starter_price','50,000'))}"></div>
+                    <div class="form-group"><label class="form-label">Growth Package (₦)</label><input type="text" name="social_growth_price" class="form-control" value="{html_escape(pri.get('social_growth_price','120,000'))}"></div>
+                    <div class="form-group"><label class="form-label">Premium Package (₦)</label><input type="text" name="social_premium_price" class="form-control" value="{html_escape(pri.get('social_premium_price','240,000'))}"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label">Premium Platforms Count</label><input type="text" name="social_premium_platforms" class="form-control" value="{html_escape(pri.get('social_premium_platforms','4 platforms managed'))}"></div>
+                  <button type="submit" class="btn btn-primary">💾 Save All Pricing Rates</button>
+                </div>
+              </div>
+            </form>
+            """
+        elif tab == 'hero':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="hero">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">🌟 Homepage Hero Section</h3></div>
+                <div class="card-body">
+                  <div class="form-group"><label class="form-label">Announcement Badge</label><input type="text" name="hero_badge" class="form-control" value="{html_escape(hero.get('badge',''))}"></div>
+                  <div class="form-group"><label class="form-label">Main Headline</label><textarea name="hero_headline" class="form-control" style="min-height:60px;">{html_escape(hero.get('headline',''))}</textarea></div>
+                  <div class="form-group"><label class="form-label">Subtitle</label><textarea name="hero_subtitle" class="form-control" style="min-height:80px;">{html_escape(hero.get('subtitle',''))}</textarea></div>
+                  <button type="submit" class="btn btn-primary">💾 Save Homepage Details</button>
+                </div>
+              </div>
+            </form>
+            """
+        elif tab == 'about':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="about">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">📖 About Ezekiel &amp; Glorifix Story</h3></div>
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">Founder Name</label><input type="text" name="founder_name" class="form-control" value="{html_escape(abt.get('founder_name','Soje Ezekiel'))}"></div>
+                    <div class="form-group"><label class="form-label">Executive Role</label><input type="text" name="founder_role" class="form-control" value="{html_escape(abt.get('founder_role','CEO & Lead Developer'))}"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label">Founder Biography</label><textarea name="founder_bio" class="form-control" style="min-height:80px;">{html_escape(abt.get('founder_bio',''))}</textarea></div>
+                  <div class="form-group"><label class="form-label">Mission Statement</label><textarea name="mission" class="form-control" style="min-height:60px;">{html_escape(abt.get('mission',''))}</textarea></div>
+                  <button type="submit" class="btn btn-primary">💾 Save About Details</button>
+                </div>
+              </div>
+            </form>
+            """
+        elif tab == 'voice':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="voice">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">🤖 AI Voice Assistant Knowledge Base</h3></div>
+                <div class="card-body">
+                  <div class="form-group"><label class="form-label">CAC Registration Answer</label><textarea name="va_cac_response" class="form-control" style="min-height:70px;">{html_escape(va.get('cac_response',''))}</textarea></div>
+                  <div class="form-group"><label class="form-label">Social Media Packages Answer</label><textarea name="va_social_response" class="form-control" style="min-height:70px;">{html_escape(va.get('social_response',''))}</textarea></div>
+                  <div class="form-group"><label class="form-label">Website Packages Answer</label><textarea name="va_web_response" class="form-control" style="min-height:70px;">{html_escape(va.get('web_response',''))}</textarea></div>
+                  <button type="submit" class="btn btn-primary">💾 Save Voice Agent Answers</button>
+                </div>
+              </div>
+            </form>
+            """
+
+        html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Content Editor — Glorifix Admin</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-wrapper">
+  {self.render_sidebar('content-manager.php', cfg)}
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" aria-label="Toggle Menu"><svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+        <div class="page-breadcrumb"><a href="index.php" style="color: var(--text-muted);">Dashboard</a><span>/</span><span>Website Content Editor</span></div>
+      </div>
+      <div class="topbar-right"><a href="../pricing.html" target="_blank" class="btn-view-site"><span>View Pricing Page</span></a></div>
+    </header>
+    <div class="admin-container">
+      {msg_html}
+      <div style="margin-bottom: 1.5rem;">
+        <h1 style="font-size: 1.75rem; margin-bottom: 0.35rem;">Visual Website Content Editor</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Edit website texts, pricing rates, and contact details in plain text. Zero HTML code needed!</p>
+      </div>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+        <a href="content-manager.php?tab=company" class="btn btn-sm {'btn-primary' if tab=='company' else 'btn-outline'}">🏢 Company &amp; Contact</a>
+        <a href="content-manager.php?tab=pricing" class="btn btn-sm {'btn-primary' if tab=='pricing' else 'btn-outline'}">💰 Pricing &amp; Packages</a>
+        <a href="content-manager.php?tab=hero" class="btn btn-sm {'btn-primary' if tab=='hero' else 'btn-outline'}">🌟 Home &amp; Hero</a>
+        <a href="content-manager.php?tab=about" class="btn btn-sm {'btn-primary' if tab=='about' else 'btn-outline'}">📖 About Us &amp; Founder</a>
+        <a href="content-manager.php?tab=voice" class="btn btn-sm {'btn-primary' if tab=='voice' else 'btn-outline'}">🤖 Voice Assistant Answers</a>
+      </div>
+      {tab_body}
+    </div>
+  </main>
+</div>
+<script src="js/admin.js"></script>
+</body>
+</html>"""
+        self.send_html(html)
+
     def render_sidebar(self, active_tab, cfg):
         def is_act(tab):
             return "active" if active_tab == tab else ""
+        inquiries_file = os.path.join(BASE_DIR, 'admin', 'data', 'inquiries.json')
+        inq_badge = ""
+        if os.path.exists(inquiries_file):
+            try:
+                with open(inquiries_file, 'r', encoding='utf-8') as f:
+                    inqs = json.load(f)
+                unr = len([i for i in inqs if not i.get('read')])
+                if unr > 0:
+                    inq_badge = f'<span style="background: var(--red2); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 6px;">{unr}</span>'
+            except Exception:
+                pass
+
         return f"""<aside class="admin-sidebar">
     <div class="sidebar-header">
       <div class="brand-badge">G</div>
@@ -1045,9 +1509,18 @@ function switchTab(tabId, btn) {{
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         <span>Dashboard</span>
       </a>
+      <a href="inquiries.php" class="nav-item {is_act('inquiries.php')}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <span>Inquiries &amp; Bookings</span>
+        {inq_badge}
+      </a>
+      <a href="content-manager.php" class="nav-item {is_act('content-manager.php')}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        <span>Website Content Editor</span>
+      </a>
       <a href="pages.php" class="nav-item {is_act('pages.php')}">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        <span>Edit Pages</span>
+        <span>HTML File Editor</span>
       </a>
       <a href="portfolio-manager.php" class="nav-item {is_act('portfolio-manager.php')}">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>

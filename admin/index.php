@@ -18,6 +18,15 @@ $banner_count = 0;
 if (is_dir($banners_dir)) {
     $banner_count = count(glob($banners_dir . '/*.svg') ?: []);
 }
+
+$inquiries_file = __DIR__ . '/data/inquiries.json';
+$inquiry_count = 0;
+$unread_inquiries = 0;
+if (file_exists($inquiries_file)) {
+    $all_inqs = json_decode(file_get_contents($inquiries_file), true) ?: [];
+    $inquiry_count = count($all_inqs);
+    $unread_inquiries = count(array_filter($all_inqs, fn($i) => empty($i['read'])));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,9 +57,20 @@ if (is_dir($banners_dir)) {
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
         <span>Dashboard</span>
       </a>
+      <a href="inquiries.php" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <span>Inquiries &amp; Bookings</span>
+        <?php if ($unread_inquiries > 0): ?>
+          <span style="background: var(--red2); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: 6px;"><?= $unread_inquiries ?></span>
+        <?php endif; ?>
+      </a>
+      <a href="content-manager.php" class="nav-item">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        <span>Website Content Editor</span>
+      </a>
       <a href="pages.php" class="nav-item">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        <span>Edit Pages</span>
+        <span>HTML File Editor</span>
       </a>
       <a href="portfolio-manager.php" class="nav-item">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -113,6 +133,16 @@ if (is_dir($banners_dir)) {
 
       <!-- Stats Grid -->
       <div class="stats-grid">
+        <div class="stat-card" style="border-color: <?= $unread_inquiries > 0 ? 'var(--red2)' : 'var(--border-subtle)' ?>;">
+          <div class="stat-info">
+            <h3 style="color: <?= $unread_inquiries > 0 ? 'var(--red2)' : '#fff' ?>;"><?= $inquiry_count ?> <?= $unread_inquiries > 0 ? "<small style='font-size:0.85rem;color:var(--gold);'>({$unread_inquiries} New)</small>" : "" ?></h3>
+            <p>Customer Inquiries</p>
+          </div>
+          <div class="stat-icon" style="background: rgba(232, 37, 53, 0.15); color: var(--red2);">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+        </div>
+
         <div class="stat-card">
           <div class="stat-info">
             <h3><?= count($pages) ?></h3>
@@ -130,16 +160,6 @@ if (is_dir($banners_dir)) {
           </div>
           <div class="stat-icon">
             <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          </div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-info">
-            <h3><?= $banner_count ?></h3>
-            <p>Banners & Sliders</p>
-          </div>
-          <div class="stat-icon">
-            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
           </div>
         </div>
 
@@ -164,11 +184,19 @@ if (is_dir($banners_dir)) {
         </div>
         <div class="card-body">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
-            <a href="edit-page.php?page=index.html" class="btn btn-outline" style="justify-content: flex-start; padding: 1.1rem;">
-              <span style="font-size: 1.5rem; margin-right: 8px;">🏠</span>
+            <a href="content-manager.php" class="btn btn-outline" style="justify-content: flex-start; padding: 1.1rem; border-color: var(--border-gold); background: rgba(232, 185, 35, 0.05);">
+              <span style="font-size: 1.5rem; margin-right: 8px;">✏️</span>
               <div style="text-align: left;">
-                <strong style="display: block; color: #fff;">Edit Home Page</strong>
-                <small style="color: var(--text-muted);">Update hero text, slider & CTA</small>
+                <strong style="display: block; color: var(--gold);">Website Content Editor</strong>
+                <small style="color: var(--text-muted);">Edit prices, contact info, hero &amp; about (No HTML)</small>
+              </div>
+            </a>
+
+            <a href="inquiries.php" class="btn btn-outline" style="justify-content: flex-start; padding: 1.1rem; <?= $unread_inquiries > 0 ? 'border-color: var(--red2);' : '' ?>">
+              <span style="font-size: 1.5rem; margin-right: 8px;">📬</span>
+              <div style="text-align: left;">
+                <strong style="display: block; color: #fff;">Inquiries &amp; Bookings</strong>
+                <small style="color: var(--text-muted);"><?= $unread_inquiries > 0 ? "<strong>{$unread_inquiries} new inquiries waiting!</strong>" : "View customer notes &amp; schedules" ?></small>
               </div>
             </a>
 
