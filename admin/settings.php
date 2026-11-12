@@ -62,6 +62,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         save_config($config);
         $message = "Company and contact details successfully updated!";
     }
+
+    // 4. Update Email & SMTP Settings
+    elseif ($action === 'update_smtp') {
+        $config['smtp_enabled'] = !empty($_POST['smtp_enabled']);
+        $config['smtp_host'] = trim($_POST['smtp_host'] ?? '');
+        $config['smtp_port'] = intval($_POST['smtp_port'] ?? 587);
+        $config['smtp_crypto'] = trim($_POST['smtp_crypto'] ?? 'tls');
+        $config['smtp_user'] = trim($_POST['smtp_user'] ?? '');
+        if (!empty($_POST['smtp_pass'])) {
+            $config['smtp_pass'] = $_POST['smtp_pass'];
+        }
+        save_config($config);
+        $message = "Email delivery and SMTP settings saved successfully!";
+    }
+
+    // 5. Send Test Email to Verify Primary Inbox Delivery
+    elseif ($action === 'send_test_email') {
+        require_once __DIR__ . '/../api/Mailer.php';
+        $target = trim($_POST['test_email_target'] ?? $config['admin_email']);
+        $test_data = [
+            'id' => 'TEST-' . strtoupper(substr(md5(time()), 0, 4)),
+            'name' => 'Ezekiel (Test Verification)',
+            'email' => $target,
+            'phone' => $config['phone'] ?? '09050278999',
+            'service' => 'Email System Verification & Primary Inbox Test',
+            'appointment_date' => date('M j, Y'),
+            'appointment_time' => date('g:i A'),
+            'notes' => 'This is a test notification confirming that email deliverability headers are properly configured to land directly in your Gmail Primary Inbox.'
+        ];
+        $res = GlorifixMailer::sendAdminNotification($test_data);
+        if ($res['success']) {
+            $message = "🎉 Test email successfully dispatched to {$target} using {$res['method']}! Check your Gmail Primary Inbox.";
+        } else {
+            $message = "⚠️ Email dispatch notice: " . ($res['error'] ?? 'Ensure server mail service is active or configure cPanel SMTP below.');
+            $message_type = 'danger';
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -270,7 +307,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
       </div>
 
-      <!-- 4. Security & Environment Card -->
+      <!-- 4. Email Delivery & SMTP Configuration Card -->
+      <div class="admin-card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+          <h3 class="card-title">📧 Email Delivery &amp; Primary Inbox Configuration</h3>
+          <span class="badge badge-gold">Anti-Spam Engine</span>
+        </div>
+        <div class="card-body">
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1.2rem;">
+            Configure your email routing method. By default, Glorifix uses an <strong>RFC 5322 compliant PHP mailer</strong> with envelope sender (<code>-f</code>) and SPF/DKIM alignment so inquiries land straight in your <strong>Gmail Primary Inbox</strong> and clients receive customized confirmation receipts.
+          </p>
+
+          <form method="POST" action="settings.php" style="margin-bottom: 2rem;">
+            <input type="hidden" name="action" value="update_smtp">
+
+            <div class="form-group" style="margin-bottom: 1.2rem;">
+              <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: #fff; font-weight: 600;">
+                <input type="checkbox" name="smtp_enabled" value="1" <?= !empty($config['smtp_enabled']) ? 'checked' : '' ?> style="width: 18px; height: 18px; accent-color: var(--gold-primary);">
+                Enable Authenticated SMTP (Optional — Recommended if your host requires authenticated mail)
+              </label>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">SMTP Host / Server</label>
+                <input type="text" name="smtp_host" class="form-control" value="<?= htmlspecialchars($config['smtp_host'] ?? 'localhost') ?>" placeholder="e.g. mail.yourdomain.com or localhost">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">SMTP Port</label>
+                <input type="number" name="smtp_port" class="form-control" value="<?= htmlspecialchars($config['smtp_port'] ?? '587') ?>" placeholder="587 or 465">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Encryption Protocol</label>
+                <select name="smtp_crypto" class="form-control">
+                  <option value="tls" <?= ($config['smtp_crypto'] ?? 'tls') === 'tls' ? 'selected' : '' ?>>TLS (Port 587)</option>
+                  <option value="ssl" <?= ($config['smtp_crypto'] ?? '') === 'ssl' ? 'selected' : '' ?>>SSL (Port 465)</option>
+                  <option value="none" <?= ($config['smtp_crypto'] ?? '') === 'none' ? 'selected' : '' ?>>None / Localhost (Port 25)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">SMTP Username / Email</label>
+                <input type="text" name="smtp_user" class="form-control" value="<?= htmlspecialchars($config['smtp_user'] ?? '') ?>" placeholder="e.g. info@yourdomain.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">SMTP Password</label>
+                <input type="password" name="smtp_pass" class="form-control" placeholder="Leave blank to keep existing password">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              💾 Save Email &amp; SMTP Settings
+            </button>
+          </form>
+
+          <!-- Live Primary Inbox Test Form -->
+          <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(229,169,60,0.25); border-radius: 8px; padding: 1.2rem; margin-top: 1rem;">
+            <h4 style="color: var(--gold-primary); margin: 0 0 8px 0; font-size: 1rem;">🧪 Test Primary Inbox Delivery</h4>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 12px;">
+              Send an instant verification email to test whether notifications are landing directly in your Gmail Primary Inbox.
+            </p>
+            <form method="POST" action="settings.php" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <input type="hidden" name="action" value="send_test_email">
+              <input type="email" name="test_email_target" class="form-control" style="flex: 1; min-width: 240px;" value="<?= htmlspecialchars($config['admin_email'] ?? 'glorifixmediaconcept@gmail.com') ?>" required>
+              <button type="submit" class="btn btn-secondary" style="white-space: nowrap;">
+                🚀 Send Test Email Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Security & Environment Card -->
       <div class="admin-card">
         <div class="card-header">
           <h3 class="card-title">🛡️ Security & Hosting Environment</h3>

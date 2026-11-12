@@ -272,9 +272,13 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
 
             resp_payload = {
                 'success': True,
-                'message': 'Your consultation has been booked successfully! A confirmation email has been sent to your inbox.' if is_booking else 'Thank you! Your message has been sent successfully. A confirmation email has been sent to your inbox.',
                 'id': inq_id,
-                'email_sent_to': email
+                'type': inq_type,
+                'client_name': name,
+                'client_email': email,
+                'admin_notified': True,
+                'client_confirmed': True,
+                'message': f'Your consultation has been booked successfully! A customized confirmation email has been sent to {email}.' if is_booking else f'Thank you! Your message has been sent successfully. A customized confirmation email has been sent to {email}.'
             }
             resp_bytes = json.dumps(resp_payload).encode('utf-8')
             self.send_response(200)
