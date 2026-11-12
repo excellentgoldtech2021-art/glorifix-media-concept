@@ -552,6 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '.team-grid',
       '.features-grid',
       '.contact-cards-grid',
+      '.statement-cards-grid',
       '.footer-grid',
       '.slots-grid',
       '.cal-grid'
@@ -577,6 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '.team-c',
       '.feature-card',
       '.stat-card',
+      '.statement-card',
       '.contact-card-item',
       '.about-card-box',
       '.booking-wrap',
