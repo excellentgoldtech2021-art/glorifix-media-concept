@@ -89,8 +89,8 @@ $admin_delivery = GlorifixMailer::sendAdminNotification($new_entry);
 // B. Branded Personalized Confirmation to Customer's Email
 $client_delivery = GlorifixMailer::sendCustomerConfirmation($new_entry);
 
-// 3. Optional secondary relay to FormSubmit (non-blocking fallback)
-if (function_exists('curl_init')) {
+// 3. Secondary relay to FormSubmit ONLY if native server mail failed
+if (empty($admin_delivery['success']) && function_exists('curl_init')) {
     $fs_payload = json_encode([
         '_subject'         => ($is_booking ? "📅 [Booking Alert] " : "📩 [Inquiry Alert] ") . $name . " (" . $service . ")",
         '_replyto'         => $email,

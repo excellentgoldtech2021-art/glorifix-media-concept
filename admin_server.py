@@ -242,33 +242,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
             with open(inquiries_file, 'w', encoding='utf-8') as f:
                 json.dump(inquiries, f, indent=2, ensure_ascii=False)
 
-            # Background dispatch to FormSubmit for direct Gmail inbox delivery
-            try:
-                fs_data = json.dumps({
-                    '_subject': f"{'📅 New Consultation Booking' if is_booking else '📩 New Website Inquiry'}: {name}",
-                    '_replyto': email,
-                    'Customer Name': name,
-                    'Email Address': email,
-                    'Phone / WhatsApp': phone or 'Not provided',
-                    'Service Requested': service,
-                    'Appointment Date': app_date or 'N/A',
-                    'Appointment Time': app_time or 'N/A',
-                    'Message': notes or 'None',
-                    'Reference ID': inq_id
-                }).encode('utf-8')
-                fs_req = urllib.request.Request(
-                    'https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com',
-                    data=fs_data,
-                    headers={
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'Origin': 'https://excellentgoldtech2021-art.github.io',
-                        'Referer': 'https://excellentgoldtech2021-art.github.io/glorifix-media-concept/contact.html'
-                    }
-                )
-                urllib.request.urlopen(fs_req, timeout=3)
-            except Exception:
-                pass
+            # Logged to inquiries.json for Admin Dashboard
 
             resp_payload = {
                 'success': True,
