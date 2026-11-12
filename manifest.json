@@ -1,0 +1,25 @@
+{
+  "name": "Glorifix Media Concept Limited",
+  "short_name": "Glorifix",
+  "description": "CAC Registered Digital Agency & Business Advisory — Web Development, Meta Ads, and Brand Transformation.",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0F0204",
+  "theme_color": "#1F0508",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

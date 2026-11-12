@@ -495,5 +495,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+
+  // 8. Register Progressive Web App (PWA) Service Worker
+  if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(reg => {
+          console.log('Glorifix PWA Service Worker registered:', reg.scope);
+        })
+        .catch(err => {
+          console.log('PWA Service Worker registration deferred:', err);
+        });
+    });
+  }
 });
 
