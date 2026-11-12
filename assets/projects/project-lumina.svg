@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="lumina-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdba74"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="bottle-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fdf4ff"/>
+      <stop offset="30%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f5d0fe"/>
+      <stop offset="100%" stop-color="#e879f9"/>
+    </linearGradient>
+    <linearGradient id="dropper-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#a16207"/>
+    </linearGradient>
+    <filter id="lumina-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="20" stdDeviation="25" flood-color="#831843" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#lumina-bg)" rx="16"/>
+  <circle cx="150" cy="120" r="160" fill="#ffffff" fill-opacity="0.12"/>
+  <circle cx="680" cy="400" r="140" fill="#ffffff" fill-opacity="0.08"/>
+
+  <g filter="url(#lumina-shadow)" transform="translate(100, 50)">
+    <!-- Brand Book / Packaging Canvas -->
+    <!-- Base Paper Board -->
+    <rect x="0" y="40" width="340" height="340" rx="16" fill="#fffdfa" stroke="#fbcfe8" stroke-width="2"/>
+    
+    <!-- Botanical Decorative Shapes -->
+    <path d="M 60 70 C 80 40, 140 50, 160 90 C 180 130, 120 180, 80 150 Z" fill="#fdf2f8" opacity="0.8"/>
+    <circle cx="280" cy="90" r="28" fill="#fce7f3"/>
+    
+    <!-- Brand Logo Mark -->
+    <circle cx="170" cy="130" r="32" fill="#be185d"/>
+    <path d="M 170 110 C 160 125, 160 138, 170 148 C 180 138, 180 125, 170 110 Z" fill="#fbcfe8"/>
+    <text x="170" y="185" font-family="'Georgia', serif" font-size="22" fill="#831843" font-weight="700" text-anchor="middle" letter-spacing="3">LUMINA</text>
+    <text x="170" y="202" font-family="-apple-system, sans-serif" font-size="9" fill="#9d174d" font-weight="600" text-anchor="middle" letter-spacing="4">BOTANICS • ESSENCE</text>
+
+    <!-- Color Swatches -->
+    <rect x="40" y="240" width="50" height="50" rx="8" fill="#831843"/>
+    <text x="65" y="305" font-family="monospace" font-size="8" fill="#9d174d" text-anchor="middle">#831843</text>
+
+    <rect x="100" y="240" width="50" height="50" rx="8" fill="#be185d"/>
+    <text x="125" y="305" font-family="monospace" font-size="8" fill="#9d174d" text-anchor="middle">#BE185D</text>
+
+    <rect x="160" y="240" width="50" height="50" rx="8" fill="#f472b6"/>
+    <text x="185" y="305" font-family="monospace" font-size="8" fill="#9d174d" text-anchor="middle">#F472B6</text>
+
+    <rect x="220" y="240" width="50" height="50" rx="8" fill="#fdf2f8" stroke="#fbcfe8"/>
+    <text x="245" y="305" font-family="monospace" font-size="8" fill="#9d174d" text-anchor="middle">#FDF2F8</text>
+
+    <!-- Typography Guide Specimen -->
+    <rect x="40" y="325" width="260" height="30" rx="6" fill="#fdf4ff"/>
+    <text x="50" y="344" font-family="'Georgia', serif" font-size="12" fill="#701a75" font-style="italic">Aa Bb Cc Dd — Royal Serif Display</text>
+
+    <!-- 3D Luxury Serum Bottle Mockup -->
+    <g transform="translate(360, 20)">
+      <!-- Box Packaging Behind -->
+      <rect x="120" y="40" width="100" height="260" rx="10" fill="#be185d"/>
+      <rect x="135" y="60" width="70" height="18" fill="#9d174d" rx="4"/>
+      <text x="170" y="73" font-family="'Georgia', serif" font-size="10" fill="#fbcfe8" text-anchor="middle">LUMINA</text>
+      <circle cx="170" cy="140" r="16" fill="#ffffff" fill-opacity="0.15"/>
+      <rect x="140" y="240" width="60" height="6" rx="3" fill="#fda4af"/>
+      <rect x="145" y="252" width="50" height="4" rx="2" fill="#fda4af" opacity="0.6"/>
+
+      <!-- Cosmetic Dropper Glass Bottle -->
+      <rect x="20" y="110" width="110" height="190" rx="28" fill="url(#bottle-grad)" stroke="#ffffff" stroke-width="2"/>
+      
+      <!-- Gold Dropper Cap -->
+      <rect x="55" y="80" width="40" height="30" rx="4" fill="url(#dropper-gold)"/>
+      <path d="M 68 80 C 68 62, 82 62, 82 80 Z" fill="#ffffff"/>
+      
+      <!-- Bottle Label -->
+      <rect x="35" y="150" width="80" height="100" rx="6" fill="#ffffff" stroke="#fbcfe8"/>
+      <circle cx="75" cy="175" r="10" fill="#be185d"/>
+      <text x="75" y="198" font-family="'Georgia', serif" font-size="9" fill="#831843" font-weight="700" text-anchor="middle">LUMINA</text>
+      <text x="75" y="208" font-family="-apple-system, sans-serif" font-size="6" fill="#9d174d" text-anchor="middle" letter-spacing="1">FACIAL NECTAR</text>
+      <rect x="48" y="220" width="54" height="3" rx="1.5" fill="#e2e8f0"/>
+      <rect x="52" y="226" width="46" height="3" rx="1.5" fill="#e2e8f0"/>
+      
+      <!-- Subtle Glass Sheen / Highlight -->
+      <path d="M 30 140 C 35 180, 35 240, 30 270" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 650" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="hero-grad-primary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="hero-grad-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="hero-grad-warm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#f43f5e"/>
+    </linearGradient>
+    <linearGradient id="glass-card-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#f8fafc" stop-opacity="0.85"/>
+    </linearGradient>
+    <linearGradient id="avatar-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#fed7aa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="hero-shadow-lg" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="25" stdDeviation="30" flood-color="#4338ca" flood-opacity="0.25"/>
+    </filter>
+    <filter id="hero-shadow-sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="15" flood-color="#0f172a" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Light Orbs -->
+  <circle cx="350" cy="320" r="240" fill="url(#hero-grad-primary)" opacity="0.12"/>
+  <circle cx="500" cy="180" r="140" fill="url(#hero-grad-accent)" opacity="0.15"/>
+  <circle cx="180" cy="460" r="160" fill="url(#hero-grad-warm)" opacity="0.12"/>
+
+  <!-- Main Central Composition -->
+  <!-- Layer 1: Code & Web Design Window (Back Left) -->
+  <g filter="url(#hero-shadow-sm)" transform="translate(40, 80)">
+    <rect width="320" height="230" rx="16" fill="#0f172a" stroke="#334155" stroke-width="2"/>
+    <!-- Window Bar -->
+    <rect width="320" height="34" rx="16" fill="#1e293b"/>
+    <rect y="22" width="320" height="12" fill="#1e293b"/>
+    <circle cx="18" cy="17" r="4.5" fill="#f43f5e"/>
+    <circle cx="32" cy="17" r="4.5" fill="#fbbf24"/>
+    <circle cx="46" cy="17" r="4.5" fill="#10b981"/>
+    <text x="65" y="21" font-family="monospace" font-size="9" fill="#94a3b8">App.tsx — Glorifix</text>
+
+    <!-- Syntax Code lines -->
+    <g transform="translate(20, 50)" font-family="monospace" font-size="10">
+      <text x="0" y="15" fill="#c084fc">export const <tspan fill="#38bdf8">GloryFitsMedia</tspan> = () =&gt; {</text>
+      <text x="15" y="35" fill="#64748b">// Modern High-Conversion Solutions</text>
+      <text x="15" y="55" fill="#f43f5e">const <tspan fill="#ffffff">services</tspan> = [</text>
+      <text x="30" y="75" fill="#34d399">"Web Design &amp; Dev",</text>
+      <text x="30" y="95" fill="#34d399">"Graphic &amp; Brand Identity",</text>
+      <text x="30" y="115" fill="#34d399">"Social Media Scaling"</text>
+      <text x="15" y="135" fill="#f43f5e">];</text>
+      <text x="15" y="155" fill="#38bdf8">return <tspan fill="#facc15">&lt;DigitalImpact /&gt;</tspan>;</text>
+      <text x="0" y="172" fill="#c084fc">};</text>
+    </g>
+  </g>
+
+  <!-- Layer 2: Graphic Design / Canvas Showcase (Back Right) -->
+  <g filter="url(#hero-shadow-sm)" transform="translate(360, 60)">
+    <rect width="300" height="250" rx="16" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+    <!-- Artboard Header -->
+    <rect width="300" height="34" rx="16" fill="#f8fafc"/>
+    <rect y="22" width="300" height="12" fill="#f8fafc"/>
+    <rect x="18" y="11" width="12" height="12" rx="3" fill="#f43f5e"/>
+    <text x="38" y="21" font-family="-apple-system, sans-serif" font-size="10" fill="#475569" font-weight="600">Brand Identity System • 300 DPI</text>
+
+    <!-- Vector Curves & Geometric Art -->
+    <path d="M 40 180 C 60 90, 160 80, 200 130 C 240 180, 220 220, 260 210" fill="none" stroke="url(#hero-grad-primary)" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Vector Handles -->
+    <circle cx="60" cy="90" r="5" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <circle cx="160" cy="80" r="5" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <line x1="60" y1="90" x2="160" y2="80" stroke="#818cf8" stroke-dasharray="3"/>
+
+    <!-- Swatches -->
+    <rect x="40" y="195" width="28" height="28" rx="6" fill="#6366f1"/>
+    <rect x="76" y="195" width="28" height="28" rx="6" fill="#a855f7"/>
+    <rect x="112" y="195" width="28" height="28" rx="6" fill="#ec4899"/>
+    <rect x="148" y="195" width="28" height="28" rx="6" fill="#f97316"/>
+    <rect x="184" y="195" width="28" height="28" rx="6" fill="#06b6d4"/>
+
+    <!-- Pen Tool Icon -->
+    <g transform="translate(230, 95) rotate(-35)">
+      <polygon points="0,0 12,30 20,20" fill="#334155"/>
+      <polygon points="0,0 20,20 30,12" fill="#475569"/>
+      <circle cx="15" cy="15" r="3" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- Layer 3: Main Central Creator Card (Hero Focal Point) -->
+  <g filter="url(#hero-shadow-lg)" transform="translate(150, 190)">
+    <!-- Main Card Body -->
+    <rect width="400" height="360" rx="24" fill="url(#glass-card-grad)" stroke="#ffffff" stroke-width="2.5"/>
+
+    <!-- Card Top Badge -->
+    <g transform="translate(30, 30)">
+      <rect width="170" height="32" rx="16" fill="#f1f5f9"/>
+      <circle cx="16" cy="16" r="6" fill="#10b981"/>
+      <text x="30" y="20" font-family="-apple-system, sans-serif" font-size="11" fill="#0f172a" font-weight="700">Glorifix Media Concept</text>
+    </g>
+
+    <g transform="translate(290, 30)">
+      <rect width="80" height="32" rx="16" fill="url(#hero-grad-primary)"/>
+      <text x="40" y="20" font-family="-apple-system, sans-serif" font-size="11" fill="#ffffff" font-weight="700" text-anchor="middle">★ TOP PRO</text>
+    </g>
+
+    <!-- Central Emblem Visual -->
+    <g transform="translate(200, 150)">
+      <circle cx="0" cy="0" r="55" fill="url(#hero-grad-primary)"/>
+      <circle cx="0" cy="0" r="46" fill="#ffffff"/>
+      <!-- Monogram GFMC -->
+      <text x="0" y="11" font-family="-apple-system, sans-serif" font-size="28" fill="#4f46e5" font-weight="900" text-anchor="middle" letter-spacing="1">GFM</text>
+    </g>
+
+    <!-- Creator Subtitle -->
+    <text x="200" y="240" font-family="-apple-system, sans-serif" font-size="17" fill="#0f172a" font-weight="800" text-anchor="middle">Premium Creative Studio</text>
+    <text x="200" y="262" font-family="-apple-system, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Digital Architecture • Visuals • Brand Growth</text>
+
+    <!-- Core Metrics Strip Inside Card -->
+    <g transform="translate(30, 285)">
+      <rect width="340" height="52" rx="14" fill="#f8fafc" stroke="#e2e8f0"/>
+      <!-- Stat 1 -->
+      <g transform="translate(30, 18)">
+        <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="14" fill="#0f172a" font-weight="800">100%</text>
+        <text x="0" y="26" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b">Satisfaction</text>
+      </g>
+      <line x1="120" y1="12" x2="120" y2="40" stroke="#e2e8f0"/>
+      <!-- Stat 2 -->
+      <g transform="translate(150, 18)">
+        <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="14" fill="#0f172a" font-weight="800">50+</text>
+        <text x="0" y="26" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b">Projects Done</text>
+      </g>
+      <line x1="240" y1="12" x2="240" y2="40" stroke="#e2e8f0"/>
+      <!-- Stat 3 -->
+      <g transform="translate(265, 18)">
+        <text x="0" y="12" font-family="-apple-system, sans-serif" font-size="14" fill="#0f172a" font-weight="800">24/7</text>
+        <text x="0" y="26" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b">Fast Support</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Floating Badge 1: WhatsApp Quick Connect Pill (Bottom Left) -->
+  <g filter="url(#hero-shadow-sm)" transform="translate(50, 480)">
+    <rect width="180" height="54" rx="27" fill="#ffffff" stroke="#22c55e" stroke-width="2"/>
+    <circle cx="28" cy="27" r="16" fill="#22c55e"/>
+    <!-- WhatsApp Icon -->
+    <path d="M 28 17 C 22.5 17 18 21.5 18 27 C 18 28.8 18.5 30.5 19.3 32 L 18 36 L 22.2 34.8 C 23.6 35.6 25.2 36 27 36 C 32.5 36 37 31.5 37 27 C 37 21.5 32.5 17 28 17 Z" fill="#ffffff"/>
+    <text x="54" y="24" font-family="-apple-system, sans-serif" font-size="11" fill="#0f172a" font-weight="800">Chat on WhatsApp</text>
+    <text x="54" y="38" font-family="-apple-system, sans-serif" font-size="9" fill="#16a34a" font-weight="600">09050278999</text>
+  </g>
+
+  <!-- Floating Badge 2: Social Media Reach Booster (Bottom Right) -->
+  <g filter="url(#hero-shadow-sm)" transform="translate(480, 470)">
+    <rect width="170" height="60" rx="16" fill="#ffffff" stroke="#f43f5e" stroke-width="2"/>
+    <circle cx="32" cy="30" r="16" fill="#fef2f2"/>
+    <path d="M 32 24 C 28 20, 24 24, 32 33 C 40 24, 36 20, 32 24 Z" fill="#f43f5e"/>
+    <text x="60" y="26" font-family="-apple-system, sans-serif" font-size="11" fill="#0f172a" font-weight="800">Viral Traction</text>
+    <text x="60" y="42" font-family="-apple-system, sans-serif" font-size="13" fill="#f43f5e" font-weight="800">+2.5M Views</text>
+  </g>
+
+  <!-- Floating Star & Sparkle Accents -->
+  <g transform="translate(130, 50)">
+    <polygon points="12,0 15,9 24,12 15,15 12,24 9,15 0,12 9,9" fill="#fbbf24"/>
+  </g>
+  <g transform="translate(620, 380)">
+    <polygon points="10,0 13,8 20,10 13,12 10,20 7,12 0,10 7,8" fill="#6366f1"/>
+  </g>
+  <g transform="translate(100, 360)">
+    <polygon points="8,0 10,6 16,8 10,10 8,16 6,10 0,8 6,6" fill="#06b6d4"/>
+  </g>
+</svg>

@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="apex-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f766e"/>
+      <stop offset="50%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="apex-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#042f2e" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#apex-bg)" rx="16"/>
+  <circle cx="680" cy="120" r="140" fill="#ffffff" fill-opacity="0.1"/>
+
+  <g filter="url(#apex-shadow)" transform="translate(160, 45)">
+    <!-- Device 1: Activity Tracker App View -->
+    <g transform="translate(0, 0)">
+      <rect width="220" height="410" rx="36" fill="#090d16" stroke="#134e4a" stroke-width="4"/>
+      <rect x="8" y="8" width="204" height="394" rx="28" fill="#111827"/>
+      <!-- Notch -->
+      <rect x="75" y="16" width="70" height="18" rx="9" fill="#000000"/>
+
+      <text x="24" y="60" font-family="-apple-system, sans-serif" font-size="16" fill="#ffffff" font-weight="800">Apex Activity</text>
+      <text x="24" y="76" font-family="-apple-system, sans-serif" font-size="9" fill="#9ca3af">Today's Target: 850 kcal</text>
+
+      <!-- Activity Rings -->
+      <g transform="translate(110, 150)">
+        <!-- Outer Ring (Move) -->
+        <circle cx="0" cy="0" r="54" fill="none" stroke="#374151" stroke-width="9"/>
+        <circle cx="0" cy="0" r="54" fill="none" stroke="#f43f5e" stroke-width="9" stroke-dasharray="339" stroke-dashoffset="68" stroke-linecap="round"/>
+        <!-- Middle Ring (Exercise) -->
+        <circle cx="0" cy="0" r="41" fill="none" stroke="#374151" stroke-width="9"/>
+        <circle cx="0" cy="0" r="41" fill="none" stroke="#10b981" stroke-width="9" stroke-dasharray="257" stroke-dashoffset="40" stroke-linecap="round"/>
+        <!-- Inner Ring (Stand) -->
+        <circle cx="0" cy="0" r="28" fill="none" stroke="#374151" stroke-width="9"/>
+        <circle cx="0" cy="0" r="28" fill="none" stroke="#06b6d4" stroke-width="9" stroke-dasharray="175" stroke-dashoffset="30" stroke-linecap="round"/>
+      </g>
+
+      <!-- Mini KPI Metrics -->
+      <g transform="translate(20, 230)">
+        <rect width="180" height="42" rx="8" fill="#1f2937"/>
+        <circle cx="24" cy="21" r="10" fill="#f43f5e" fill-opacity="0.2"/>
+        <circle cx="24" cy="21" r="4" fill="#f43f5e"/>
+        <text x="44" y="18" font-family="-apple-system, sans-serif" font-size="8" fill="#9ca3af">MOVE</text>
+        <text x="44" y="32" font-family="-apple-system, sans-serif" font-size="12" fill="#ffffff" font-weight="700">720 / 850 kcal</text>
+
+        <rect y="50" width="180" height="42" rx="8" fill="#1f2937"/>
+        <circle cx="24" cy="71" r="10" fill="#10b981" fill-opacity="0.2"/>
+        <circle cx="24" cy="71" r="4" fill="#10b981"/>
+        <text x="44" y="68" font-family="-apple-system, sans-serif" font-size="8" fill="#9ca3af">EXERCISE</text>
+        <text x="44" y="82" font-family="-apple-system, sans-serif" font-size="12" fill="#ffffff" font-weight="700">48 / 60 min</text>
+
+        <rect y="100" width="180" height="42" rx="8" fill="#1f2937"/>
+        <circle cx="24" cy="121" r="10" fill="#06b6d4" fill-opacity="0.2"/>
+        <circle cx="24" cy="121" r="4" fill="#06b6d4"/>
+        <text x="44" y="118" font-family="-apple-system, sans-serif" font-size="8" fill="#9ca3af">HEART RATE</text>
+        <text x="44" y="132" font-family="-apple-system, sans-serif" font-size="12" fill="#ffffff" font-weight="700">134 bpm • Peak</text>
+      </g>
+    </g>
+
+    <!-- Device 2: Offset Analytics Card -->
+    <g transform="translate(260, 30)">
+      <rect width="220" height="360" rx="20" fill="#ffffff"/>
+      <text x="24" y="40" font-family="-apple-system, sans-serif" font-size="15" fill="#0f172a" font-weight="800">Weekly Performance</text>
+      
+      <!-- Bar Chart of Daily Workouts -->
+      <g transform="translate(24, 70)">
+        <rect x="0" y="70" width="18" height="60" rx="5" fill="#ccfbf1"/>
+        <rect x="0" y="85" width="18" height="45" rx="5" fill="#0d9488"/>
+        <text x="9" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">M</text>
+
+        <rect x="26" y="40" width="18" height="90" rx="5" fill="#ccfbf1"/>
+        <rect x="26" y="55" width="18" height="75" rx="5" fill="#0d9488"/>
+        <text x="35" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">T</text>
+
+        <rect x="52" y="30" width="18" height="100" rx="5" fill="#ccfbf1"/>
+        <rect x="52" y="40" width="18" height="90" rx="5" fill="#0d9488"/>
+        <text x="61" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">W</text>
+
+        <rect x="78" y="50" width="18" height="80" rx="5" fill="#ccfbf1"/>
+        <rect x="78" y="70" width="18" height="60" rx="5" fill="#0d9488"/>
+        <text x="87" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">T</text>
+
+        <rect x="104" y="20" width="18" height="110" rx="5" fill="#99f6e4"/>
+        <rect x="104" y="25" width="18" height="105" rx="5" fill="#14b8a6"/>
+        <text x="113" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#0f766e" font-weight="700" text-anchor="middle">F</text>
+
+        <rect x="130" y="60" width="18" height="70" rx="5" fill="#ccfbf1"/>
+        <rect x="130" y="80" width="18" height="50" rx="5" fill="#0d9488"/>
+        <text x="139" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">S</text>
+
+        <rect x="156" y="75" width="18" height="55" rx="5" fill="#ccfbf1"/>
+        <rect x="156" y="90" width="18" height="40" rx="5" fill="#0d9488"/>
+        <text x="165" y="145" font-family="-apple-system, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">S</text>
+      </g>
+
+      <!-- Badge -->
+      <g transform="translate(24, 250)">
+        <rect width="172" height="65" rx="10" fill="#f0fdfa" stroke="#ccfbf1"/>
+        <circle cx="28" cy="32" r="14" fill="#0d9488"/>
+        <path d="M 23 32 L 27 36 L 34 27" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+        <text x="50" y="28" font-family="-apple-system, sans-serif" font-size="10" fill="#134e4a" font-weight="800">Streak Maintained</text>
+        <text x="50" y="42" font-family="-apple-system, sans-serif" font-size="8.5" fill="#0f766e">18 Consecutive Days</text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="aura-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+    <filter id="aura-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#78350f" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#aura-bg)" rx="16"/>
+  <circle cx="700" cy="80" r="140" fill="#ffffff" fill-opacity="0.1"/>
+
+  <g filter="url(#aura-shadow)" transform="translate(100, 50)">
+    <!-- Artisan Coffee Bag Mockup -->
+    <g transform="translate(40, 20)">
+      <!-- Kraft Bag Body -->
+      <polygon points="60,40 180,40 195,340 45,340" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+      <polygon points="60,40 45,60 45,340 60,340" fill="#fde68a"/>
+      <!-- Top Fold & Clip -->
+      <polygon points="50,40 190,40 185,20 55,20" fill="#d97706"/>
+      <rect x="70" y="16" width="100" height="10" rx="3" fill="#92400e"/>
+
+      <!-- Bag Minimalist Label -->
+      <rect x="65" y="100" width="110" height="160" rx="8" fill="#ffffff" stroke="#fcd34d"/>
+      <circle cx="120" cy="135" r="18" fill="#78350f"/>
+      <text x="120" y="141" font-family="'Georgia', serif" font-size="14" fill="#fef3c7" text-anchor="middle" font-weight="700">A</text>
+      <text x="120" y="172" font-family="'Georgia', serif" font-size="13" fill="#78350f" font-weight="800" text-anchor="middle" letter-spacing="2">AURA</text>
+      <text x="120" y="186" font-family="-apple-system, sans-serif" font-size="7" fill="#b45309" font-weight="600" text-anchor="middle" letter-spacing="1">SPECIALTY ROASTERS</text>
+      
+      <line x1="80" y1="200" x2="160" y2="200" stroke="#fef3c7" stroke-width="1.5"/>
+      <text x="120" y="214" font-family="-apple-system, sans-serif" font-size="7.5" fill="#451a03" text-anchor="middle">ETHIOPIA YIRGACHEFFE</text>
+      <text x="120" y="226" font-family="-apple-system, sans-serif" font-size="6.5" fill="#92400e" text-anchor="middle">Jasmine • Bergamot • Honey</text>
+      <rect x="85" y="238" width="70" height="12" rx="3" fill="#fef3c7"/>
+      <text x="120" y="247" font-family="monospace" font-size="6" fill="#78350f" text-anchor="middle">SINGLE ORIGIN 250G</text>
+    </g>
+
+    <!-- Branding Stationery & Business Cards -->
+    <g transform="translate(290, 40)">
+      <!-- Letterhead / Menu Sheet -->
+      <rect width="250" height="320" rx="12" fill="#fffbeb" stroke="#fde68a"/>
+      <!-- Header Gold Foil Accent -->
+      <rect x="30" y="30" width="40" height="40" rx="8" fill="#78350f"/>
+      <circle cx="50" cy="50" r="12" fill="#f59e0b"/>
+      <text x="85" y="48" font-family="'Georgia', serif" font-size="16" fill="#451a03" font-weight="800">AURA COFFEE CO.</text>
+      <text x="85" y="62" font-family="-apple-system, sans-serif" font-size="8" fill="#92400e" font-weight="600">Visual Identity by Glorifix Media</text>
+
+      <line x1="30" y1="90" x2="220" y2="90" stroke="#fde68a" stroke-width="1.5"/>
+
+      <!-- Menu / Brand Typography Lines -->
+      <rect x="30" y="110" width="130" height="8" rx="4" fill="#78350f"/>
+      <rect x="30" y="126" width="180" height="5" rx="2.5" fill="#d97706" opacity="0.6"/>
+      <rect x="30" y="136" width="160" height="5" rx="2.5" fill="#d97706" opacity="0.6"/>
+      
+      <!-- Business Card Mockup Overlapping -->
+      <g transform="translate(40, 170)" filter="url(#aura-shadow)">
+        <rect width="180" height="110" rx="8" fill="#451a03"/>
+        <text x="24" y="42" font-family="'Georgia', serif" font-size="14" fill="#fef3c7" font-weight="700">AURA</text>
+        <circle cx="150" cy="35" r="10" fill="#f59e0b"/>
+        <rect x="24" y="65" width="80" height="4" rx="2" fill="#fde68a"/>
+        <rect x="24" y="75" width="110" height="3" rx="1.5" fill="#fef3c7" opacity="0.8"/>
+        <rect x="24" y="83" width="90" height="3" rx="1.5" fill="#fef3c7" opacity="0.8"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+<defs>
+  <linearGradient id="corp1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#0d47a1"/><stop offset="100%" stop-color="#1565c0"/></linearGradient>
+</defs>
+<rect width="600" height="380" rx="10" fill="#f5f5f5"/>
+<rect width="600" height="34" rx="10" fill="#263238"/>
+<circle cx="18" cy="17" r="5" fill="#ff5f57"/><circle cx="34" cy="17" r="5" fill="#febc2e"/><circle cx="50" cy="17" r="5" fill="#28c840"/>
+<rect x="70" y="8" width="380" height="18" rx="9" fill="#37474f"/>
+<text x="260" y="20" font-size="9" fill="#90a4ae" font-family="Arial">www.coretech-ng.com</text>
+<rect x="0" y="34" width="600" height="346" fill="#fff"/>
+<rect x="0" y="34" width="600" height="80" fill="url(#corp1)"/>
+<rect x="20" y="44" width="90" height="12" rx="3" fill="rgba(255,255,255,0.9)"/>
+<rect x="280" y="44" width="35" height="8" rx="3" fill="rgba(255,255,255,0.6)"/><rect x="325" y="44" width="35" height="8" rx="3" fill="rgba(255,255,255,0.6)"/><rect x="370" y="44" width="35" height="8" rx="3" fill="rgba(255,255,255,0.6)"/>
+<rect x="440" y="41" width="70" height="16" rx="8" fill="white"/>
+<text x="475" y="52" font-size="8" fill="#1565c0" font-family="Arial" text-anchor="middle" font-weight="bold">Get a Quote</text>
+<text x="40" y="88" font-size="17" fill="white" font-family="Arial" font-weight="bold">Technology Solutions</text>
+<text x="40" y="104" font-size="9" fill="rgba(255,255,255,0.75)" font-family="Arial">Driving Digital Transformation Across Nigeria</text>
+<rect x="20" y="118" width="120" height="70" rx="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+<text x="80" y="148" font-size="22" text-anchor="middle">💻</text>
+<text x="80" y="165" font-size="8" fill="#1565c0" font-family="Arial" text-anchor="middle" font-weight="bold">IT Solutions</text>
+<text x="80" y="178" font-size="7" fill="#666" font-family="Arial" text-anchor="middle">Enterprise Tech</text>
+<rect x="155" y="118" width="120" height="70" rx="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+<text x="215" y="148" font-size="22" text-anchor="middle">☁️</text>
+<text x="215" y="165" font-size="8" fill="#1565c0" font-family="Arial" text-anchor="middle" font-weight="bold">Cloud Services</text>
+<text x="215" y="178" font-size="7" fill="#666" font-family="Arial" text-anchor="middle">AWS &amp; Azure</text>
+<rect x="290" y="118" width="120" height="70" rx="6" fill="#fff" stroke="#e0e0e0" stroke-width="1"/>
+<text x="350" y="148" font-size="22" text-anchor="middle">🔒</text>
+<text x="350" y="165" font-size="8" fill="#1565c0" font-family="Arial" text-anchor="middle" font-weight="bold">Cybersecurity</text>
+<text x="350" y="178" font-size="7" fill="#666" font-family="Arial" text-anchor="middle">Data Protection</text>
+<rect x="425" y="118" width="155" height="70" rx="6" fill="#e3f2fd" stroke="#bbdefb" stroke-width="1"/>
+<text x="502" y="148" font-size="13" fill="#1565c0" font-family="Arial" font-weight="bold" text-anchor="middle">500+</text>
+<text x="502" y="162" font-size="8" fill="#1565c0" font-family="Arial" text-anchor="middle">Projects Delivered</text>
+<text x="502" y="176" font-size="8" fill="#666" font-family="Arial" text-anchor="middle">Across 15 Countries</text>
+<text x="300" y="218" font-size="9" fill="#888" font-family="Arial" text-anchor="middle">Our Trusted Clients</text>
+<rect x="30" y="228" width="80" height="20" rx="4" fill="#f5f5f5"/><text x="70" y="242" font-size="8" fill="#999" font-family="Arial" text-anchor="middle">ClientCo Ltd</text>
+<rect x="125" y="228" width="80" height="20" rx="4" fill="#f5f5f5"/><text x="165" y="242" font-size="8" fill="#999" font-family="Arial" text-anchor="middle">TechGroup</text>
+<rect x="220" y="228" width="80" height="20" rx="4" fill="#f5f5f5"/><text x="260" y="242" font-size="8" fill="#999" font-family="Arial" text-anchor="middle">NigeriaBank</text>
+<rect x="315" y="228" width="80" height="20" rx="4" fill="#f5f5f5"/><text x="355" y="242" font-size="8" fill="#999" font-family="Arial" text-anchor="middle">MediaHouse</text>
+<rect x="410" y="228" width="80" height="20" rx="4" fill="#f5f5f5"/><text x="450" y="242" font-size="8" fill="#999" font-family="Arial" text-anchor="middle">LogiCorp</text>
+</svg>

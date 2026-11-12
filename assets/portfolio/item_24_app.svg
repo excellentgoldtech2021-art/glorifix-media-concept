@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+<defs>
+  <linearGradient id="re1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1b5e20"/><stop offset="100%" stop-color="#2e7d32"/></linearGradient>
+</defs>
+<rect width="600" height="380" rx="10" fill="#f5f5f5"/>
+<rect width="600" height="34" rx="10" fill="#1b2631"/>
+<circle cx="18" cy="17" r="5" fill="#ff5f57"/><circle cx="34" cy="17" r="5" fill="#febc2e"/><circle cx="50" cy="17" r="5" fill="#28c840"/>
+<rect x="70" y="8" width="360" height="18" rx="9" fill="#2c3e50"/>
+<text x="250" y="20" font-size="9" fill="#90a4ae" font-family="Arial">www.propertypro.ng</text>
+<rect x="0" y="34" width="600" height="346" fill="#fff"/>
+<rect x="0" y="34" width="600" height="65" fill="url(#re1)"/>
+<rect x="20" y="44" width="100" height="12" rx="3" fill="rgba(255,255,255,0.9)"/>
+<text x="25" y="54" font-size="8" fill="#1b5e20" font-family="Arial" font-weight="bold">PropertyPro</text>
+<rect x="200" y="55" width="250" height="20" rx="10" fill="white"/>
+<text x="225" y="68" font-size="8" fill="#999" font-family="Arial">🔍 Search properties in Abuja...</text>
+<rect x="456" y="55" width="45" height="20" rx="10" fill="url(#re1)"/>
+<text x="478" y="68" font-size="8" fill="white" font-family="Arial" text-anchor="middle">Search</text>
+<rect x="10" y="108" width="185" height="140" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+<rect x="10" y="108" width="185" height="80" rx="8" fill="#c8e6c9"/>
+<text x="102" y="152" font-size="32" text-anchor="middle">🏠</text>
+<text x="20" y="206" font-size="9" fill="#1b5e20" font-family="Arial" font-weight="bold">3-Bed Duplex, Maitama</text>
+<text x="20" y="218" font-size="11" fill="#1b5e20" font-family="Arial" font-weight="bold">₦45,000,000</text>
+<text x="20" y="230" font-size="7" fill="#888" font-family="Arial">🛏 3  🚿 2  📐 280sqm  📍 Maitama, Abuja</text>
+<rect x="16" y="236" width="80" height="10" rx="5" fill="url(#re1)"/>
+<text x="56" y="244" font-size="6" fill="white" font-family="Arial" text-anchor="middle">View Details</text>
+<rect x="210" y="108" width="185" height="140" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+<rect x="210" y="108" width="185" height="80" rx="8" fill="#bbdefb"/>
+<text x="302" y="152" font-size="32" text-anchor="middle">🏢</text>
+<text x="220" y="206" font-size="9" fill="#1b5e20" font-family="Arial" font-weight="bold">Office Complex, Wuse</text>
+<text x="220" y="218" font-size="11" fill="#1b5e20" font-family="Arial" font-weight="bold">₦12M/year</text>
+<text x="220" y="230" font-size="7" fill="#888" font-family="Arial">🏢 Commercial  📐 450sqm  📍 Wuse 2, Abuja</text>
+<rect x="216" y="236" width="80" height="10" rx="5" fill="url(#re1)"/>
+<text x="256" y="244" font-size="6" fill="white" font-family="Arial" text-anchor="middle">View Details</text>
+<rect x="410" y="108" width="180" height="140" rx="8" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+<rect x="410" y="108" width="180" height="80" rx="8" fill="#ffe0b2"/>
+<text x="500" y="152" font-size="32" text-anchor="middle">🏡</text>
+<text x="420" y="206" font-size="9" fill="#1b5e20" font-family="Arial" font-weight="bold">Land, Lugbe FCT</text>
+<text x="420" y="218" font-size="11" fill="#1b5e20" font-family="Arial" font-weight="bold">₦8,500,000</text>
+<text x="420" y="230" font-size="7" fill="#888" font-family="Arial">🌿 Residential Plot  📐 600sqm  📍 Lugbe</text>
+<rect x="416" y="236" width="80" height="10" rx="5" fill="url(#re1)"/>
+<text x="456" y="244" font-size="6" fill="white" font-family="Arial" text-anchor="middle">View Details</text>
+<rect x="0" y="268" width="600" height="45" fill="#f8fffe" stroke="#e0f2f1" stroke-width="1"/>
+<text x="300" y="286" font-size="9" fill="#333" font-family="Arial" text-anchor="middle">🏘 1,200+ Properties Listed  •  ✅ Verified Agents  •  🔐 Secure Transactions  •  📱 Mobile App Available</text>
+<text x="300" y="304" font-size="8" fill="#2e7d32" font-family="Arial" text-anchor="middle" font-weight="bold">PropertyPro — Nigeria's Most Trusted Real Estate Platform</text>
+<rect x="10" y="320" width="580" height="40" rx="8" fill="#e8f5e9" stroke="#c8e6c9" stroke-width="1"/>
+<text x="300" y="338" font-size="9" fill="#1b5e20" font-family="Arial" text-anchor="middle" font-weight="bold">📞 List Your Property Free Today | 09050278999</text>
+<text x="300" y="352" font-size="8" fill="#2e7d32" font-family="Arial" text-anchor="middle">Built by Glorifix Media Concept — Full-Stack Web Application</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+<defs>
+  <linearGradient id="ig1" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient>
+</defs>
+<rect width="600" height="380" fill="#fafafa"/>
+<rect x="0" y="0" width="600" height="60" fill="white" stroke="#dbdbdb" stroke-width="1"/>
+<rect x="20" y="15" width="28" height="28" rx="14" fill="url(#ig1)"/>
+<text x="34" y="33" font-size="11" fill="white" font-family="Arial" text-anchor="middle" font-weight="bold">FH</text>
+<text x="58" y="27" font-size="11" fill="#262626" font-family="Arial" font-weight="bold">fashionhive_ng</text>
+<text x="58" y="41" font-size="9" fill="#8e8e8e" font-family="Arial">Fashion &amp; Lifestyle • 48.2K followers</text>
+<rect x="540" y="18" width="50" height="24" rx="5" fill="url(#ig1)"/>
+<text x="565" y="34" font-size="9" fill="white" font-family="Arial" text-anchor="middle" font-weight="bold">Follow</text>
+<rect x="5" y="65" width="130" height="130" rx="4" fill="#f9c3b0"/>
+<text x="70" y="135" font-size="36" text-anchor="middle">👗</text>
+<rect x="140" y="65" width="130" height="130" rx="4" fill="#fde8ed"/>
+<text x="205" y="135" font-size="36" text-anchor="middle">💄</text>
+<rect x="275" y="65" width="130" height="130" rx="4" fill="#c8e6c9"/>
+<text x="340" y="135" font-size="36" text-anchor="middle">👠</text>
+<rect x="410" y="65" width="185" height="130" rx="4" fill="url(#ig1)" opacity="0.85"/>
+<text x="502" y="115" font-size="11" fill="white" font-family="Arial" font-weight="bold" text-anchor="middle">NEW DROP</text>
+<text x="502" y="132" font-size="9" fill="rgba(255,255,255,0.85)" font-family="Arial" text-anchor="middle">Summer Collection</text>
+<rect x="5" y="200" width="185" height="130" rx="4" fill="#e8d5f5"/>
+<text x="97" y="270" font-size="36" text-anchor="middle">👒</text>
+<rect x="195" y="200" width="130" height="130" rx="4" fill="#ffeeba"/>
+<text x="260" y="270" font-size="36" text-anchor="middle">💍</text>
+<rect x="330" y="200" width="130" height="130" rx="4" fill="#b3e5fc"/>
+<text x="395" y="270" font-size="36" text-anchor="middle">👜</text>
+<rect x="465" y="200" width="130" height="130" rx="4" fill="#ffccbc"/>
+<text x="530" y="270" font-size="36" text-anchor="middle">🧣</text>
+<rect x="0" y="335" width="600" height="45" fill="white" stroke="#dbdbdb" stroke-width="1"/>
+<text x="20" y="357" font-size="10" fill="#262626" font-family="Arial">❤️ 2,847 likes  💬 312 comments  📤 Share</text>
+<text x="20" y="373" font-size="9" fill="#CC1111" font-family="Arial" font-weight="bold">+500% Engagement Growth • 48.2K Followers Gained</text>
+</svg>
