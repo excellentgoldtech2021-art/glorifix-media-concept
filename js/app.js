@@ -668,8 +668,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize the aesthetic animation engine
+  // 10. Scroll Navigation Dock (Scroll to Top & Scroll to Bottom)
+  function initScrollNavDock() {
+    let dock = document.getElementById('scroll-nav-dock');
+    if (!dock) {
+      dock = document.createElement('div');
+      dock.className = 'scroll-nav-dock';
+      dock.id = 'scroll-nav-dock';
+      dock.setAttribute('role', 'navigation');
+      dock.setAttribute('aria-label', 'Quick page scroll navigation');
+      dock.innerHTML = `
+        <button type="button" class="scroll-nav-btn scroll-nav-up" id="scroll-to-top" aria-label="Scroll to top of page" title="Scroll to Top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+          <span class="scroll-nav-tooltip">Scroll to Top</span>
+        </button>
+        <div class="scroll-nav-divider"></div>
+        <button type="button" class="scroll-nav-btn scroll-nav-down" id="scroll-to-bottom" aria-label="Scroll to bottom of page" title="Scroll to Bottom">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+          <span class="scroll-nav-tooltip">Scroll to Bottom</span>
+        </button>
+      `;
+      document.body.appendChild(dock);
+    }
+
+    const upBtn = document.getElementById('scroll-to-top');
+    const downBtn = document.getElementById('scroll-to-bottom');
+
+    if (upBtn) {
+      upBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    if (downBtn) {
+      downBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const maxScroll = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+          document.body.offsetHeight,
+          document.documentElement.offsetHeight,
+          document.body.clientHeight,
+          document.documentElement.clientHeight
+        );
+        window.scrollTo({
+          top: maxScroll,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // Dynamic state updates based on scroll position
+    const updateScrollNavState = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+      const isAtTop = scrollTop <= 60;
+      const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 60);
+
+      if (upBtn) {
+        if (isAtTop) {
+          upBtn.classList.add('is-disabled');
+        } else {
+          upBtn.classList.remove('is-disabled');
+        }
+      }
+
+      if (downBtn) {
+        if (isAtBottom) {
+          downBtn.classList.add('is-disabled');
+        } else {
+          downBtn.classList.remove('is-disabled');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', updateScrollNavState, { passive: true });
+    updateScrollNavState();
+  }
+
+  // Initialize features
   initAestheticAnimations();
+  initScrollNavDock();
 });
 
 

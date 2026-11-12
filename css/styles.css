@@ -3027,3 +3027,124 @@ html {
     animation: none !important;
   }
 }
+
+/* ==========================================================================
+   FLOATING SCROLL NAVIGATION DOCK (SCROLL UP & SCROLL DOWN ARROWS)
+   ========================================================================== */
+
+.scroll-nav-dock {
+  position: fixed;
+  bottom: 32px;
+  left: 28px;
+  z-index: 996;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(26, 4, 8, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(229, 169, 60, 0.45);
+  border-radius: 30px;
+  padding: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 18px rgba(229, 169, 60, 0.25);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+}
+
+.scroll-nav-dock:hover {
+  border-color: rgba(255, 215, 0, 0.75);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 24px rgba(255, 215, 0, 0.35);
+}
+
+.scroll-nav-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #F8EDD8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.scroll-nav-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-nav-btn:hover {
+  background: linear-gradient(135deg, rgba(232, 37, 53, 0.35), rgba(229, 169, 60, 0.35));
+  color: #FFD700;
+  transform: scale(1.12);
+}
+
+.scroll-nav-btn:active {
+  transform: scale(0.92);
+}
+
+.scroll-nav-btn.is-disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.scroll-nav-btn:hover .scroll-nav-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+  pointer-events: auto;
+}
+
+.scroll-nav-tooltip {
+  position: absolute;
+  left: 56px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px);
+  background: rgba(26, 4, 8, 0.95);
+  border: 1px solid rgba(229, 169, 60, 0.5);
+  color: #FFD700;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-nav-divider {
+  width: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(229, 169, 60, 0.4), transparent);
+  margin: 2px 0;
+}
+
+@media (max-width: 768px) {
+  .scroll-nav-dock {
+    bottom: 24px;
+    left: 16px;
+    padding: 3px;
+    border-radius: 26px;
+  }
+  .scroll-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .scroll-nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .scroll-nav-tooltip {
+    display: none;
+  }
+}

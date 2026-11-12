@@ -1,5 +1,33 @@
 [
   {
+    "id": "INQ-96AD0F",
+    "timestamp": "2026-11-12 08:18:55",
+    "type": "Direct Inquiry",
+    "name": "Johnson Jacob",
+    "email": "excellentgoldtech2021@gmail.com",
+    "phone": "Not provided",
+    "service": "General Consultation",
+    "appointment_date": "",
+    "appointment_time": "",
+    "notes": "Testing",
+    "status": "new",
+    "read": false
+  },
+  {
+    "id": "INQ-061B52",
+    "timestamp": "2026-11-12 08:00:40",
+    "type": "Direct Inquiry",
+    "name": "Ezekiel Direct Test",
+    "email": "glorifixmediaconcept@gmail.com",
+    "phone": "09050278999",
+    "service": "General Consultation",
+    "appointment_date": "",
+    "appointment_time": "",
+    "notes": "Testing direct delivery to Gmail inbox and admin dashboard.",
+    "status": "new",
+    "read": false
+  },
+  {
     "id": "INQ-AA5A05",
     "timestamp": "2026-11-12 07:45:30",
     "type": "Consultation Booking",
