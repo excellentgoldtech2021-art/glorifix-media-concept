@@ -580,6 +580,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '.stat-card',
       '.statement-card',
       '.contact-card-item',
+      '.contact-map-card',
       '.about-card-box',
       '.booking-wrap',
       '.calendar-card',
@@ -757,9 +758,85 @@ document.addEventListener('DOMContentLoaded', () => {
     updateScrollNavState();
   }
 
+  /* =========================================================================
+     6. Interactive Office Map & Branch Switcher
+     ========================================================================= */
+  function initOfficeMapSwitcher() {
+    const mapCard = document.getElementById('office-map-section');
+    if (!mapCard) return;
+
+    const iframe = document.getElementById('office-map-iframe');
+    const tabHq = document.getElementById('map-tab-hq');
+    const tabAbuja = document.getElementById('map-tab-abuja');
+    const addressEl = document.getElementById('map-detail-address');
+    const landmarkEl = document.getElementById('map-detail-landmark');
+    const hoursEl = document.getElementById('map-detail-hours');
+    const actionOpen = document.getElementById('map-action-open');
+    const actionDirections = document.getElementById('map-action-directions');
+    const actionWhatsapp = document.getElementById('map-action-whatsapp');
+
+    const branches = {
+      hq: {
+        name: 'Ikare-Akoko Headquarters',
+        address: 'Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria',
+        landmark: 'Opposite General Hospital / Behind G-Delight Hotel',
+        hours: 'Monday – Saturday: 8:00 AM – 8:00 PM (Sunday by Appointment)',
+        embedSrc: 'https://maps.google.com/maps?q=General+Hospital+Ikare-Akoko+Ondo+State+Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed',
+        searchUrl: 'https://www.google.com/maps/search/?api=1&query=Opposite+General+Hospital+Ikare+Akoko+Ondo+State',
+        dirUrl: 'https://www.google.com/maps/dir/?api=1&destination=Opposite+General+Hospital+Ikare+Akoko+Ondo+State',
+        waText: 'Hello Glorifix Media, I am visiting your Ikare-Akoko Office'
+      },
+      abuja: {
+        name: 'Abuja Operations Hub',
+        address: 'Phase 2, Shop 7, Opp. University of Abuja Mini-Campus, Gwagwalada, Abuja FCT, Nigeria',
+        landmark: 'Opp. University of Abuja Mini-Campus / Phase 2 Commercial Strip',
+        hours: 'Monday – Saturday: 8:30 AM – 7:30 PM (Sunday by Appointment)',
+        embedSrc: 'https://maps.google.com/maps?q=University+of+Abuja+Mini-Campus+Gwagwalada+Abuja+Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed',
+        searchUrl: 'https://www.google.com/maps/search/?api=1&query=University+of+Abuja+Mini-Campus+Gwagwalada+Abuja',
+        dirUrl: 'https://www.google.com/maps/dir/?api=1&destination=University+of+Abuja+Mini-Campus+Gwagwalada+Abuja',
+        waText: 'Hello Glorifix Media, I am visiting your Abuja Office'
+      }
+    };
+
+    function switchBranch(key) {
+      const data = branches[key];
+      if (!data) return;
+
+      if (tabHq) {
+        tabHq.classList.toggle('active', key === 'hq');
+        tabHq.setAttribute('aria-selected', key === 'hq');
+      }
+      if (tabAbuja) {
+        tabAbuja.classList.toggle('active', key === 'abuja');
+        tabAbuja.setAttribute('aria-selected', key === 'abuja');
+      }
+
+      if (iframe && iframe.src !== data.embedSrc) {
+        iframe.src = data.embedSrc;
+      }
+      if (addressEl) addressEl.textContent = data.address;
+      if (landmarkEl) landmarkEl.textContent = data.landmark;
+      if (hoursEl) hoursEl.textContent = data.hours;
+
+      if (actionOpen) actionOpen.href = data.searchUrl;
+      if (actionDirections) actionDirections.href = data.dirUrl;
+      if (actionWhatsapp) {
+        actionWhatsapp.href = `https://wa.me/2349050278999?text=${encodeURIComponent(data.waText)}`;
+      }
+    }
+
+    if (tabHq) {
+      tabHq.addEventListener('click', () => switchBranch('hq'));
+    }
+    if (tabAbuja) {
+      tabAbuja.addEventListener('click', () => switchBranch('abuja'));
+    }
+  }
+
   // Initialize features
   initAestheticAnimations();
   initScrollNavDock();
+  initOfficeMapSwitcher();
 });
 
 
