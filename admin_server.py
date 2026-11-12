@@ -1086,7 +1086,11 @@ def html_escape(text):
                 .replace("'", "&#039;"))
 
 if __name__ == '__main__':
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(("", PORT), AdminHandler) as httpd:
+    class ThreadedServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
+        daemon_threads = True
+        allow_reuse_address = True
+
+    with ThreadedServer(("", PORT), AdminHandler) as httpd:
         print(f"🚀 Glorifix Local Admin & Site Server listening on port {PORT}...")
         httpd.serve_forever()
+
