@@ -7,7 +7,9 @@ DirectoryIndex index.html index.php
 
 # 2. Character Encoding & Options
 AddDefaultCharset UTF-8
-Options -Indexes +FollowSymLinks
+<IfModule mod_autoindex.c>
+    Options -Indexes
+</IfModule>
 
 # 3. Security Headers
 <IfModule mod_headers.c>
