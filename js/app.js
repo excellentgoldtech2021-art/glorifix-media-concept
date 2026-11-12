@@ -457,12 +457,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Support URL Hash Deep-linking (e.g. #panel-media)
-    const currentHash = window.location.hash.replace('#', '');
-    if (currentHash) {
-      const matchingTab = document.querySelector(`.pricing-tab-btn[data-target="${currentHash}"]`);
+    // Support URL Hash Deep-linking (e.g. #cac, #panel-cac, #media)
+    const rawHash = window.location.hash.replace('#', '').toLowerCase();
+    if (rawHash) {
+      let targetId = rawHash.startsWith('panel-') ? rawHash : 'panel-' + rawHash;
+      const matchingTab = document.querySelector(`.pricing-tab-btn[data-target="${targetId}"]`) || document.querySelector(`.pricing-tab-btn[data-target="${rawHash}"]`);
       if (matchingTab) {
         matchingTab.click();
+        setTimeout(() => {
+          const p = document.getElementById(targetId);
+          if (p) p.scrollIntoView({ behavior: 'smooth' });
+        }, 150);
       }
     }
   }
