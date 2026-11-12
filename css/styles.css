@@ -1769,6 +1769,28 @@ footer.footer {
   color: var(--red2);
 }
 
+.footer-admin-link {
+  color: #E5A93C !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 10px !important;
+  background: rgba(229, 169, 60, 0.12) !important;
+  border: 1px solid rgba(229, 169, 60, 0.35) !important;
+  border-radius: 6px !important;
+  letter-spacing: 0.02em !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+}
+
+.footer-admin-link:hover {
+  background: #E5A93C !important;
+  color: #1A0408 !important;
+  box-shadow: 0 0 12px rgba(229, 169, 60, 0.6) !important;
+  transform: translateX(4px) !important;
+}
+
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 24px;
@@ -1777,6 +1799,20 @@ footer.footer {
   align-items: center;
   font-size: 0.85rem;
   color: #9A6070;
+}
+
+.footer-bottom-admin {
+  color: #E5A93C !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  margin-left: 6px !important;
+  transition: color 0.2s ease, text-shadow 0.2s ease !important;
+}
+
+.footer-bottom-admin:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(229, 169, 60, 0.8) !important;
+  text-decoration: underline !important;
 }
 
 /* ==========================================================================

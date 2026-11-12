@@ -192,37 +192,53 @@ class GlorifixMailer {
     private static function renderCustomerPlain($data, $is_booking, $admin_email) {
         $name = $data['name'] ?? 'Valued Client';
         $service = $data['service'] ?? 'General Strategy Consultation';
-        $ref_id = $data['id'] ?? 'GLF-' . strtoupper(substr(md5(time()), 0, 6));
+        $ref_id = $data['id'] ?? 'INQ-' . strtoupper(substr(md5(time()), 0, 6));
         $date = $data['appointment_date'] ?? '';
         $time = $data['appointment_time'] ?? '';
+        $phone = $data['phone'] ?? '08050278999';
 
-        $text = "Dear {$name},\n\n";
-        if ($is_booking) {
-            $text .= "Thank you for scheduling a strategy consultation with Glorifix Media Concept Limited.\n\n";
-            $text .= "YOUR CONSULTATION DETAILS:\n";
-            $text .= "----------------------------------------\n";
-            $text .= "Reference ID: #{$ref_id}\n";
-            $text .= "Service: {$service}\n";
-            $text .= "Scheduled Date: {$date} at {$time}\n";
-            $text .= "Consultant: Soje Ezekiel Oluwaseyi & Strategic Team\n";
-            $text .= "----------------------------------------\n\n";
-        } else {
-            $text .= "Thank you for reaching out to Glorifix Media Concept Limited. We have received your inquiry.\n\n";
-            $text .= "INQUIRY DETAILS:\n";
-            $text .= "----------------------------------------\n";
-            $text .= "Reference ID: #{$ref_id}\n";
-            $text .= "Service: {$service}\n";
-            $text .= "----------------------------------------\n\n";
+        $formatted_appointment = '';
+        if (!empty($date)) {
+            $ts = strtotime($date);
+            $d_str = $ts ? date('M d, Y', $ts) : $date;
+            if (!empty($time)) {
+                $t_ts = strtotime($time);
+                $t_str = $t_ts ? date('h:i A', $t_ts) : $time;
+                $formatted_appointment = "{$d_str} at {$t_str}";
+            } else {
+                $formatted_appointment = $d_str;
+            }
         }
 
-        $text .= "WHAT HAPPENS NEXT:\n";
-        $text .= "Our lead consultant will review your project requirements and connect with you directly via WhatsApp or phone call within 24 business hours to discuss your roadmap.\n\n";
-        $text .= "Need immediate assistance? Connect with Ezekiel on WhatsApp:\n";
+        $text = "OFFICIAL CLIENT CONFIRMATION\n";
+        $text .= "GLORIFIX MEDIA CONCEPT LIMITED\n";
+        $text .= "--------------------------------------------------\n\n";
+        $text .= "Dear {$name},\n\n";
+        $text .= "Thank you for choosing Glorifix Media Concept Limited. We have securely registered your request in our client management system with Reference ID: #{$ref_id}.\n\n";
+        $text .= "📋 REQUEST SUMMARY\n";
+        $text .= "--------------------------------------------------\n";
+        $text .= "Reference ID:    #{$ref_id}\n";
+        $text .= "Service:         {$service}\n";
+        if ($is_booking && !empty($formatted_appointment)) {
+            $text .= "Appointment:     {$formatted_appointment}\n";
+        }
+        $text .= "Phone / WA:      {$phone}\n";
+        $text .= "Lead Consultant: Soje Ezekiel Oluwaseyi & Strategic Team\n";
+        $text .= "--------------------------------------------------\n\n";
+
+        $text .= "🚀 WHAT HAPPENS NEXT?\n";
+        $text .= "• Review Brief: Our technical team is reviewing your project details.\n";
+        $text .= "• Direct Connection: Ezekiel or a Senior Account Strategist will reach out to you via WhatsApp or phone call within 24 business hours.\n";
+        $text .= "• Project Roadmap: We will discuss execution timelines, deliverables, and customized pricing tailored to your scale.\n\n";
+
+        $text .= "NEED AN IMMEDIATE RESPONSE?\n";
+        $text .= "Connect directly with Ezekiel on WhatsApp right now:\n";
         $text .= "https://wa.me/2349050278999\n\n";
+
         $text .= "Glorifix Media Concept Limited\n";
-        $text .= "Headquarters: Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria\n";
-        $text .= "Abuja Operations Hub: Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja FCT\n";
-        $text .= "Phone: +234 905 027 8999 | Email: {$admin_email}\n";
+        $text .= "Registered Office: Opp. General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State\n";
+        $text .= "Abuja Studio Hub: Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja FCT\n";
+        $text .= "Hotline: +234 905 027 8999 | Email: {$admin_email}\n";
 
         return $text;
     }
@@ -233,18 +249,31 @@ class GlorifixMailer {
     private static function renderCustomerHtml($data, $is_booking, $admin_email) {
         $name = htmlspecialchars($data['name'] ?? 'Valued Client');
         $service = htmlspecialchars($data['service'] ?? 'General Strategy Consultation');
-        $phone = htmlspecialchars($data['phone'] ?? 'Not provided');
+        $phone = htmlspecialchars($data['phone'] ?? '08050278999');
         $app_date = htmlspecialchars($data['appointment_date'] ?? '');
         $app_time = htmlspecialchars($data['appointment_time'] ?? '');
         $ref_id = htmlspecialchars($data['id'] ?? 'INQ-' . strtoupper(substr(md5(time()), 0, 6)));
         $cust_email = htmlspecialchars($data['email'] ?? '');
 
+        // Format Appointment nicely like in the screenshot: Nov 26, 2026 at 06:30 PM
+        $formatted_appointment = '';
+        if (!empty($app_date)) {
+            $ts = strtotime($app_date);
+            $d_str = $ts ? date('M d, Y', $ts) : $app_date;
+            if (!empty($app_time)) {
+                $t_ts = strtotime($app_time);
+                $t_str = $t_ts ? date('h:i A', $t_ts) : $app_time;
+                $formatted_appointment = "{$d_str} at {$t_str}";
+            } else {
+                $formatted_appointment = $d_str;
+            }
+        }
+
         $headline = $is_booking ? "Your Consultation is Confirmed" : "We Have Received Your Note";
         $subtitle = $is_booking 
             ? "Your 1-on-1 strategy session has been scheduled with Glorifix Media Concept Limited."
-            : "Thank you for reaching out to Glorifix Media Concept Limited. Our team is already reviewing your brief.";
+            : "Your project brief has been securely registered with Glorifix Media Concept Limited.";
 
-        $clean_phone = preg_replace('/[^0-9]/', '', $data['phone'] ?? '');
         $wa_msg = urlencode("Hello Ezekiel, I just confirmed my request on Glorifix Media Concept (Ref #{$ref_id}).");
         $wa_url = "https://wa.me/2349050278999?text={$wa_msg}";
 
@@ -255,24 +284,24 @@ class GlorifixMailer {
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>{$headline}</title>
 </head>
-<body style='margin:0; padding:24px 12px; background-color:#f6efe8; font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; color:#2d0a14; -webkit-font-smoothing:antialiased;'>
+<body style='margin:0; padding:24px 12px; background-color:#FAF7F2; font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; color:#2D0A14; -webkit-font-smoothing:antialiased;'>
   
   <table role='presentation' width='100%' border='0' cellspacing='0' cellpadding='0'>
     <tr>
       <td align='center'>
         
-        <table role='presentation' width='100%' style='max-width:600px; background:#ffffff; border-radius:14px; overflow:hidden; border:1px solid #ebd9c8; box-shadow:0 6px 24px rgba(0,0,0,0.06);' cellpadding='0' cellspacing='0'>
+        <table role='presentation' width='100%' style='max-width:580px; background:#ffffff; border-radius:16px; overflow:hidden; border:1.5px solid #EFE6DA; box-shadow:0 8px 30px rgba(74,14,23,0.08);' cellpadding='0' cellspacing='0'>
           
-          <!-- Brand Header (Rich Crimson Gradient) -->
+          <!-- Top Header Gradient Card -->
           <tr>
-            <td style='background:linear-gradient(135deg, #7b1324 0%, #1f0508 100%); padding:32px 24px; text-align:center; color:#ffffff;'>
-              <div style='display:inline-block; padding:5px 16px; background:rgba(229,169,60,0.18); border:1px solid #e5a93c; border-radius:20px; font-size:11px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#e5a93c; margin-bottom:12px;'>
+            <td style='background-color:#4F0A13; background:linear-gradient(180deg, #4F0A13 0%, #6E0F1D 50%, #2E050B 100%); padding:38px 24px 34px 24px; text-align:center;'>
+              <div style='display:inline-block; padding:5px 16px; border:1.2px solid #D4AF37; border-radius:24px; font-size:11px; font-weight:800; color:#E8C872; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; font-family:\"Montserrat\", -apple-system, sans-serif;'>
                 OFFICIAL CLIENT CONFIRMATION
               </div>
-              <h1 style='margin:0 0 8px 0; font-size:24px; font-weight:800; color:#ffffff; letter-spacing:-0.02em;'>
+              <h1 style='margin:0 0 10px 0; font-size:24px; font-weight:800; color:#ffffff; letter-spacing:-0.02em; font-family:\"Montserrat\", -apple-system, sans-serif; line-height:1.25;'>
                 Glorifix Media Concept Limited
               </h1>
-              <p style='margin:0; font-size:14px; color:#f0dcd0; line-height:1.5;'>
+              <p style='margin:0 auto; font-size:14px; color:#F5E8E8; font-weight:400; line-height:1.55; max-width:440px;'>
                 {$subtitle}
               </p>
             </td>
@@ -280,75 +309,75 @@ class GlorifixMailer {
 
           <!-- Main Body -->
           <tr>
-            <td style='padding:30px 24px; line-height:1.6;'>
+            <td style='padding:32px 26px 20px 26px; line-height:1.6;'>
               
-              <div style='font-size:18px; font-weight:700; color:#1a0408; margin-bottom:12px;'>
+              <h2 style='margin:0 0 14px 0; font-size:20px; font-weight:800; color:#1A0408; font-family:\"Montserrat\", -apple-system, sans-serif;'>
                 Dear {$name},
-              </div>
+              </h2>
               
-              <p style='margin:0 0 20px 0; font-size:15px; color:#4a1e26; line-height:1.6;'>
-                Thank you for choosing Glorifix Media Concept Limited. We have securely registered your request in our client management system with Reference ID: <strong style='color:#7b1324;'>#{$ref_id}</strong>.
+              <p style='margin:0 0 24px 0; font-size:15px; color:#2D0A14; line-height:1.65;'>
+                Thank you for choosing Glorifix Media Concept Limited. We have securely registered your request in our client management system with Reference ID: <strong style='color:#6E0F1D; font-weight:800;'>#{$ref_id}</strong>.
               </p>
 
               <!-- Card 1: 📋 REQUEST SUMMARY -->
-              <table role='presentation' width='100%' style='background:#fdf9f4; border:1.5px solid #f0d5be; border-radius:10px; margin-bottom:24px;' cellpadding='20' cellspacing='0'>
+              <table role='presentation' width='100%' style='background-color:#FCF9F4; border:1.5px solid #F0E6D8; border-radius:12px; margin:0 0 26px 0; overflow:hidden;' cellpadding='0' cellspacing='0'>
                 <tr>
-                  <td>
-                    <div style='font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#7b1324; margin-bottom:14px; border-bottom:1px solid #f0d5be; padding-bottom:6px;'>
+                  <td style='padding:20px 22px;'>
+                    <div style='font-size:13px; font-weight:800; color:#6E0F1D; text-transform:uppercase; letter-spacing:1.8px; padding-bottom:10px; border-bottom:1.5px solid #EFE4D6; margin-bottom:14px; font-family:\"Montserrat\", -apple-system, sans-serif;'>
                       📋 REQUEST SUMMARY
                     </div>
-                    <table width='100%' border='0' cellspacing='0' cellpadding='5' style='font-size:14px;'>
+                    <table width='100%' border='0' cellspacing='0' cellpadding='0' style='font-size:14px;'>
                       <tr>
-                        <td style='color:#7a3c48; font-weight:600; width:130px; vertical-align:top;'>Reference ID:</td>
-                        <td style='color:#1a0408; font-weight:700;'>#{$ref_id}</td>
+                        <td style='color:#6E0F1D; font-weight:700; width:140px; padding:7px 0; vertical-align:top;'>Reference ID:</td>
+                        <td style='color:#1A0408; font-weight:800; font-size:15px; padding:7px 0;'>#{$ref_id}</td>
                       </tr>
                       <tr>
-                        <td style='color:#7a3c48; font-weight:600; vertical-align:top;'>Service:</td>
-                        <td style='color:#1a0408; font-weight:700;'>{$service}</td>
+                        <td style='color:#6E0F1D; font-weight:700; padding:7px 0; vertical-align:top;'>Service:</td>
+                        <td style='color:#1A0408; font-weight:700; padding:7px 0; line-height:1.45;'>{$service}</td>
                       </tr>" . 
-                      ($is_booking && !empty($app_date) ? "
+                      ($is_booking && !empty($formatted_appointment) ? "
                       <tr>
-                        <td style='color:#7a3c48; font-weight:600; vertical-align:top;'>Appointment:</td>
-                        <td style='color:#7b1324; font-weight:700;'>{$app_date} at {$app_time}</td>
+                        <td style='color:#6E0F1D; font-weight:700; padding:7px 0; vertical-align:top;'>Appointment:</td>
+                        <td style='color:#6E0F1D; font-weight:800; padding:7px 0; line-height:1.45;'>{$formatted_appointment}</td>
                       </tr>" : "") . "
                       <tr>
-                        <td style='color:#7a3c48; font-weight:600; vertical-align:top;'>Phone / WA:</td>
-                        <td style='color:#1a0408;'>{$phone}</td>
+                        <td style='color:#6E0F1D; font-weight:700; padding:7px 0; vertical-align:top;'>Phone / WA:</td>
+                        <td style='color:#1A0408; font-weight:600; padding:7px 0;'>{$phone}</td>
                       </tr>
                       <tr>
-                        <td style='color:#7a3c48; font-weight:600; vertical-align:top;'>Lead Consultant:</td>
-                        <td style='color:#1a0408;'>Soje Ezekiel Oluwaseyi &amp; Strategic Team</td>
+                        <td style='color:#6E0F1D; font-weight:700; padding:7px 0; vertical-align:top;'>Lead Consultant:</td>
+                        <td style='color:#1A0408; font-weight:600; padding:7px 0; line-height:1.5;'>Soje Ezekiel Oluwaseyi &amp; Strategic Team</td>
                       </tr>
                     </table>
                   </td>
                 </tr>
               </table>
 
-              <!-- Card 2: 🚀 What happens next? -->
+              <!-- Section: 🚀 What happens next? -->
               <div style='margin-bottom:26px;'>
-                <div style='font-size:16px; font-weight:700; color:#1a0408; margin-bottom:10px;'>
+                <h3 style='margin:0 0 12px 0; font-size:17px; font-weight:800; color:#1A0408; font-family:\"Montserrat\", -apple-system, sans-serif;'>
                   🚀 What happens next?
-                </div>
-                <ul style='margin:0; padding-left:20px; font-size:14px; color:#5a2830; line-height:1.7;'>
-                  <li style='margin-bottom:6px;'><strong>Review Brief:</strong> Our technical team is reviewing your project details.</li>
-                  <li style='margin-bottom:6px;'><strong>Direct Connection:</strong> Ezekiel or a Senior Account Strategist will reach out to you via WhatsApp or phone call within <strong>24 business hours</strong>.</li>
-                  <li><strong>Project Roadmap:</strong> We will discuss execution timelines, deliverables, and customized pricing tailored to your scale.</li>
+                </h3>
+                <ul style='margin:0; padding-left:20px; font-size:14.5px; color:#374151; line-height:1.7;'>
+                  <li style='margin-bottom:8px;'><strong style='color:#1A0408;'>Review Brief:</strong> Our technical team is reviewing your project details.</li>
+                  <li style='margin-bottom:8px;'><strong style='color:#1A0408;'>Direct Connection:</strong> Ezekiel or a Senior Account Strategist will reach out to you via WhatsApp or phone call within <strong style='color:#6E0F1D;'>24 business hours</strong>.</li>
+                  <li style='margin-bottom:8px;'><strong style='color:#1A0408;'>Project Roadmap:</strong> We will discuss execution timelines, deliverables, and customized pricing tailored to your scale.</li>
                 </ul>
               </div>
 
-              <!-- Card 3: Need an Immediate Response? (WhatsApp Action) -->
-              <table role='presentation' width='100%' style='background:#f3faf4; border:1px solid #b7e4c7; border-radius:10px; margin-bottom:24px;' cellpadding='20' cellspacing='0'>
+              <!-- Card 2: Need an Immediate Response? (WhatsApp Action) -->
+              <table role='presentation' width='100%' style='background-color:#F0FDF4; border:1.5px solid #BBF7D0; border-radius:12px; margin:0 0 28px 0; text-align:center;' cellpadding='0' cellspacing='0'>
                 <tr>
-                  <td align='center'>
-                    <div style='font-size:15px; font-weight:700; color:#1b4332; margin-bottom:6px;'>
+                  <td style='padding:22px 20px;'>
+                    <h4 style='margin:0 0 6px 0; font-size:16px; font-weight:800; color:#14532D; font-family:\"Montserrat\", -apple-system, sans-serif;'>
                       Need an Immediate Response?
-                    </div>
-                    <p style='margin:0 0 14px 0; font-size:13px; color:#2d6a4f;'>
+                    </h4>
+                    <p style='margin:0 0 16px 0; font-size:14px; color:#15803D;'>
                       You can connect directly with Ezekiel on WhatsApp right now:
                     </p>
                     <a href='{$wa_url}' 
                        target='_blank' 
-                       style='display:inline-block; background:#25D366; color:#ffffff; text-decoration:none; padding:12px 24px; border-radius:8px; font-weight:700; font-size:14px; box-shadow:0 4px 12px rgba(37,211,102,0.3);'>
+                       style='display:inline-block; background-color:#25D366; color:#ffffff; text-decoration:none; padding:13px 26px; border-radius:8px; font-weight:800; font-size:14px; box-shadow:0 4px 14px rgba(37,211,102,0.35); font-family:\"Montserrat\", -apple-system, sans-serif;'>
                       💬 Chat with Ezekiel on WhatsApp (09050278999)
                     </a>
                   </td>
@@ -358,15 +387,23 @@ class GlorifixMailer {
             </td>
           </tr>
 
-          <!-- Corporate Footer -->
+          <!-- Card 3: Footer -->
           <tr>
-            <td style='background:#f6efe8; border-top:1px solid #ebd9c8; padding:24px; text-align:center; font-size:12px; color:#7a3c48; line-height:1.6;'>
-              <strong style='color:#1a0408; font-size:13px;'>Glorifix Media Concept Limited</strong><br>
-              📍 <strong>Registered Office:</strong> Opp. General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State<br>
-              🏛️ <strong>Abuja Studio Hub:</strong> Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja FCT<br>
-              📞 Hotline: <a href='tel:09050278999' style='color:#7b1324; font-weight:700; text-decoration:none;'>+234 905 027 8999</a> &bull; ✉️ <a href='mailto:{$admin_email}' style='color:#7b1324; text-decoration:none;'>{$admin_email}</a><br>
-              <div style='margin-top:10px; font-size:11px; color:#a0707a;'>
-                This is an automated transactional confirmation for your website booking or inquiry with Glorifix Media Concept Limited. Sent to {$cust_email}.
+            <td style='background-color:#F8F4EE; border-top:1.5px solid #EFE6DA; border-radius:0 0 16px 16px; padding:28px 24px 26px 24px; text-align:center; font-size:12px; color:#5A2A38; line-height:1.7;'>
+              <div style='font-size:14px; font-weight:800; color:#1A0408; margin-bottom:10px; font-family:\"Montserrat\", -apple-system, sans-serif;'>
+                Glorifix Media Concept Limited
+              </div>
+              <div style='margin-bottom:6px;'>
+                📍 <strong>Registered Office:</strong> Opp. General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State
+              </div>
+              <div style='margin-bottom:8px;'>
+                🏛️ <strong>Abuja Studio Hub:</strong> Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja FCT
+              </div>
+              <div style='margin-bottom:14px;'>
+                📞 Hotline: <a href='tel:09050278999' style='color:#6E0F1D; font-weight:700; text-decoration:none;'>+234 905 027 8999</a> &bull; ✉️ <a href='mailto:{$admin_email}' style='color:#6E0F1D; font-weight:700; text-decoration:none;'>{$admin_email}</a>
+              </div>
+              <div style='font-size:11px; color:#8C6A72; line-height:1.5;'>
+                This is an automated transactional confirmation for your website booking or inquiry with Glorifix Media Concept Limited.
               </div>
             </td>
           </tr>
@@ -378,6 +415,7 @@ class GlorifixMailer {
   </table>
 
 </body>
+</html>";
     }
 
     /**

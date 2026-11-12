@@ -19,7 +19,7 @@ ZIP_OUTPUT = os.path.join(PROJ_DIR, 'glorifix_cpanel_ready.zip')
 PHONE_DOWNLOADS = '/storage/emulated/0/Download/glorifix_cpanel_ready.zip'
 
 IGNORE_DIRS = {'.git', '.ide', '__pycache__'}
-IGNORE_FILES = {'admin_server.py', 'package_cpanel.py', 'academy_source.html', 'media_buying.txt'}
+IGNORE_FILES = {'admin_server.py', 'package_cpanel.py', 'academy_source.html', 'media_buying.txt', 'email_preview.html'}
 
 def build_package():
     # 1. Update local filesystem permissions
