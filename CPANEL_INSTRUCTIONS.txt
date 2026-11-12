@@ -1,0 +1,53 @@
+================================================================================
+GLORIFIX MEDIA CONCEPT LIMITED — CPANEL DEPLOYMENT & HOSTING GUIDE
+================================================================================
+
+Everything in this zip package is 100% pre-configured and tested for standard
+cPanel Apache / LiteSpeed web hosting environments.
+
+--------------------------------------------------------------------------------
+1. STEP-BY-STEP CPANEL UPLOAD INSTRUCTIONS
+--------------------------------------------------------------------------------
+Step 1: Log in to your cPanel account (e.g. https://yourdomain.com:2083).
+Step 2: Under the "Files" section, click on "File Manager".
+Step 3: Double-click to open your web root folder:
+        - For main domain: "public_html"
+        - For addon domain / subdomain: public_html/your-subdomain-folder/
+Step 4: Click the "Upload" button at the top toolbar.
+Step 5: Select "glorifix_cpanel_ready.zip" from your Downloads folder:
+        (Location on phone: Internal Storage -> Download -> glorifix_cpanel_ready.zip)
+Step 6: Wait for the upload bar to reach 100% and turn green.
+Step 7: Return to File Manager, right-click "glorifix_cpanel_ready.zip", and select "Extract".
+Step 8: Confirm destination as "public_html" and click "Extract File(s)".
+Step 9: (Optional) Delete "glorifix_cpanel_ready.zip" from public_html to save space.
+
+--------------------------------------------------------------------------------
+2. ACCESSING YOUR WEBSITE & ADMIN DASHBOARD
+--------------------------------------------------------------------------------
+* Main Website:
+  https://yourdomain.com/
+
+* Admin Login Panel:
+  https://yourdomain.com/admin/
+
+* Initial Admin Credentials:
+  - Username: Ezekiel
+  - Password: Ezekiel
+
+IMPORTANT: Immediately after logging in, go to "Settings" in the admin sidebar
+to change your username and password to your private credentials!
+
+--------------------------------------------------------------------------------
+3. TECHNICAL SPECIFICATIONS & COMPATIBILITY
+--------------------------------------------------------------------------------
+- Architecture: 100% Native PHP + HTML5 / CSS3 / Vanilla JS.
+- No Node.js, Python, Composer, or npm required on cPanel.
+- No MySQL database required: Uses fast, self-contained JSON flat files with
+  built-in automatic timestamped backups in admin/data/backups/.
+- PHP Compatibility: PHP 7.4, 8.0, 8.1, 8.2, 8.3.
+- Apache Modules Supported: mod_rewrite, mod_deflate, mod_headers, mod_expires.
+- Security: admin/data/ directory is completely protected by .htaccess (Require all denied).
+
+================================================================================
+Need help or support? Contact Glorifix Media Concept Limited.
+================================================================================
