@@ -1,5 +1,33 @@
 [
   {
+    "id": "INQ-AA5A05",
+    "timestamp": "2026-11-12 07:45:30",
+    "type": "Consultation Booking",
+    "name": "Olawale Rotimi",
+    "email": "excellentgold1@gmail.com",
+    "phone": "08063780075",
+    "service": "Website Design & Development",
+    "appointment_date": "Nov 18, 2026",
+    "appointment_time": "02:00 PM",
+    "notes": "Website Design",
+    "status": "new",
+    "read": false
+  },
+  {
+    "id": "INQ-52A70A",
+    "timestamp": "2026-11-12 07:43:33",
+    "type": "Direct Inquiry",
+    "name": "Dokinla James",
+    "email": "excellentgoldtech2021@gmail.com",
+    "phone": "08057957891",
+    "service": "📩 New Website Inquiry from: Dokinla James",
+    "appointment_date": "",
+    "appointment_time": "",
+    "notes": "Testing",
+    "status": "new",
+    "read": false
+  },
+  {
     "id": "INQ-7FA862",
     "timestamp": "2026-11-12 06:31:55",
     "type": "Consultation Booking",

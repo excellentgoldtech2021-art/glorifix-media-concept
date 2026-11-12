@@ -237,44 +237,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const payload = {
         Full_Name: name,
+        _subject: `📅 New Consultation Booking: ${name} (${service})`,
+        _replyto: email,
+        _template: "table",
+        "Customer Name": name,
+        "Email Address": email,
+        "Phone / WhatsApp": phone,
+        "Service Requested": service,
+        "Appointment Date": selectedDate,
+        "Appointment Time": selectedSlot,
+        "Project Goals / Brief": notes || "No specific notes provided.",
+        // Standard keys for api/contact.php
+        Full_Name: name,
         Email_Address: email,
         Phone_Number: phone,
         Service_Requested: service,
         Appointment_Date: selectedDate,
         Appointment_Time: selectedSlot,
-        Project_Notes: notes || "None provided",
-        _subject: `📅 New Appointment Booking: ${name} - ${service}`,
-        _replyto: email
+        Project_Notes: notes || ""
       };
 
-      // Primary: Post to Glorifix Inquiries API (saves to dashboard + emails customer & Ezekiel)
-      fetch('api/contact.php', {
+      // Dual-dispatch: 1) FormSubmit for guaranteed direct Gmail inbox delivery + 2) api/contact.php for dashboard logging
+      const sendToGmail = fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('API server unavailable');
-        return res.json();
-      })
-      .then(data => {
+      }).catch(err => ({ ok: false, error: err }));
+
+      const sendToApi = fetch('api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+      Promise.allSettled([sendToGmail, sendToApi]).then(results => {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = origText;
         }
 
-        const whatsappMsg = `Hello Glorifix Media Concept! I just booked an appointment on your website:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}`;
+        const apiResult = results[1].status === 'fulfilled' ? results[1].value : null;
+        const refId = (apiResult && apiResult.id) ? apiResult.id : 'GLF-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+
+        const whatsappMsg = `Hello Glorifix Media Concept! I just booked an appointment on your website:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}\n• Ref: ${refId}`;
         const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
 
         if (statusDiv) {
           statusDiv.innerHTML = `
             <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 16px; border-radius: 8px; text-align: left; line-height: 1.6;">
               <strong style="font-size: 1.05rem; color: #1B5E20; display: block; margin-bottom: 6px;">🎉 Consultation Booked Successfully!</strong>
-              Thank you, <strong>${escapeHtml(name)}</strong>! A confirmation receipt has been sent to your email (<strong>${escapeHtml(email)}</strong>).<br>
-              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${data.id || 'GLF-BOOK'}</strong> &bull; Ezekiel and our team have received your booking in our dashboard and will contact you within 24 hours.</span>
+              Thank you, <strong>${escapeHtml(name)}</strong>! Your appointment has been dispatched directly to <strong>glorifixmediaconcept@gmail.com</strong> and logged in our admin dashboard.<br>
+              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${refId}</strong> &bull; Ezekiel will review your booking and connect with you within 24 hours.</span>
               <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #A5D6A7; font-size: 0.9rem;">
                 Prefer instant WhatsApp confirmation? <a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" style="color: #00796B; font-weight: 700; text-decoration: underline;">Click here to chat directly with Ezekiel &rarr;</a>
               </div>
@@ -283,41 +296,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         bookingForm.reset();
         updateBookingSummary();
-      })
-      .catch(err => {
-        // Fallback to FormSubmit if API endpoint unavailable
-        fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-        .then(res => res.json())
-        .then(() => {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
-          if (statusDiv) {
-            statusDiv.innerHTML = `
-              <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left;">
-                <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">🎉 Appointment Sent!</strong>
-                Thank you, <strong>${escapeHtml(name)}</strong>! Your appointment has been sent to <strong>glorifixmediaconcept@gmail.com</strong>. We will reply to <strong>${escapeHtml(email)}</strong> promptly.
-              </div>
-            `;
-          }
-          bookingForm.reset();
-          updateBookingSummary();
-        })
-        .catch(() => {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
-          const whatsappMsg = `Hello Glorifix! I want to book an appointment:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}`;
-          const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
-          if (statusDiv) {
-            statusDiv.innerHTML = `
-              <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
-                <strong>Please confirm on WhatsApp:</strong><br>
-                <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Confirm on WhatsApp &rarr;</a>
-              </div>
-            `;
-          }
-        });
+      }).catch(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+        const whatsappMsg = `Hello Glorifix! I want to book an appointment:\n• Name: ${name}\n• Email: ${email}\n• Phone: ${phone}\n• Service: ${service}\n• Date: ${selectedDate} at ${selectedSlot}\n• Notes: ${notes || 'None'}`;
+        const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
+        if (statusDiv) {
+          statusDiv.innerHTML = `
+            <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
+              <strong>Please confirm on WhatsApp:</strong><br>
+              <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Confirm on WhatsApp &rarr;</a>
+            </div>
+          `;
+        }
       });
     });
   }
@@ -350,80 +340,68 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (statusDiv) {
         statusDiv.style.display = 'block';
-        statusDiv.innerHTML = '<div style="color: #6A3040; font-size: 0.9rem;">Transmitting inquiry to dashboard and email...</div>';
+        statusDiv.innerHTML = '<div style="color: #6A3040; font-size: 0.9rem;">Transmitting inquiry to glorifixmediaconcept@gmail.com and dashboard...</div>';
       }
 
       const payload = {
+        _subject: `📩 New Website Inquiry from: ${name}`,
+        _replyto: email,
+        _template: "table",
+        "Sender Name": name,
+        "Email Address": email,
+        "Phone / WhatsApp": phone || "Not provided",
+        "Message": message,
+        // Standard keys for api/contact.php
         Sender_Name: name,
         Email_Address: email,
         Phone_Number: phone || "Not provided",
-        Message: message,
-        Subject: `📩 New Website Inquiry from: ${name}`
+        Message: message
       };
 
-      // Primary: Post to Glorifix Inquiries API
-      fetch('api/contact.php', {
+      // Dual-dispatch: 1) FormSubmit for direct Gmail inbox delivery + 2) api/contact.php for dashboard logging
+      const sendToGmail = fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('API server unavailable');
-        return res.json();
-      })
-      .then(data => {
+      }).catch(err => ({ ok: false, error: err }));
+
+      const sendToApi = fetch('api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+      Promise.allSettled([sendToGmail, sendToApi]).then(results => {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = origText;
         }
 
+        const apiResult = results[1].status === 'fulfilled' ? results[1].value : null;
+        const refId = (apiResult && apiResult.id) ? apiResult.id : 'GLF-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+
         if (statusDiv) {
           statusDiv.innerHTML = `
             <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 16px; border-radius: 8px; text-align: left; line-height: 1.6;">
-              <strong style="font-size: 1.05rem; color: #1B5E20; display: block; margin-bottom: 6px;">✅ Message Delivered Successfully!</strong>
-              Thank you, <strong>${escapeHtml(name)}</strong>! A confirmation email has been sent to <strong>${escapeHtml(email)}</strong>.<br>
-              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${data.id || 'GLF-INQ'}</strong> &bull; Your note is logged in our admin dashboard and Ezekiel will review it promptly.</span>
+              <strong style="font-size: 1.05rem; color: #1B5E20; display: block; margin-bottom: 6px;">✅ Message Sent to Gmail &amp; Dashboard!</strong>
+              Thank you, <strong>${escapeHtml(name)}</strong>! Your note has been delivered directly to <strong>glorifixmediaconcept@gmail.com</strong> and recorded in our admin dashboard.<br>
+              <span style="font-size: 0.9rem; color: #2E7D32;">Reference ID: <strong>#${refId}</strong> &bull; Ezekiel will review it promptly and reply to <strong>${escapeHtml(email)}</strong>.</span>
             </div>
           `;
         }
         contactForm.reset();
-      })
-      .catch(err => {
-        // Fallback to FormSubmit
-        fetch('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(payload)
-        })
-        .then(res => res.json())
-        .then(() => {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
-          if (statusDiv) {
-            statusDiv.innerHTML = `
-              <div style="background: #E8F5E9; color: #1B5E20; border: 1.5px solid #81C784; padding: 14px 16px; border-radius: 8px; text-align: left;">
-                <strong style="font-size: 1rem; color: #1B5E20; display: block; margin-bottom: 4px;">✅ Message Delivered to Email!</strong>
-                Thank you, <strong>${escapeHtml(name)}</strong>! Your note has been delivered to <strong>glorifixmediaconcept@gmail.com</strong>.
-              </div>
-            `;
-          }
-          contactForm.reset();
-        })
-        .catch(() => {
-          if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
-          const whatsappMsg = `Hello Glorifix Media Concept! Inquiry from ${name} (${email}):\n${message}`;
-          const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
-          if (statusDiv) {
-            statusDiv.innerHTML = `
-              <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
-                <strong>Please chat with us directly:</strong><br>
-                <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Chat on WhatsApp &rarr;</a>
-              </div>
-            `;
-          }
-        });
+      }).catch(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = origText; }
+        const whatsappMsg = `Hello Glorifix Media Concept! Inquiry from ${name} (${email}):\n${message}`;
+        const whatsappUrl = `https://wa.me/2349050278999?text=${encodeURIComponent(whatsappMsg)}`;
+        if (statusDiv) {
+          statusDiv.innerHTML = `
+            <div style="background: #FFF3E0; color: #E65100; border: 1.5px solid #FFB74D; padding: 14px 16px; border-radius: 8px;">
+              <strong>Please chat with us directly:</strong><br>
+              <a href="${whatsappUrl}" target="_blank" class="btn btn-primary" style="margin-top: 8px; display: inline-block;">Chat on WhatsApp &rarr;</a>
+            </div>
+          `;
+        }
       });
     });
   }

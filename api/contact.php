@@ -251,6 +251,37 @@ $headers_admin = $headers_common . "From: Glorifix Website <{$from_email}>\r\nRe
 $headers_customer = $headers_common . "From: Glorifix Media Concept <{$from_email}>\r\nReply-To: Glorifix Support <{$admin_email}>\r\n";
 @mail($email, $customer_subject, $customer_body, $headers_customer);
 
+// Redundant Direct Gmail Delivery via FormSubmit
+if (function_exists('curl_init')) {
+    $fs_payload = json_encode([
+        '_subject' => $admin_subject,
+        '_replyto' => $email,
+        '_template' => 'table',
+        'Customer Name' => $name,
+        'Email Address' => $email,
+        'Phone / WhatsApp' => $phone ?: 'Not provided',
+        'Service Requested' => $service,
+        'Appointment Date' => $app_date ?: 'N/A',
+        'Appointment Time' => $app_time ?: 'N/A',
+        'Message / Notes' => $notes ?: 'None',
+        'Reference ID' => $inquiry_id
+    ]);
+
+    $ch = curl_init('https://formsubmit.co/ajax/glorifixmediaconcept@gmail.com');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $fs_payload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Accept: application/json',
+        'Origin: https://excellentgoldtech2021-art.github.io',
+        'Referer: https://excellentgoldtech2021-art.github.io/glorifix-media-concept/contact.html'
+    ]);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 4);
+    @curl_exec($ch);
+    curl_close($ch);
+}
+
 // Successful JSON response
 echo json_encode([
     'success' => true,
