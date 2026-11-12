@@ -75,10 +75,24 @@ def build_package():
     size_mb = os.path.getsize(ZIP_OUTPUT) / (1024 * 1024)
     print(f"✅ Packaged {file_count} files (0644) & {dir_count} directories (0755) into {ZIP_OUTPUT} ({size_mb:.2f} MB)")
 
-    # 3. Copy to phone Downloads
+    # 3. Copy to phone Downloads & create unzipped folder
     try:
         shutil.copy2(ZIP_OUTPUT, PHONE_DOWNLOADS)
         print(f"✅ Successfully copied to phone Downloads: {PHONE_DOWNLOADS}")
+        
+        # Also copy as glorifix-website-cpanel.zip
+        alt_zip = '/storage/emulated/0/Download/glorifix-website-cpanel.zip'
+        shutil.copy2(ZIP_OUTPUT, alt_zip)
+        print(f"✅ Synced alt archive name: {alt_zip}")
+
+        # Unzip into glorifix_cpanel_ready directory in Downloads
+        extract_dir = '/storage/emulated/0/Download/glorifix_cpanel_ready'
+        if os.path.exists(extract_dir):
+            shutil.rmtree(extract_dir)
+        os.makedirs(extract_dir, exist_ok=True)
+        with zipfile.ZipFile(ZIP_OUTPUT, 'r') as z:
+            z.extractall(extract_dir)
+        print(f"✅ Unzipped folder ready at: {extract_dir}")
     except Exception as e:
         print(f"⚠️ Note on phone copy: {e}")
 
