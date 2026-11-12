@@ -3,7 +3,7 @@
  * Provides offline support & instant asset caching for fast mobile performance.
  */
 
-const CACHE_NAME = 'glorifix-pwa-v1';
+const CACHE_NAME = 'glorifix-pwa-v2';
 const PRECACHE_ASSETS = [
   './',
   'index.html',
@@ -12,7 +12,7 @@ const PRECACHE_ASSETS = [
   'pricing.html',
   'gallery.html',
   'contact.html',
-  'css/style.css',
+  'css/styles.css',
   'css/voice-agent.css',
   'js/app.js',
   'js/voice-agent.js',
@@ -74,7 +74,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static Assets (CSS, JS, Images, Fonts): Cache-first with background network update
+  // Static Assets (CSS, JS, Images, Fonts): Network-first when query versioned or local, else Cache-first
+  if (url.search || url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+    event.respondWith(
+      fetch(req)
+        .then((networkRes) => {
+          if (networkRes && networkRes.status === 200) {
+            const clone = networkRes.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+          }
+          return networkRes;
+        })
+        .catch(() => caches.match(req))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) {

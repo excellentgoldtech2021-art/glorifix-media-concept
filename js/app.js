@@ -508,5 +508,190 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   }
+
+  // 9. Aesthetic Scroll Animation & Element Reveal Engine
+  function initAestheticAnimations() {
+    // A. Top Scroll Progress Indicator
+    let progressBar = document.querySelector('.scroll-progress-bar');
+    if (!progressBar) {
+      progressBar = document.createElement('div');
+      progressBar.className = 'scroll-progress-bar';
+      document.body.appendChild(progressBar);
+    }
+
+    const updateScrollMetrics = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      if (progressBar) {
+        progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      }
+
+      // Sticky Header Scrolled State
+      const header = document.querySelector('.site-header');
+      if (header) {
+        if (scrollTop > 40) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+      }
+    };
+
+    // B. Target and Tag All Interactive Elements for Scroll Reveal
+    // Headers, kickers, titles and subtitles
+    document.querySelectorAll('.sec-lbl, .section-kicker, .pill-tag').forEach(el => {
+      el.classList.add('gf-reveal-left');
+    });
+
+    document.querySelectorAll('.sec-title, .section-title, .hero-title, .page-hero-title, .contact-box h3, .cal-header h3').forEach(el => {
+      el.classList.add('gf-reveal');
+    });
+
+    document.querySelectorAll('.sec-desc, .hero-sub, .page-hero-sub').forEach(el => {
+      el.classList.add('gf-reveal');
+    });
+
+    document.querySelectorAll('.rl').forEach(el => {
+      el.classList.add('rl');
+    });
+
+    // Hero and banner elements
+    document.querySelectorAll('.hero-slider-wrap, .page-hero-banner-wrap').forEach(el => {
+      el.classList.add('gf-reveal-scale');
+    });
+
+    document.querySelectorAll('.hero-actions .btn, .cta-banner .btn').forEach((btn, idx) => {
+      btn.classList.add('gf-reveal-pop');
+      btn.classList.add(`gf-stagger-${(idx % 6) + 1}`);
+    });
+
+    // Staggered Grid Collections
+    const gridSelectors = [
+      '.services-grid',
+      '.pricing-grid',
+      '.projects-grid',
+      '.team-grid',
+      '.features-grid',
+      '.contact-cards-grid',
+      '.footer-grid',
+      '.slots-grid',
+      '.cal-grid'
+    ];
+
+    gridSelectors.forEach(selector => {
+      document.querySelectorAll(selector).forEach(grid => {
+        const children = Array.from(grid.children);
+        children.forEach((child, idx) => {
+          if (!child.classList.contains('gf-reveal-scale') && !child.classList.contains('gf-reveal')) {
+            child.classList.add('gf-reveal-scale');
+          }
+          child.classList.add(`gf-stagger-${(idx % 12) + 1}`);
+        });
+      });
+    });
+
+    // Standalone cards and sections
+    const cardSelectors = [
+      '.service-card',
+      '.pricing-card',
+      '.project-card',
+      '.team-c',
+      '.feature-card',
+      '.stat-card',
+      '.contact-card-item',
+      '.about-card-box',
+      '.booking-wrap',
+      '.calendar-card',
+      '.contact-box',
+      '.founder',
+      '.cta-banner'
+    ];
+
+    document.querySelectorAll(cardSelectors.join(',')).forEach(card => {
+      if (!card.classList.contains('gf-reveal') && !card.classList.contains('gf-reveal-scale')) {
+        card.classList.add('gf-reveal-scale');
+      }
+    });
+
+    // List items and bullets in cards
+    document.querySelectorAll('.about-card-box li, .service-details-card li').forEach((li, idx) => {
+      li.classList.add('gf-reveal-left');
+      li.classList.add(`gf-stagger-${(idx % 6) + 1}`);
+    });
+
+    // Footer columns and bottom bar
+    document.querySelectorAll('.footer-brand, .footer-nav-col, .footer-bottom').forEach((col, idx) => {
+      col.classList.add('gf-reveal');
+      col.classList.add(`gf-stagger-${(idx % 6) + 1}`);
+    });
+
+    // C. Setup Intersection Observer with Instant Viewport Check & Scroll Fallback
+    const animElements = document.querySelectorAll('.gf-reveal, .gf-reveal-scale, .gf-reveal-left, .gf-reveal-right, .gf-reveal-pop, .rl');
+
+    const checkAndRevealVisible = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      animElements.forEach(el => {
+        if (!el.classList.contains('gf-revealed')) {
+          const r = el.getBoundingClientRect();
+          if (r.top <= vh - 20 && r.bottom >= 0) {
+            el.classList.add('gf-revealed');
+          }
+        }
+      });
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gf-revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px'
+      });
+
+      animElements.forEach(el => observer.observe(el));
+    }
+
+    // Unified scroll, resize & touch handler
+    const handleScrollOrResize = () => {
+      updateScrollMetrics();
+      checkAndRevealVisible();
+    };
+
+    // Run instant metrics & viewport check
+    handleScrollOrResize();
+    setTimeout(handleScrollOrResize, 80);
+    setTimeout(handleScrollOrResize, 250);
+    setTimeout(handleScrollOrResize, 500);
+
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize, { passive: true });
+    window.addEventListener('touchmove', handleScrollOrResize, { passive: true });
+
+    // D. Hook into Filter & Tab Switches to Re-Animate
+    document.querySelectorAll('.filter-btn, .pricing-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setTimeout(() => {
+          const visibleCards = document.querySelectorAll('.project-card:not([style*="display: none"]), .pricing-category-panel.active .pricing-card');
+          visibleCards.forEach((card, idx) => {
+            card.classList.remove('gf-revealed');
+            card.classList.remove('gf-stagger-1', 'gf-stagger-2', 'gf-stagger-3', 'gf-stagger-4', 'gf-stagger-5', 'gf-stagger-6');
+            card.classList.add(`gf-stagger-${(idx % 6) + 1}`);
+            void card.offsetWidth;
+            card.classList.add('gf-revealed');
+          });
+        }, 50);
+      });
+    });
+  }
+
+  // Initialize the aesthetic animation engine
+  initAestheticAnimations();
 });
+
 
