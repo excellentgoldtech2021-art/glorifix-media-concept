@@ -180,92 +180,229 @@
           </div>
         </div>
 
-        <form id="booking-form" class="booking-form" action="api/contact.php" method="POST">
+        <form id="booking-form" class="booking-form multi-step-wrapper" action="api/contact.php" method="POST">
           <input type="hidden" name="_subject" id="booking-email-subject" value="📅 New Appointment Booking - Glorifix Media Concept Limited">
-
-          <div class="booking-summary-banner">
-            <span>📅</span>
-            <span>Selected Time: <strong id="selected-datetime-display">Nov 11, 2026 at 10:00 AM</strong></span>
-          </div>
-
-          <div class="form-group">
-            <label for="book-name">Full Name *</label>
-            <input type="text" id="book-name" name="Full_Name" placeholder="E.g. Michael Adebayo" required>
-          </div>
-
-          <div class="form-group">
-            <label for="book-email">Email Address *</label>
-            <input type="email" id="book-email" name="Email_Address" placeholder="you@domain.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="book-phone">Phone / WhatsApp Number *</label>
-            <input type="tel" id="book-phone" name="Phone_Number" placeholder="09050278999" required>
-          </div>
-
-          <div class="form-group">
-            <label for="book-service">Service of Interest *</label>
-            <select id="book-service" name="Service_Requested" required>
-              <option value="Website Design & Development">Website Design &amp; Development</option>
-              <option value="Media Buying & Meta Ads (Facebook & Instagram)">Media Buying &amp; Meta Ads (Facebook &amp; Instagram)</option>
-              <option value="Social Media Management">Social Media Management</option>
-              <option value="Graphic Design & Branding">Graphic Design &amp; Brand Identity</option>
-              <option value="CAC Business Registration">CAC Business Registration</option>
-              <option value="Full Comprehensive Growth Suite">Full Comprehensive Growth Suite</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="book-notes">Project Goals / Brief</label>
-            <textarea id="book-notes" name="Project_Notes" rows="3" placeholder="Briefly explain what you would like to achieve..."></textarea>
-          </div>
-
           <!-- Hidden inputs to submit selected date and time -->
           <input type="hidden" id="book-date-input" name="Appointment_Date" value="Nov 11, 2026">
           <input type="hidden" id="book-time-input" name="Appointment_Time" value="10:00 AM">
 
-          <button type="submit" id="book-submit-btn" class="btn btn-primary" style="margin-top: 6px; width: 100%;">Confirm &amp; Book a Consultation</button>
-          <div id="booking-status" style="display: none; margin-top: 10px;"></div>
-          <div style="font-size: 0.82rem; color: #6A3040; text-align: center; margin-top: 6px;">
-            📩 Instant alert delivered to Ezekiel's primary inbox &bull; Customized confirmation sent to your email
+          <!-- Multi-Step Header / Progress -->
+          <div class="multi-step-header" id="booking-stepper">
+            <div class="step-indicator active" data-step="1">
+              <div class="step-num">1</div>
+              <div class="step-label">Timing &amp; Service</div>
+            </div>
+            <div class="step-line" id="book-line-1"></div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-num">2</div>
+              <div class="step-label">Your Info</div>
+            </div>
+            <div class="step-line" id="book-line-2"></div>
+            <div class="step-indicator" data-step="3">
+              <div class="step-num">3</div>
+              <div class="step-label">Confirm</div>
+            </div>
+          </div>
+
+          <!-- Step 1: Schedule & Service -->
+          <div class="form-step active" id="book-step-1">
+            <div class="step-title-box">
+              <div class="step-title"><span>📅</span> Step 1: Choose Timing &amp; Service</div>
+              <p class="step-desc">Pick your preferred date/time on the calendar, then select your required service.</p>
+            </div>
+
+            <div class="booking-summary-banner" style="margin-bottom: 16px;">
+              <span>📅</span>
+              <span>Selected Time: <strong id="selected-datetime-display">Nov 11, 2026 at 10:00 AM</strong></span>
+            </div>
+
+            <div class="form-group">
+              <label for="book-service">Service of Interest *</label>
+              <select id="book-service" name="Service_Requested" required>
+                <option value="Website Design & Development">Website Design &amp; Development</option>
+                <option value="Media Buying & Meta Ads (Facebook & Instagram)">Media Buying &amp; Meta Ads (Facebook &amp; Instagram)</option>
+                <option value="Social Media Management">Social Media Management</option>
+                <option value="Graphic Design & Branding">Graphic Design &amp; Brand Identity</option>
+                <option value="CAC Business Registration">CAC Business Registration</option>
+                <option value="Full Comprehensive Growth Suite">Full Comprehensive Growth Suite</option>
+              </select>
+            </div>
+
+            <div class="step-nav-buttons">
+              <button type="button" class="btn-step-next" id="book-next-1">
+                Next: Your Details &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 2: Client Contact Details -->
+          <div class="form-step" id="book-step-2">
+            <div class="step-title-box">
+              <div class="step-title"><span>👤</span> Step 2: Contact Information</div>
+              <p class="step-desc">Tell us who we will be consulting with so we can prepare your project brief.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="book-name">Full Name *</label>
+              <input type="text" id="book-name" name="Full_Name" placeholder="E.g. Michael Adebayo" required>
+            </div>
+
+            <div class="form-group">
+              <label for="book-email">Email Address *</label>
+              <input type="email" id="book-email" name="Email_Address" placeholder="you@domain.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="book-phone">Phone / WhatsApp Number *</label>
+              <input type="tel" id="book-phone" name="Phone_Number" placeholder="09050278999" required>
+            </div>
+
+            <div class="step-nav-buttons">
+              <button type="button" class="btn-step-prev" id="book-prev-2">
+                &larr; Back to Schedule
+              </button>
+              <button type="button" class="btn-step-next" id="book-next-2">
+                Next: Project Brief &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Step 3: Project Brief & Final Confirmation -->
+          <div class="form-step" id="book-step-3">
+            <div class="step-title-box">
+              <div class="step-title"><span>🚀</span> Step 3: Project Goals &amp; Review</div>
+              <p class="step-desc">Add any specifics or goals, review your details, and confirm your slot.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="book-notes">Project Goals / Brief</label>
+              <textarea id="book-notes" name="Project_Notes" rows="3" placeholder="Briefly explain what you would like to achieve..."></textarea>
+            </div>
+
+            <!-- Real-time Live Review Summary Box -->
+            <div class="step-review-card">
+              <div class="step-review-header">📋 Consultation Summary Snapshot</div>
+              <div class="step-review-grid">
+                <div class="step-review-row">
+                  <span>Date &amp; Slot:</span>
+                  <strong id="review-book-datetime">Nov 11, 2026 at 10:00 AM</strong>
+                </div>
+                <div class="step-review-row">
+                  <span>Selected Service:</span>
+                  <strong id="review-book-service">Website Design &amp; Development</strong>
+                </div>
+                <div class="step-review-row">
+                  <span>Client Contact:</span>
+                  <strong id="review-book-contact">Pending details...</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-nav-buttons">
+              <button type="button" class="btn-step-prev" id="book-prev-3">
+                &larr; Back to Details
+              </button>
+              <button type="submit" id="book-submit-btn" class="btn btn-primary" style="margin-left: auto;">
+                Confirm &amp; Book Consultation
+              </button>
+            </div>
+
+            <div id="booking-status" style="display: none; margin-top: 14px;"></div>
+            <div style="font-size: 0.82rem; color: #6A3040; text-align: center; margin-top: 10px;">
+              📩 Instant alert delivered to Ezekiel's primary inbox &bull; Customized confirmation sent to your email
+            </div>
           </div>
         </form>
       </div>
 
       <!-- Direct Contact Form -->
       <div class="contact-box">
-        <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 10px;">Send a Direct Note</h3>
-        <p style="color: #5A2830; font-size: 0.95rem; margin-bottom: 24px;">Have a custom inquiry or tender? Fill out the form below and we will get back to you promptly.</p>
+        <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 8px;">Send a Direct Note</h3>
+        <p style="color: #5A2830; font-size: 0.95rem; margin-bottom: 22px;">Have a custom inquiry, corporate tender, or strategic proposal? Complete our quick interactive form below.</p>
         
-        <form id="contact-form" action="api/contact.php" method="POST" style="display: flex; flex-direction: column; gap: 16px;">
+        <form id="contact-form" class="multi-step-wrapper" action="api/contact.php" method="POST">
           <input type="hidden" name="_subject" id="contact-email-subject" value="📩 New Website Inquiry - Glorifix Media Concept Limited">
 
-          <div class="form-group">
-            <label for="contact-name">Your Name *</label>
-            <input type="text" id="contact-name" name="Sender_Name" placeholder="John Doe" required>
+          <!-- Multi-Step Header / Progress -->
+          <div class="multi-step-header" id="contact-stepper">
+            <div class="step-indicator active" data-step="1">
+              <div class="step-num">1</div>
+              <div class="step-label">Your Info</div>
+            </div>
+            <div class="step-line" id="contact-line-1"></div>
+            <div class="step-indicator" data-step="2">
+              <div class="step-num">2</div>
+              <div class="step-label">Your Message</div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="contact-email">Email Address *</label>
-            <input type="email" id="contact-email" name="Sender_Email" placeholder="you@domain.com" required>
+
+          <!-- Step 1: Sender Identification -->
+          <div class="form-step active" id="contact-step-1">
+            <div class="step-title-box">
+              <div class="step-title"><span>👤</span> Step 1: Who Is Reaching Out?</div>
+              <p class="step-desc">Enter your name and contact info so our executive team can address you properly.</p>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="contact-name">Your Full Name *</label>
+              <input type="text" id="contact-name" name="Sender_Name" placeholder="E.g. Chief John Adeleke" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="contact-email">Email Address *</label>
+              <input type="email" id="contact-email" name="Sender_Email" placeholder="you@domain.com" required>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="contact-phone">Phone / WhatsApp Number (Optional)</label>
+              <input type="tel" id="contact-phone" name="Sender_Phone" placeholder="09050278999">
+            </div>
+
+            <div class="step-nav-buttons">
+              <button type="button" class="btn-step-next" id="contact-next-1">
+                Next: Write Message &rarr;
+              </button>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="contact-phone">Phone / WhatsApp Number</label>
-            <input type="tel" id="contact-phone" name="Sender_Phone" placeholder="09050278999">
-          </div>
-          <div class="form-group">
-            <label for="contact-msg">Message / Inquiry *</label>
-            <textarea id="contact-msg" name="Inquiry_Message" rows="4" placeholder="How can Glorifix Media Concept help your business?" required></textarea>
-          </div>
-          <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%;">Send Direct Message to Email</button>
-          <div id="contact-status" style="display: none; margin-top: 10px;"></div>
-          <div style="font-size: 0.82rem; color: #6A3040; text-align: center;">
-            📩 Delivered directly to Ezekiel's primary inbox &bull; Customized confirmation sent to your email
+
+          <!-- Step 2: Message Details -->
+          <div class="form-step" id="contact-step-2">
+            <div class="step-title-box">
+              <div class="step-title"><span>💬</span> Step 2: How Can We Help You?</div>
+              <p class="step-desc">Describe your request, project scale, or key questions for our specialists.</p>
+            </div>
+
+            <div class="step-review-card" style="margin-bottom: 16px;">
+              <div class="step-review-header">👤 Inquirer Details</div>
+              <div style="font-size: 0.88rem; color: #374151;">
+                Reaching out as: <strong id="review-contact-sender" style="color: #1A0408;">Pending name...</strong>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="contact-msg">Message / Inquiry Details *</label>
+              <textarea id="contact-msg" name="Inquiry_Message" rows="4" placeholder="How can Glorifix Media Concept help your business achieve scale?" required></textarea>
+            </div>
+
+            <div class="step-nav-buttons">
+              <button type="button" class="btn-step-prev" id="contact-prev-2">
+                &larr; Back to Info
+              </button>
+              <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="margin-left: auto;">
+                Send Direct Message to Email
+              </button>
+            </div>
+
+            <div id="contact-status" style="display: none; margin-top: 14px;"></div>
+            <div style="font-size: 0.82rem; color: #6A3040; text-align: center; margin-top: 10px;">
+              📩 Delivered directly to Ezekiel's primary inbox &bull; Customized confirmation sent to your email
+            </div>
           </div>
         </form>
       </div>
 
       <!-- Interactive Office Map & Directions Card -->
-      <div class="contact-map-card gf-reveal" id="office-map-section" style="margin-top: 50px;">
+      <div class="contact-map-card" id="office-map-section" style="margin-top: 50px;">
         <div class="map-card-header">
           <div class="map-header-left">
             <div class="section-kicker" style="margin-bottom: 6px;">OFFICE LOCATIONS &amp; DIRECTIONS</div>

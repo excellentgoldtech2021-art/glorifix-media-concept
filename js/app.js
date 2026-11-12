@@ -187,6 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (summaryField) {
       summaryField.textContent = `${selectedDate} at ${selectedSlot}`;
     }
+    const revDt = document.getElementById('review-book-datetime');
+    if (revDt) {
+      revDt.textContent = `${selectedDate} at ${selectedSlot}`;
+    }
     const dateInput = document.getElementById('book-date-input');
     const timeInput = document.getElementById('book-time-input');
     if (dateInput) dateInput.value = selectedDate;
@@ -201,6 +205,272 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  // --- Multi-Step Controller for Booking Form ---
+  let currentBookStep = 1;
+  const totalBookSteps = 3;
+
+  function setBookingStep(step) {
+    if (step < 1 || step > totalBookSteps) return;
+    currentBookStep = step;
+
+    for (let i = 1; i <= totalBookSteps; i++) {
+      const stepEl = document.getElementById(`book-step-${i}`);
+      if (stepEl) {
+        stepEl.classList.toggle('active', i === step);
+      }
+    }
+
+    const stepper = document.getElementById('booking-stepper');
+    if (stepper) {
+      const indicators = stepper.querySelectorAll('.step-indicator');
+      indicators.forEach(ind => {
+        const sNum = parseInt(ind.getAttribute('data-step') || '1', 10);
+        ind.classList.remove('active', 'completed');
+        if (sNum === step) {
+          ind.classList.add('active');
+        } else if (sNum < step) {
+          ind.classList.add('completed');
+        }
+      });
+      const line1 = document.getElementById('book-line-1');
+      const line2 = document.getElementById('book-line-2');
+      if (line1) line1.classList.toggle('completed', step > 1);
+      if (line2) line2.classList.toggle('completed', step > 2);
+    }
+
+    if (step === 3) {
+      const revDt = document.getElementById('review-book-datetime');
+      const revSvc = document.getElementById('review-book-service');
+      const revCont = document.getElementById('review-book-contact');
+      const bName = (document.getElementById('book-name')?.value || '').trim();
+      const bEmail = (document.getElementById('book-email')?.value || '').trim();
+      const bPhone = (document.getElementById('book-phone')?.value || '').trim();
+      const bService = document.getElementById('book-service')?.value || 'Website Design & Development';
+
+      if (revDt) revDt.textContent = `${selectedDate} at ${selectedSlot}`;
+      if (revSvc) revSvc.textContent = bService;
+      if (revCont) revCont.textContent = `${bName || 'Not specified'} (${bPhone || 'No phone'} • ${bEmail || 'No email'})`;
+    }
+  }
+
+  const bookNext1 = document.getElementById('book-next-1');
+  if (bookNext1) {
+    bookNext1.addEventListener('click', () => {
+      setBookingStep(2);
+    });
+  }
+
+  const bookPrev2 = document.getElementById('book-prev-2');
+  if (bookPrev2) {
+    bookPrev2.addEventListener('click', () => {
+      setBookingStep(1);
+    });
+  }
+
+  const bookNext2 = document.getElementById('book-next-2');
+  if (bookNext2) {
+    bookNext2.addEventListener('click', () => {
+      const bNameInput = document.getElementById('book-name');
+      const bEmailInput = document.getElementById('book-email');
+      const bPhoneInput = document.getElementById('book-phone');
+
+      if (!bNameInput?.value.trim()) {
+        bNameInput?.focus();
+        bNameInput?.reportValidity();
+        return;
+      }
+      if (!bEmailInput?.value.trim() || !bEmailInput?.checkValidity()) {
+        bEmailInput?.focus();
+        bEmailInput?.reportValidity();
+        return;
+      }
+      if (!bPhoneInput?.value.trim()) {
+        bPhoneInput?.focus();
+        bPhoneInput?.reportValidity();
+        return;
+      }
+      setBookingStep(3);
+    });
+  }
+
+  const bookPrev3 = document.getElementById('book-prev-3');
+  if (bookPrev3) {
+    bookPrev3.addEventListener('click', () => {
+      setBookingStep(2);
+    });
+  }
+
+  const bookingStepper = document.getElementById('booking-stepper');
+  if (bookingStepper) {
+    bookingStepper.querySelectorAll('.step-indicator').forEach(ind => {
+      ind.addEventListener('click', () => {
+        const targetStep = parseInt(ind.getAttribute('data-step') || '1', 10);
+        if (targetStep < currentBookStep) {
+          setBookingStep(targetStep);
+        } else if (targetStep === 2) {
+          setBookingStep(2);
+        } else if (targetStep === 3) {
+          const bNameInput = document.getElementById('book-name');
+          const bEmailInput = document.getElementById('book-email');
+          if (bNameInput?.value.trim() && bEmailInput?.value.trim()) {
+            setBookingStep(3);
+          }
+        }
+      });
+    });
+  }
+
+  // --- Multi-Step Controller for Direct Contact Form ---
+  let currentContactStep = 1;
+  const totalContactSteps = 2;
+
+  function setContactStep(step) {
+    if (step < 1 || step > totalContactSteps) return;
+    currentContactStep = step;
+
+    for (let i = 1; i <= totalContactSteps; i++) {
+      const stepEl = document.getElementById(`contact-step-${i}`);
+      if (stepEl) {
+        stepEl.classList.toggle('active', i === step);
+      }
+    }
+
+    const stepper = document.getElementById('contact-stepper');
+    if (stepper) {
+      const indicators = stepper.querySelectorAll('.step-indicator');
+      indicators.forEach(ind => {
+        const sNum = parseInt(ind.getAttribute('data-step') || '1', 10);
+        ind.classList.remove('active', 'completed');
+        if (sNum === step) {
+          ind.classList.add('active');
+        } else if (sNum < step) {
+          ind.classList.add('completed');
+        }
+      });
+      const line1 = document.getElementById('contact-line-1');
+      if (line1) line1.classList.toggle('completed', step > 1);
+    }
+
+    if (step === 2) {
+      const revSender = document.getElementById('review-contact-sender');
+      const cName = (document.getElementById('contact-name')?.value || '').trim();
+      const cEmail = (document.getElementById('contact-email')?.value || '').trim();
+      const cPhone = (document.getElementById('contact-phone')?.value || '').trim();
+      if (revSender) {
+        revSender.textContent = `${cName || 'Valued Client'} (${cEmail || 'No email'}${cPhone ? ' • ' + cPhone : ''})`;
+      }
+    }
+  }
+
+  const contactNext1 = document.getElementById('contact-next-1');
+  if (contactNext1) {
+    contactNext1.addEventListener('click', () => {
+      const cNameInput = document.getElementById('contact-name');
+      const cEmailInput = document.getElementById('contact-email');
+      if (!cNameInput?.value.trim()) {
+        cNameInput?.focus();
+        cNameInput?.reportValidity();
+        return;
+      }
+      if (!cEmailInput?.value.trim() || !cEmailInput?.checkValidity()) {
+        cEmailInput?.focus();
+        cEmailInput?.reportValidity();
+        return;
+      }
+      setContactStep(2);
+    });
+  }
+
+  const contactPrev2 = document.getElementById('contact-prev-2');
+  if (contactPrev2) {
+    contactPrev2.addEventListener('click', () => {
+      setContactStep(1);
+    });
+  }
+
+  const contactStepper = document.getElementById('contact-stepper');
+  if (contactStepper) {
+    contactStepper.querySelectorAll('.step-indicator').forEach(ind => {
+      ind.addEventListener('click', () => {
+        const targetStep = parseInt(ind.getAttribute('data-step') || '1', 10);
+        if (targetStep === 1) {
+          setContactStep(1);
+        } else if (targetStep === 2) {
+          const cNameInput = document.getElementById('contact-name');
+          const cEmailInput = document.getElementById('contact-email');
+          if (cNameInput?.value.trim() && cEmailInput?.value.trim()) {
+            setContactStep(2);
+          }
+        }
+      });
+    });
+  }
+
+  // --- Interactive Office Map & Branch Switcher ---
+  const mapTabHq = document.getElementById('map-tab-hq');
+  const mapTabAbuja = document.getElementById('map-tab-abuja');
+  const mapIframe = document.getElementById('office-map-iframe');
+  const mapDetailAddress = document.getElementById('map-detail-address');
+  const mapDetailLandmark = document.getElementById('map-detail-landmark');
+  const mapDetailHours = document.getElementById('map-detail-hours');
+  const mapActionOpen = document.getElementById('map-action-open');
+  const mapActionDirections = document.getElementById('map-action-directions');
+  const mapActionWhatsapp = document.getElementById('map-action-whatsapp');
+
+  const branches = {
+    hq: {
+      name: "Ikare-Akoko HQ Studio",
+      iframeSrc: "https://maps.google.com/maps?q=General+Hospital+Ikare-Akoko+Ondo+State+Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      address: "Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria",
+      landmark: "Opposite General Hospital / Behind G-Delight Hotel",
+      hours: "Monday – Saturday: 8:00 AM – 8:00 PM (Sunday by Appointment)",
+      openUrl: "https://www.google.com/maps/search/?api=1&query=Opposite+General+Hospital+Ikare+Akoko+Ondo+State",
+      dirUrl: "https://www.google.com/maps/dir/?api=1&destination=Opposite+General+Hospital+Ikare+Akoko+Ondo+State",
+      waText: "Hello Glorifix Media Concept! I am visiting your Ikare-Akoko HQ Studio."
+    },
+    abuja: {
+      name: "Abuja Office Hub",
+      iframeSrc: "https://maps.google.com/maps?q=University+of+Abuja+Mini+Campus+Gwagwalada+Abuja&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      address: "Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja FCT, Nigeria",
+      landmark: "Opposite UniAbuja Mini-Campus Main Gate, Phase 2 Hub",
+      hours: "Monday – Saturday: 8:00 AM – 8:00 PM (Sunday by Appointment)",
+      openUrl: "https://www.google.com/maps/search/?api=1&query=University+of+Abuja+Mini+Campus+Gwagwalada+Abuja",
+      dirUrl: "https://www.google.com/maps/dir/?api=1&destination=University+of+Abuja+Mini+Campus+Gwagwalada+Abuja",
+      waText: "Hello Glorifix Media Concept! I am visiting your Abuja Studio Hub in Gwagwalada."
+    }
+  };
+
+  function switchMapBranch(branchKey) {
+    const data = branches[branchKey];
+    if (!data) return;
+
+    if (mapTabHq) {
+      mapTabHq.classList.toggle('active', branchKey === 'hq');
+      mapTabHq.setAttribute('aria-selected', branchKey === 'hq');
+    }
+    if (mapTabAbuja) {
+      mapTabAbuja.classList.toggle('active', branchKey === 'abuja');
+      mapTabAbuja.setAttribute('aria-selected', branchKey === 'abuja');
+    }
+
+    if (mapIframe) mapIframe.src = data.iframeSrc;
+    if (mapDetailAddress) mapDetailAddress.textContent = data.address;
+    if (mapDetailLandmark) mapDetailLandmark.textContent = data.landmark;
+    if (mapDetailHours) mapDetailHours.textContent = data.hours;
+    if (mapActionOpen) mapActionOpen.href = data.openUrl;
+    if (mapActionDirections) mapActionDirections.href = data.dirUrl;
+    if (mapActionWhatsapp) {
+      mapActionWhatsapp.href = `https://wa.me/2349050278999?text=${encodeURIComponent(data.waText)}`;
+    }
+  }
+
+  if (mapTabHq) {
+    mapTabHq.addEventListener('click', () => switchMapBranch('hq'));
+  }
+  if (mapTabAbuja) {
+    mapTabAbuja.addEventListener('click', () => switchMapBranch('abuja'));
   }
 
   // 4. Booking Form Submission — Delivered Directly to glorifixmediaconcept@gmail.com

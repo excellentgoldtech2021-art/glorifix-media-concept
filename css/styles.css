@@ -3544,3 +3544,256 @@ html {
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   GLORIFIX MULTI-STEP INTERACTIVE FORMS & MAP RESCUE
+   ========================================================================== */
+.contact-map-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.multi-step-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.multi-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+  position: relative;
+  padding: 0 4px;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.step-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #F8ECEE;
+  color: #7A3C48;
+  font-weight: 800;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #E2CCD2;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.step-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #7A3C48;
+  margin-top: 6px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.step-indicator.active .step-num {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border-color: #E5A93C;
+  box-shadow: 0 0 0 4px rgba(229, 169, 60, 0.25), 0 4px 12px rgba(204, 17, 17, 0.35);
+  transform: scale(1.08);
+}
+
+.step-indicator.active .step-label {
+  color: #1A0408;
+  font-weight: 800;
+}
+
+.step-indicator.completed .step-num {
+  background: #2E7D32;
+  color: #ffffff;
+  border-color: #81C784;
+}
+
+.step-indicator.completed .step-label {
+  color: #2E7D32;
+}
+
+.step-line {
+  flex: 1;
+  height: 3px;
+  background: #E2CCD2;
+  margin: -16px 8px 0 8px;
+  position: relative;
+  z-index: 1;
+  border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+.step-line.completed {
+  background: linear-gradient(90deg, #2E7D32, #CC1111);
+}
+
+/* Form Step Containers */
+.form-step {
+  display: none;
+  width: 100%;
+}
+
+.form-step.active {
+  display: block;
+  animation: stepSlideIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes stepSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-title-box {
+  margin-bottom: 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.step-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: #1A0408;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.step-desc {
+  font-size: 0.86rem;
+  color: #6A3040;
+  margin: 0;
+}
+
+/* Step Action Navigation */
+.step-nav-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border-light);
+}
+
+.btn-step-prev {
+  background: #ffffff;
+  color: #5A2830;
+  border: 1.5px solid #E2CCD2;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-step-prev:hover {
+  background: #FCF6F7;
+  border-color: var(--red2);
+  color: var(--red2);
+}
+
+.btn-step-next {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border: none;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  font-size: 0.93rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(204, 17, 17, 0.28);
+  transition: all 0.25s ease;
+  margin-left: auto;
+}
+
+.btn-step-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(204, 17, 17, 0.38);
+}
+
+/* Live Review Card for Step 3 */
+.step-review-card {
+  background: #FDF9F5;
+  border: 1.5px solid #F0E2D5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.step-review-header {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #6E0F1D;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-review-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #374151;
+}
+
+.step-review-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #EFE3D8;
+  padding-bottom: 4px;
+}
+
+.step-review-row strong {
+  color: #1A0408;
+}
+
+@media (max-width: 600px) {
+  .step-label {
+    display: none;
+  }
+  .step-num {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+  .step-nav-buttons {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .btn-step-prev, .btn-step-next {
+    width: 100%;
+    justify-content: center;
+  }
+}
