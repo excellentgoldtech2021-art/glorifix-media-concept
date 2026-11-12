@@ -108,6 +108,19 @@ p {
   color: #FFFFFF;
 }
 
+@media (max-width: 768px) {
+  .top-notice-bar {
+    padding: 6px 0 !important;
+    font-size: 0.74rem !important;
+  }
+  .notice-inner {
+    flex-direction: column !important;
+    gap: 3px !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
 /* ==========================================================================
    Header Architecture: Distinct Title Bar & Standalone Menu Bar
    ========================================================================== */
@@ -180,7 +193,7 @@ p {
   color: #ffffff !important;
   line-height: 1.15;
   letter-spacing: -0.3px;
-  white-space: nowrap !important;
+  white-space: normal;
   display: inline-flex;
   align-items: center;
 }
@@ -516,13 +529,10 @@ p {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  /* On mobile screens, hide wide desktop SVG banners so users see the crisp, clean native title & kicker */
   .page-hero-section {
-    padding: 10px 0 16px 0;
-  }
-  .page-hero-banner-wrap {
-    border-radius: 10px;
-    aspect-ratio: 1200 / 520;
+    display: none !important;
   }
 }
 
@@ -1572,6 +1582,20 @@ p {
   fill: currentColor;
 }
 
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 18px !important;
+    right: 18px !important;
+    width: 46px !important;
+    height: 46px !important;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45) !important;
+  }
+  .whatsapp-float svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
 /* Footer */
 footer.footer {
   background: #1A0408;
@@ -2283,7 +2307,8 @@ footer.footer {
   }
   .brand-logo img.site-logo,
   .footer-brand-col .brand-logo img.site-logo {
-    height: 72px;
+    height: 44px !important;
+    width: auto !important;
   }
   .brand-text,
   .brand-name,
@@ -2293,10 +2318,11 @@ footer.footer {
   .footer-brand-col .brand-name,
   .footer-brand-col .brand-main,
   .footer-brand-col .brand-sub {
-    font-size: 1.75rem;
+    font-size: 1.15rem !important;
     font-weight: 800;
     color: #ffffff !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
   }
 
   /* Standalone Menu Bar Mobile Hamburger & Vertical Dropdown */
@@ -2305,7 +2331,7 @@ footer.footer {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   .menu-toggle {
@@ -2377,22 +2403,22 @@ footer.footer {
     box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
   }
 
-  /* Vertical Menu Dropdown on Mobile */
+  /* Reliable Vertical Menu Dropdown on Mobile */
   .menu-collapse {
-    display: block;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    padding: 0;
-    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
-    width: 100%;
+    display: none !important;
+    width: 100% !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    padding: 0 !important;
   }
 
   .menu-collapse.is-open {
-    max-height: 480px;
-    opacity: 1;
-    padding: 10px 0 16px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding: 10px 0 16px 0 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
   }
 
   .menu-nav-links {
@@ -2746,10 +2772,11 @@ footer.footer {
   .footer-brand-col .brand-name,
   .footer-brand-col .brand-main,
   .footer-brand-col .brand-sub {
-    font-size: clamp(1.12rem, 4.4vw, 1.45rem);
+    font-size: clamp(1.05rem, 4vw, 1.25rem);
     font-weight: 800;
     color: #ffffff !important;
-    white-space: nowrap !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
   }
 
   /* Founder & Team Small Screens */
@@ -3251,23 +3278,10 @@ html {
   margin: 2px 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
+  /* Hide floating scroll dock on mobile & touch screens to prevent blocking content */
   .scroll-nav-dock {
-    bottom: 24px;
-    left: 16px;
-    padding: 3px;
-    border-radius: 26px;
-  }
-  .scroll-nav-btn {
-    width: 40px;
-    height: 40px;
-  }
-  .scroll-nav-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-  .scroll-nav-tooltip {
-    display: none;
+    display: none !important;
   }
 }
 
