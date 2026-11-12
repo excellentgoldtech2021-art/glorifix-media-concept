@@ -114,9 +114,105 @@
 
         <div class="contact-card-item">
           <div class="contact-card-icon">📍</div>
-          <h4>Abuja Office</h4>
-          <p>Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja</p>
-          <div class="contact-card-action action-office">Mon &ndash; Sat: 8am &ndash; 8pm</div>
+          <h4>Company Studios</h4>
+          <p>Ikare-Akoko HQ &amp; Abuja Hub</p>
+          <a href="#office-map-section" class="contact-card-action action-office">Explore Studios &amp; Map &darr;</a>
+        </div>
+      </div>
+
+      <!-- Interactive Office Map & Company Locations Card -->
+      <div class="contact-map-card" id="office-map-section" style="margin-top: 35px; margin-bottom: 50px;">
+        <div class="map-card-header">
+          <div class="map-header-left">
+            <div class="section-kicker" style="margin-bottom: 6px;">PHYSICAL STUDIOS &amp; CORPORATE LOCATIONS</div>
+            <h3 class="map-card-title">Find Our Studios &amp; Explore Interactive Maps</h3>
+            <p class="map-card-sub">
+              Glorifix Media Concept operates corporate production studios and client consultation hubs in Ondo State and Abuja FCT. Click either location card below to inspect the branch, view facilities and landmarks, and get live turn-by-turn driving directions:
+            </p>
+          </div>
+          <div class="map-tabs-nav" role="tablist">
+            <button type="button" class="map-tab-btn active" id="map-tab-hq" data-branch="hq" role="tab" aria-selected="true">
+              📍 Ikare-Akoko HQ
+            </button>
+            <button type="button" class="map-tab-btn" id="map-tab-abuja" data-branch="abuja" role="tab" aria-selected="false">
+              🏛️ Abuja Office Hub
+            </button>
+          </div>
+        </div>
+
+        <!-- Dual Location Cards Showcase -->
+        <div class="map-branch-cards-grid">
+          <div class="map-branch-card active" id="branch-card-hq" data-branch="hq">
+            <div class="map-branch-badge">📍 Corporate HQ &amp; Main Studio</div>
+            <div class="map-branch-name">Ikare-Akoko Headquarters</div>
+            <div class="map-branch-address">Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria</div>
+            <div class="map-branch-focus"><strong>Studio Facilities:</strong> Full 4K Video Production, Audio Podcast Booth, High-Impact Media Editing, Corporate CAC Documentation &amp; Software Engineering.</div>
+            <div class="map-branch-status" id="branch-status-hq"><span>✓</span> Currently Active on Map</div>
+          </div>
+
+          <div class="map-branch-card" id="branch-card-abuja" data-branch="abuja">
+            <div class="map-branch-badge">🏛️ Capital City Hub &amp; Client Studio</div>
+            <div class="map-branch-name">Abuja Operations Hub</div>
+            <div class="map-branch-address">Phase 2, Shop 7, Opp. University of Abuja Mini-Campus, Gwagwalada, Abuja FCT, Nigeria</div>
+            <div class="map-branch-focus"><strong>Studio Facilities:</strong> Client Strategy Consultations, Meta Ads Campaign Management, Website Architecture Briefings &amp; Enterprise Reviews.</div>
+            <div class="map-branch-status" id="branch-status-abuja"><span>🗺️</span> Click to View Location on Map</div>
+          </div>
+        </div>
+
+        <!-- Embedded Interactive Map Frame -->
+        <div class="map-frame-wrapper">
+          <iframe
+            id="office-map-iframe"
+            title="Glorifix Media Concept Studio Location Map"
+            src="https://maps.google.com/maps?q=General+Hospital+Ikare-Akoko+Ondo+State+Nigeria&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+            loading="lazy"
+            allowfullscreen=""
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <!-- Location Metadata Details -->
+        <div class="map-location-details">
+          <div class="map-detail-item">
+            <div class="map-detail-icon">📍</div>
+            <div class="map-detail-info">
+              <strong>Office Address</strong>
+              <p id="map-detail-address">Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria</p>
+            </div>
+          </div>
+          <div class="map-detail-item">
+            <div class="map-detail-icon">🧭</div>
+            <div class="map-detail-info">
+              <strong>Key Landmark</strong>
+              <p id="map-detail-landmark">Opposite General Hospital / Behind G-Delight Hotel</p>
+            </div>
+          </div>
+          <div class="map-detail-item">
+            <div class="map-detail-icon">🕒</div>
+            <div class="map-detail-info">
+              <strong>Studio Hours</strong>
+              <p id="map-detail-hours">Monday – Saturday: 8:00 AM – 8:00 PM (Sunday by Appointment)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1-Tap Navigation Actions -->
+        <div class="map-actions-bar">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Opposite+General+Hospital+Ikare+Akoko+Ondo+State"
+             target="_blank" rel="noopener noreferrer" class="map-action-btn primary" id="map-action-open">
+            📍 Open in Google Maps
+          </a>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Opposite+General+Hospital+Ikare+Akoko+Ondo+State"
+             target="_blank" rel="noopener noreferrer" class="map-action-btn outline" id="map-action-directions">
+            🚗 Get Live Directions
+          </a>
+          <a href="tel:09050278999" class="map-action-btn outline">
+            📞 Call Office: 09050278999
+          </a>
+          <a href="https://wa.me/2349050278999?text=Hello%20Glorifix%20Media,%20I%20am%20visiting%20your%20Ikare-Akoko%20Office"
+             target="_blank" rel="noopener noreferrer" class="map-action-btn outline" id="map-action-whatsapp">
+            💬 WhatsApp for Directions
+          </a>
         </div>
       </div>
 
@@ -398,86 +494,7 @@
               📩 Delivered directly to Ezekiel's primary inbox &bull; Customized confirmation sent to your email
             </div>
           </div>
-        </form>
       </div>
-
-      <!-- Interactive Office Map & Directions Card -->
-      <div class="contact-map-card" id="office-map-section" style="margin-top: 50px;">
-        <div class="map-card-header">
-          <div class="map-header-left">
-            <div class="section-kicker" style="margin-bottom: 6px;">OFFICE LOCATIONS &amp; DIRECTIONS</div>
-            <h3 class="map-card-title">Find Us &amp; Navigate Easily</h3>
-            <p class="map-card-sub">
-              Visit our corporate studios in person for media productions, brand consulting, and live filming sessions. Select a studio branch below for live Google Maps directions:
-            </p>
-          </div>
-          <div class="map-tabs-nav" role="tablist">
-            <button type="button" class="map-tab-btn active" id="map-tab-hq" data-branch="hq" role="tab" aria-selected="true">
-              📍 Ikare-Akoko HQ
-            </button>
-            <button type="button" class="map-tab-btn" id="map-tab-abuja" data-branch="abuja" role="tab" aria-selected="false">
-              🏛️ Abuja Office Hub
-            </button>
-          </div>
-        </div>
-
-        <!-- Embedded Interactive Map Frame -->
-        <div class="map-frame-wrapper">
-          <iframe
-            id="office-map-iframe"
-            title="Glorifix Media Concept Studio Location Map"
-            src="https://maps.google.com/maps?q=General+Hospital+Ikare-Akoko+Ondo+State+Nigeria&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-            loading="lazy"
-            allowfullscreen=""
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-
-        <!-- Location Metadata Details -->
-        <div class="map-location-details">
-          <div class="map-detail-item">
-            <div class="map-detail-icon">📍</div>
-            <div class="map-detail-info">
-              <strong>Office Address</strong>
-              <p id="map-detail-address">Opposite General Hospital, Behind G-Delight Hotel, Ikare-Akoko, Ondo State, Nigeria</p>
-            </div>
-          </div>
-          <div class="map-detail-item">
-            <div class="map-detail-icon">🧭</div>
-            <div class="map-detail-info">
-              <strong>Key Landmark</strong>
-              <p id="map-detail-landmark">Opposite General Hospital / Behind G-Delight Hotel</p>
-            </div>
-          </div>
-          <div class="map-detail-item">
-            <div class="map-detail-icon">🕒</div>
-            <div class="map-detail-info">
-              <strong>Studio Hours</strong>
-              <p id="map-detail-hours">Monday – Saturday: 8:00 AM – 8:00 PM (Sunday by Appointment)</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 1-Tap Navigation Actions -->
-        <div class="map-actions-bar">
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Opposite+General+Hospital+Ikare+Akoko+Ondo+State"
-             target="_blank" rel="noopener noreferrer" class="map-action-btn primary" id="map-action-open">
-            📍 Open in Google Maps
-          </a>
-          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Opposite+General+Hospital+Ikare+Akoko+Ondo+State"
-             target="_blank" rel="noopener noreferrer" class="map-action-btn outline" id="map-action-directions">
-            🚗 Get Live Directions
-          </a>
-          <a href="tel:09050278999" class="map-action-btn outline">
-            📞 Call Office: 09050278999
-          </a>
-          <a href="https://wa.me/2349050278999?text=Hello%20Glorifix%20Media,%20I%20am%20visiting%20your%20Ikare-Akoko%20Office"
-             target="_blank" rel="noopener noreferrer" class="map-action-btn outline" id="map-action-whatsapp">
-            💬 WhatsApp for Directions
-          </a>
-        </div>
-      </div>
-
     </div>
   </section>
 

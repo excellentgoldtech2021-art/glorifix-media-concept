@@ -442,6 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const branchCardHq = document.getElementById('branch-card-hq');
+  const branchCardAbuja = document.getElementById('branch-card-abuja');
+  const branchStatusHq = document.getElementById('branch-status-hq');
+  const branchStatusAbuja = document.getElementById('branch-status-abuja');
+
   function switchMapBranch(branchKey) {
     const data = branches[branchKey];
     if (!data) return;
@@ -453,6 +458,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mapTabAbuja) {
       mapTabAbuja.classList.toggle('active', branchKey === 'abuja');
       mapTabAbuja.setAttribute('aria-selected', branchKey === 'abuja');
+    }
+    if (branchCardHq) {
+      branchCardHq.classList.toggle('active', branchKey === 'hq');
+    }
+    if (branchCardAbuja) {
+      branchCardAbuja.classList.toggle('active', branchKey === 'abuja');
+    }
+    if (branchStatusHq) {
+      branchStatusHq.innerHTML = branchKey === 'hq' ? '<span>✓</span> Currently Active on Map' : '<span>🗺️</span> Click to View Location on Map';
+    }
+    if (branchStatusAbuja) {
+      branchStatusAbuja.innerHTML = branchKey === 'abuja' ? '<span>✓</span> Currently Active on Map' : '<span>🗺️</span> Click to View Location on Map';
     }
 
     if (mapIframe) mapIframe.src = data.iframeSrc;
@@ -471,6 +488,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (mapTabAbuja) {
     mapTabAbuja.addEventListener('click', () => switchMapBranch('abuja'));
+  }
+  if (branchCardHq) {
+    branchCardHq.addEventListener('click', () => switchMapBranch('hq'));
+  }
+  if (branchCardAbuja) {
+    branchCardAbuja.addEventListener('click', () => switchMapBranch('abuja'));
   }
 
   // 4. Booking Form Submission — Delivered Directly to glorifixmediaconcept@gmail.com
@@ -1072,6 +1095,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const iframe = document.getElementById('office-map-iframe');
     const tabHq = document.getElementById('map-tab-hq');
     const tabAbuja = document.getElementById('map-tab-abuja');
+    const branchCardHq = document.getElementById('branch-card-hq');
+    const branchCardAbuja = document.getElementById('branch-card-abuja');
+    const branchStatusHq = document.getElementById('branch-status-hq');
+    const branchStatusAbuja = document.getElementById('branch-status-abuja');
     const addressEl = document.getElementById('map-detail-address');
     const landmarkEl = document.getElementById('map-detail-landmark');
     const hoursEl = document.getElementById('map-detail-hours');
@@ -1114,6 +1141,18 @@ document.addEventListener('DOMContentLoaded', () => {
         tabAbuja.classList.toggle('active', key === 'abuja');
         tabAbuja.setAttribute('aria-selected', key === 'abuja');
       }
+      if (branchCardHq) {
+        branchCardHq.classList.toggle('active', key === 'hq');
+      }
+      if (branchCardAbuja) {
+        branchCardAbuja.classList.toggle('active', key === 'abuja');
+      }
+      if (branchStatusHq) {
+        branchStatusHq.innerHTML = key === 'hq' ? '<span>✓</span> Currently Active on Map' : '<span>🗺️</span> Click to View Location on Map';
+      }
+      if (branchStatusAbuja) {
+        branchStatusAbuja.innerHTML = key === 'abuja' ? '<span>✓</span> Currently Active on Map' : '<span>🗺️</span> Click to View Location on Map';
+      }
 
       if (iframe && iframe.src !== data.embedSrc) {
         iframe.src = data.embedSrc;
@@ -1134,6 +1173,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (tabAbuja) {
       tabAbuja.addEventListener('click', () => switchBranch('abuja'));
+    }
+    if (branchCardHq) {
+      branchCardHq.addEventListener('click', () => switchBranch('hq'));
+    }
+    if (branchCardAbuja) {
+      branchCardAbuja.addEventListener('click', () => switchBranch('abuja'));
     }
   }
 

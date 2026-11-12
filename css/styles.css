@@ -3501,6 +3501,96 @@ html {
   color: var(--red2);
 }
 
+/* Interactive Dual Branch Cards inside Map Card */
+.map-branch-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.map-branch-card {
+  background: #FFFDFD;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-branch-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(204, 17, 17, 0.38);
+  box-shadow: 0 10px 24px rgba(204, 17, 17, 0.08);
+}
+
+.map-branch-card.active {
+  background: #ffffff;
+  border-color: var(--red2);
+  box-shadow: 0 12px 30px rgba(204, 17, 17, 0.14), 0 0 0 1px var(--red2);
+}
+
+.map-branch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--red2);
+  background: rgba(204, 17, 17, 0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  align-self: flex-start;
+  transition: all 0.25s ease;
+}
+
+.map-branch-card.active .map-branch-badge {
+  background: var(--red2);
+  color: #ffffff;
+}
+
+.map-branch-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1A0408;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.map-branch-address {
+  font-size: 0.88rem;
+  color: #5A2830;
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.map-branch-focus {
+  font-size: 0.82rem;
+  color: #7A3545;
+  line-height: 1.5;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(204, 17, 17, 0.16);
+}
+
+.map-branch-status {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red2);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .map-frame-wrapper {
   position: relative;
   width: 100%;
@@ -3604,6 +3694,10 @@ html {
 @media (max-width: 768px) {
   .contact-map-card {
     padding: 24px 18px;
+  }
+  .map-branch-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
   .map-card-header {
     flex-direction: column;
