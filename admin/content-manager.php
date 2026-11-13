@@ -165,8 +165,8 @@ if (file_exists($inquiries_file)) {
       gap: 8px;
       margin-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-subtle);
-      padding-bottom: 0.5rem;
-      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      flex-wrap: wrap;
     }
     .c-tab-btn {
       background: transparent;
@@ -180,8 +180,31 @@ if (file_exists($inquiries_file)) {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      white-space: nowrap;
       text-decoration: none;
+      transition: all 0.22s ease;
+    }
+    @media (max-width: 768px) {
+      .content-nav-tabs {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding-bottom: 1rem !important;
+      }
+      .c-tab-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 10px 8px !important;
+        font-size: 0.82rem !important;
+        white-space: normal !important;
+        border-radius: 10px !important;
+        line-height: 1.25 !important;
+        border: 1px solid var(--border-subtle) !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+      }
+      .content-nav-tabs .c-tab-btn:last-child {
+        grid-column: span 2 !important;
+      }
     }
     .c-tab-btn.active {
       background: var(--red2);
