@@ -55,7 +55,9 @@ html {
 }
 
 body {
-  overflow-x: clip;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
   position: relative;
   background: var(--bg-primary);
   font-family: var(--font-body);
@@ -85,7 +87,7 @@ p {
   background: #3D0E0E;
   color: #FBE8ED;
   padding: 8px 0;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   border-bottom: 1px solid rgba(232, 37, 53, 0.3);
 }
 
@@ -110,8 +112,8 @@ p {
 
 @media (max-width: 768px) {
   .top-notice-bar {
-    padding: 6px 0 !important;
-    font-size: 0.74rem !important;
+    padding: 8px 0 !important;
+    font-size: 0.88rem !important;
   }
   .notice-inner {
     flex-direction: column !important;
@@ -521,18 +523,52 @@ p {
 
 @media (max-width: 868px) {
   .page-hero-section {
-    padding: 16px 0 24px 0;
+    display: block !important;
+    padding: 16px 0 20px 0 !important;
+    background: #180306;
   }
   .page-hero-banner-wrap {
-    border-radius: 14px;
-    aspect-ratio: 1200 / 520;
+    border-radius: 14px !important;
+    aspect-ratio: 1200 / 520 !important;
+    border: 1px solid rgba(232, 37, 53, 0.35) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
   }
 }
 
 @media (max-width: 768px) {
-  /* On mobile screens, hide wide desktop SVG banners so users see the crisp, clean native title & kicker */
   .page-hero-section {
-    display: none !important;
+    display: block !important;
+    padding: 12px 0 16px 0 !important;
+    background: #180306;
+  }
+  .page-hero-section .container {
+    padding: 0 14px !important;
+  }
+  .page-hero-banner-wrap {
+    width: 100% !important;
+    border-radius: 12px !important;
+    aspect-ratio: 1200 / 520 !important;
+    border: 1px solid rgba(232, 37, 53, 0.35) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 10px rgba(232, 37, 53, 0.15) !important;
+    overflow: hidden !important;
+  }
+  .page-hero-banner-img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: contain !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero-section {
+    padding: 8px 0 12px 0 !important;
+  }
+  .page-hero-section .container {
+    padding: 0 10px !important;
+  }
+  .page-hero-banner-wrap {
+    border-radius: 10px !important;
   }
 }
 
@@ -636,9 +672,9 @@ p {
 }
 
 .stat-label {
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   color: #5A2830;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -656,10 +692,10 @@ p {
 
 .section-kicker {
   font-family: var(--font-accent);
-  font-size: 0.78rem;
+  font-size: 0.94rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15em;
   color: #8B0A0A;
   margin-bottom: 8px;
 }
@@ -1121,7 +1157,7 @@ p {
   background: #ffffff;
   color: #5A2030;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.92rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -1191,9 +1227,9 @@ p {
   right: 10px;
   background: rgba(15, 2, 6, 0.78);
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 12px;
   backdrop-filter: blur(4px);
   pointer-events: none;
@@ -1291,7 +1327,7 @@ p {
 
 .project-category {
   font-family: var(--font-accent);
-  font-size: 0.78rem;
+  font-size: 0.90rem;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--red2);
@@ -1392,7 +1428,7 @@ p {
 }
 
 .cal-day-label {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-light);
   padding: 6px 0;
@@ -1406,7 +1442,7 @@ p {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -1441,7 +1477,7 @@ p {
 }
 
 .slot-label {
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1462,8 +1498,8 @@ p {
   border: 1.5px solid var(--border-light);
   background: #ffffff;
   border-radius: var(--radius-sm);
-  font-size: 0.86rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   cursor: pointer;
   text-align: center;
   transition: all 0.2s;
@@ -2047,7 +2083,7 @@ footer.footer {
   color: #5A2830;
   font-family: var(--font-accent);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.94rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -2123,11 +2159,11 @@ footer.footer {
   background: linear-gradient(135deg, #CC1111, #8B0A0A);
   color: #ffffff;
   font-family: var(--font-accent);
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 5px 18px;
+  padding: 6px 20px;
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(204, 17, 17, 0.4);
   white-space: nowrap;
@@ -2136,7 +2172,7 @@ footer.footer {
 
 .pricing-tier {
   font-family: var(--font-accent);
-  font-size: 0.8rem;
+  font-size: 0.94rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -2181,7 +2217,7 @@ footer.footer {
 
 .pricing-sub {
   font-family: var(--font-body);
-  font-size: 0.88rem;
+  font-size: 0.98rem;
   color: #6A3040;
   margin-bottom: 20px;
   padding-bottom: 16px;
@@ -2196,7 +2232,7 @@ footer.footer {
   border-radius: 10px;
   padding: 12px 14px;
   margin-bottom: 20px;
-  font-size: 0.82rem;
+  font-size: 0.94rem;
   line-height: 1.55;
   color: #4A1020;
   box-sizing: border-box;
@@ -2217,7 +2253,7 @@ footer.footer {
   align-items: flex-start;
   gap: 10px;
   font-family: var(--font-body);
-  font-size: 0.92rem;
+  font-size: 1.02rem;
   color: #2D0A14;
   line-height: 1.5;
 }
@@ -2269,8 +2305,8 @@ footer.footer {
     padding: 5px;
   }
   .pricing-tab-btn {
-    padding: 8px 16px;
-    font-size: 0.78rem;
+    padding: 9px 18px;
+    font-size: 0.90rem;
   }
   .pricing-grid,
   .pricing-grid.grid-4col {
@@ -2394,10 +2430,10 @@ footer.footer {
     color: #FFFFFF !important;
     font-family: var(--font-accent);
     font-weight: 700;
-    font-size: 0.78rem;
+    font-size: 0.90rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    padding: 7px 14px;
+    padding: 8px 16px;
     border-radius: 6px;
     text-decoration: none;
     box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
@@ -2431,7 +2467,7 @@ footer.footer {
   .menu-nav-links a {
     display: block;
     width: 100%;
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     padding: 12px 16px;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.05);
@@ -2483,8 +2519,8 @@ footer.footer {
   }
 
   .top-notice-bar {
-    padding: 6px 0;
-    font-size: 0.74rem;
+    padding: 8px 0;
+    font-size: 0.88rem;
     text-align: center;
   }
   .notice-inner {
@@ -2542,7 +2578,8 @@ footer.footer {
     font-size: 1.85rem;
   }
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.88rem;
+    font-weight: 700;
   }
 
   /* Grids */
@@ -2645,8 +2682,8 @@ footer.footer {
     border-radius: 16px;
   }
   .pricing-tab-btn {
-    padding: 8px 14px;
-    font-size: 0.78rem;
+    padding: 9px 16px;
+    font-size: 0.90rem;
   }
 
   /* Booking Calendar */
@@ -2664,19 +2701,20 @@ footer.footer {
     padding-bottom: 24px;
   }
   .cal-grid {
-    gap: 4px;
+    gap: 5px;
   }
   .cal-date {
-    font-size: 0.88rem;
-    min-height: 32px;
+    font-size: 0.92rem;
+    min-height: 34px;
   }
   .slots-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
   .slot-btn {
-    padding: 9px 6px;
-    font-size: 0.82rem;
+    padding: 10px 8px;
+    font-size: 0.90rem;
+    font-weight: 700;
   }
 
   /* CTA Banner */
@@ -2735,11 +2773,12 @@ footer.footer {
     font-size: 1.6rem;
   }
   .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.86rem;
+    font-weight: 700;
   }
   .filter-btn {
-    padding: 7px 14px;
-    font-size: 0.78rem;
+    padding: 8px 16px;
+    font-size: 0.88rem;
   }
 
   .title-bar {
@@ -2811,6 +2850,17 @@ footer.footer {
     padding: 24px 16px;
   }
 
+  .pricing-card,
+  .srv-card,
+  .service-detail-card,
+  .about-card-box,
+  .statement-card {
+    padding: 22px 16px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   /* Contact & Booking on Small Screens */
   .contact-cards-grid {
     grid-template-columns: 1fr;
@@ -2841,21 +2891,23 @@ footer.footer {
     gap: 3px;
   }
   .cal-day-label {
-    font-size: 0.7rem;
-    padding: 4px 0;
+    font-size: 0.82rem;
+    padding: 5px 0;
+    font-weight: 700;
   }
   .cal-date {
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     border-radius: 6px;
-    min-height: 28px;
+    min-height: 32px;
   }
   .slots-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
   }
   .slot-btn {
-    padding: 8px 4px;
-    font-size: 0.78rem;
+    padding: 9px 6px;
+    font-size: 0.88rem;
+    font-weight: 700;
   }
   .booking-summary-banner {
     padding: 10px 12px;
@@ -2893,82 +2945,32 @@ html {
   transition: width 0.08s ease-out;
 }
 
-/* 2. Scroll Reveal Foundations */
-.gf-reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.gf-reveal.gf-revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.gf-reveal-scale {
-  opacity: 0;
-  transform: scale(0.93) translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.gf-reveal-scale.gf-revealed {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-.gf-reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.gf-reveal-left.gf-revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.gf-reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, opacity;
-}
-
-.gf-reveal-right.gf-revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
+/* 2. Scroll Reveal Foundations (Progressive & 100% Stable) */
+.gf-reveal,
+.gf-reveal-scale,
+.gf-reveal-left,
+.gf-reveal-right,
 .gf-reveal-pop {
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
-              transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, opacity;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
+.gf-reveal.gf-revealed,
+.gf-reveal-scale.gf-revealed,
+.gf-reveal-left.gf-revealed,
+.gf-reveal-right.gf-revealed,
 .gf-reveal-pop.gf-revealed {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 /* 3. Red Accent Divider Line Expansion */
-.rl {
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
+.rl,
 .rl.gf-revealed {
-  transform: scaleX(1);
+  transform: scaleX(1) !important;
+  transform-origin: center;
 }
 
 /* 4. Staggered Delays for Grid Children */
@@ -3258,11 +3260,11 @@ html {
   background: rgba(26, 4, 8, 0.95);
   border: 1px solid rgba(229, 169, 60, 0.5);
   color: #FFD700;
-  font-size: 0.76rem;
+  font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 6px;
   white-space: nowrap;
   pointer-events: none;
@@ -3354,7 +3356,7 @@ html {
 
 .statement-badge {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.90rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -3394,21 +3396,21 @@ html {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #2D0A14;
 }
 
 .statement-bullet-icon {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: rgba(204, 17, 17, 0.1);
   color: var(--red2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   flex-shrink: 0;
 }
 
@@ -3552,13 +3554,13 @@ html {
   align-items: center;
   gap: 6px;
   font-family: var(--font-accent);
-  font-size: 0.72rem;
+  font-size: 0.88rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--red2);
   background: rgba(204, 17, 17, 0.08);
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 20px;
   margin-bottom: 12px;
   align-self: flex-start;
@@ -3723,8 +3725,8 @@ html {
   .map-tab-btn {
     flex: 1;
     justify-content: center;
-    font-size: 0.78rem;
-    padding: 7px 10px;
+    font-size: 0.88rem;
+    padding: 9px 12px;
   }
   .map-frame-wrapper {
     height: 300px;
