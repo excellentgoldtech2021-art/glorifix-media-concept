@@ -3298,26 +3298,37 @@ html {
 }
 
 /* ==========================================================================
-   FLOATING SCROLL NAVIGATION DOCK (SCROLL UP & SCROLL DOWN ARROWS)
+   FLOATING SCROLL NAVIGATION DOCK (SCROLL UP & SCROLL DOWN BUTTONS)
    ========================================================================== */
 
 .scroll-nav-dock {
   position: fixed;
-  bottom: 32px;
+  bottom: 30px;
   left: 28px;
   z-index: 996;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(26, 4, 8, 0.92);
+  background: rgba(22, 4, 8, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1.5px solid rgba(229, 169, 60, 0.45);
   border-radius: 30px;
   padding: 4px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 18px rgba(229, 169, 60, 0.25);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, border-color 0.3s ease;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  pointer-events: none;
+}
+
+.scroll-nav-dock.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .scroll-nav-dock:hover {
@@ -3350,9 +3361,9 @@ html {
 }
 
 .scroll-nav-btn:hover {
-  background: linear-gradient(135deg, rgba(232, 37, 53, 0.35), rgba(229, 169, 60, 0.35));
+  background: linear-gradient(135deg, rgba(232, 37, 53, 0.45), rgba(229, 169, 60, 0.45));
   color: #FFD700;
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 
 .scroll-nav-btn:active {
@@ -3360,8 +3371,9 @@ html {
 }
 
 .scroll-nav-btn.is-disabled {
-  opacity: 0.35;
+  opacity: 0.3;
   cursor: default;
+  pointer-events: none;
 }
 
 .scroll-nav-btn:hover .scroll-nav-tooltip {
@@ -3372,13 +3384,13 @@ html {
 
 .scroll-nav-tooltip {
   position: absolute;
-  left: 56px;
+  left: 54px;
   top: 50%;
   transform: translateY(-50%) translateX(-8px);
   background: rgba(26, 4, 8, 0.95);
   border: 1px solid rgba(229, 169, 60, 0.5);
   color: #FFD700;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -3392,16 +3404,33 @@ html {
 }
 
 .scroll-nav-divider {
-  width: 22px;
+  width: 20px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(229, 169, 60, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(229, 169, 60, 0.45), transparent);
   margin: 2px 0;
 }
 
 @media (max-width: 868px) {
-  /* Hide floating scroll dock on mobile & touch screens to prevent blocking content */
+  /* Mobile optimized floating scroll navigation buttons */
   .scroll-nav-dock {
+    bottom: 20px !important;
+    left: 18px !important;
+    border-radius: 26px !important;
+    padding: 3px !important;
+  }
+  .scroll-nav-btn {
+    width: 42px !important;
+    height: 42px !important;
+  }
+  .scroll-nav-btn svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .scroll-nav-tooltip {
     display: none !important;
+  }
+  .scroll-nav-divider {
+    width: 16px !important;
   }
 }
 

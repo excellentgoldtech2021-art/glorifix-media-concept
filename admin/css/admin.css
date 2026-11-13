@@ -1626,3 +1626,79 @@ body.light-mode .admin-dock-item:active {
     transform: translateX(0);
   }
 }
+
+/* Floating Scroll Navigation Dock (Admin Dashboard) */
+.admin-scroll-dock {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 92;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(22, 4, 8, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
+  border-radius: 30px;
+  padding: 3px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 14px rgba(212, 175, 55, 0.2);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  pointer-events: none;
+}
+
+body.light-mode .admin-scroll-dock {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(124, 16, 36, 0.25);
+  box-shadow: 0 6px 20px rgba(74, 8, 21, 0.12);
+}
+
+.admin-scroll-dock.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.admin-scroll-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+body.light-mode .admin-scroll-btn {
+  color: var(--wine-dark);
+}
+
+.admin-scroll-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold-primary);
+  transform: scale(1.1);
+}
+
+.admin-scroll-divider {
+  width: 18px;
+  height: 1px;
+  background: rgba(212, 175, 55, 0.3);
+  margin: 1px 0;
+}
+
+@media (max-width: 768px) {
+  .admin-scroll-dock {
+    bottom: 76px !important; /* Positioned directly above mobile dock */
+    right: 16px !important;
+  }
+}
+

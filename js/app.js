@@ -1061,22 +1061,33 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = document.documentElement.clientHeight;
-      const isAtTop = scrollTop <= 60;
+      const isAtTop = scrollTop <= 50;
       const isAtBottom = (scrollTop + clientHeight) >= (scrollHeight - 60);
+
+      // Show floating scroll buttons when scrolling past 70px
+      if (scrollTop > 70) {
+        dock.classList.add('is-visible');
+      } else {
+        dock.classList.remove('is-visible');
+      }
 
       if (upBtn) {
         if (isAtTop) {
           upBtn.classList.add('is-disabled');
+          upBtn.setAttribute('aria-disabled', 'true');
         } else {
           upBtn.classList.remove('is-disabled');
+          upBtn.removeAttribute('aria-disabled');
         }
       }
 
       if (downBtn) {
         if (isAtBottom) {
           downBtn.classList.add('is-disabled');
+          downBtn.setAttribute('aria-disabled', 'true');
         } else {
           downBtn.classList.remove('is-disabled');
+          downBtn.removeAttribute('aria-disabled');
         }
       }
     };

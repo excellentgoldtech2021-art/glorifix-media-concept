@@ -333,4 +333,51 @@ document.addEventListener('DOMContentLoaded', function() {
       setTimeout(() => alert.remove(), 400);
     }, 4500);
   });
+
+  // 9. Floating Scroll Navigation Dock (Scroll to Top & Bottom)
+  if (!document.querySelector('.admin-scroll-dock')) {
+    const adminScrollDock = document.createElement('div');
+    adminScrollDock.className = 'admin-scroll-dock';
+    adminScrollDock.setAttribute('aria-label', 'Scroll Navigation');
+    adminScrollDock.innerHTML = `
+      <button type="button" class="admin-scroll-btn admin-scroll-up" aria-label="Scroll to top" title="Scroll to Top">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+      <div class="admin-scroll-divider"></div>
+      <button type="button" class="admin-scroll-btn admin-scroll-down" aria-label="Scroll to bottom" title="Scroll to Bottom">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    `;
+    document.body.appendChild(adminScrollDock);
+
+    const adminUp = adminScrollDock.querySelector('.admin-scroll-up');
+    const adminDown = adminScrollDock.querySelector('.admin-scroll-down');
+
+    adminUp.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    adminDown.addEventListener('click', (e) => {
+      e.preventDefault();
+      const maxScroll = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      );
+      window.scrollTo({ top: maxScroll, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (scrollTop > 80) {
+        adminScrollDock.classList.add('is-visible');
+      } else {
+        adminScrollDock.classList.remove('is-visible');
+      }
+    }, { passive: true });
+  }
 });
