@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Activate progressive scroll & interactive animation engine
+  document.documentElement.classList.add('js-animations-active');
+
   // 1. Hero Banner Carousel & Slideshow
   const track = document.querySelector('.slides-track');
   const slides = document.querySelectorAll('.slide-item');
@@ -1279,8 +1282,109 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // 12. Interactive 3D Card Tilt Engine
+  function initCard3DTilt() {
+    const tiltCards = document.querySelectorAll(
+      '.service-card, .project-card, .statement-card, .pricing-card, .srv-card, .contact-card-item, .about-card-box, .stat-item, .service-detail-card'
+    );
+
+    tiltCards.forEach(card => {
+      let isHovered = false;
+
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+        card.style.transition = 'transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (!isHovered) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = ((x - centerX) / centerX) * 3.2;
+        const rotateX = -((y - centerY) / centerY) * 3.2;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        card.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease';
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+  }
+
+  // 13. Interactive Button Click Ripple Effect
+  function initClickRipples() {
+    const rippleSelectors = [
+      '.btn',
+      '.menu-cta-btn',
+      '.slider-pill',
+      '.pricing-tab-item',
+      '.filter-btn',
+      '.btn-step-next',
+      '.btn-step-prev',
+      '.slider-btn',
+      '.scroll-nav-btn'
+    ];
+
+    document.querySelectorAll(rippleSelectors.join(',')).forEach(el => {
+      el.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const ripple = document.createElement('span');
+        ripple.className = 'click-ripple';
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = `${size}px`;
+        ripple.style.height = `${size}px`;
+        ripple.style.marginLeft = `-${size / 2}px`;
+        ripple.style.marginTop = `-${size / 2}px`;
+
+        this.appendChild(ripple);
+
+        setTimeout(() => {
+          ripple.remove();
+        }, 650);
+      });
+    });
+  }
+
+  // 14. Animated Stat Numbers Pulse on Scroll
+  function initStatsCounter() {
+    const statsRibbon = document.querySelector('.stats-ribbon');
+    const stats = document.querySelectorAll('.stat-item');
+    if (!statsRibbon || !stats.length) return;
+
+    let hasAnimated = false;
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          stats.forEach((item, idx) => {
+            setTimeout(() => {
+              item.classList.add('counter-done');
+            }, idx * 100);
+          });
+          obs.unobserve(statsRibbon);
+        }
+      }, { threshold: 0.25 });
+      obs.observe(statsRibbon);
+    }
+  }
+
   // Initialize features
   initAestheticAnimations();
+  initCard3DTilt();
+  initClickRipples();
+  initStatsCounter();
   initScrollNavDock();
   initOfficeMapSwitcher();
 });

@@ -1003,7 +1003,32 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: #8B0A0A;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-kicker::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red2);
+  box-shadow: 0 0 8px rgba(232, 37, 53, 0.7);
+  animation: kickerPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes kickerPulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; box-shadow: 0 0 4px rgba(232, 37, 53, 0.5); }
+  50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 12px rgba(232, 37, 53, 0.95); }
+}
+
+.section-head:hover .section-kicker {
+  letter-spacing: 0.18em;
+  color: var(--red2);
 }
 
 .section-title {
@@ -1013,10 +1038,20 @@ p {
   letter-spacing: -0.5px;
   margin-bottom: 16px;
   color: #1A0408;
+  transition: transform 0.35s ease, color 0.35s ease;
+}
+
+.section-head:hover .section-title {
+  transform: translateY(-2px);
 }
 
 .section-title span {
   color: var(--red2);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.section-head:hover .section-title span {
+  text-shadow: 0 2px 14px rgba(204, 17, 17, 0.25);
 }
 
 .section-desc {
@@ -1025,6 +1060,7 @@ p {
   font-size: 1.22rem;
   line-height: 1.8;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 /* Multi-page Semantic Layout Classes */
@@ -1368,10 +1404,37 @@ p {
 }
 
 .cta-banner {
-  background: linear-gradient(135deg, #CC1111, #8B0A0A);
+  background: linear-gradient(135deg, #8B0A0A 0%, #CC1111 35%, #E82535 65%, #8B0A0A 100%);
+  background-size: 260% 260%;
+  animation: ctaMeshShift 12s ease-in-out infinite alternate;
   color: #ffffff;
-  padding: 70px 0;
+  padding: 75px 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes ctaMeshShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.cta-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  animation: ctaOrbRotate 20s linear infinite;
+}
+
+@keyframes ctaOrbRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .cta-banner h2 {
@@ -1379,6 +1442,9 @@ p {
   font-size: 2.5rem;
   margin-bottom: 16px;
   color: #ffffff !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 1;
 }
 
 .cta-banner p {
@@ -1388,9 +1454,16 @@ p {
   margin: 0 auto 30px;
   opacity: 0.95;
   line-height: 1.7;
+  position: relative;
+  z-index: 1;
 }
 
-/* Services Grid */
+.cta-banner .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Services Grid & Interactive Cards */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1403,19 +1476,20 @@ p {
   border-radius: 20px;
   padding: 36px 28px;
   box-shadow: 0 8px 24px rgba(45, 8, 8, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
+  perspective: 1000px;
 }
 
 .service-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 48px -8px rgba(180, 10, 40, 0.18), 0 0 0 1px rgba(232, 37, 53, 0.3);
-  border-color: rgba(232, 37, 53, 0.35);
+  box-shadow: 0 22px 50px -8px rgba(180, 10, 40, 0.2), 0 0 0 1px rgba(232, 37, 53, 0.32);
+  border-color: rgba(232, 37, 53, 0.45);
   background: #ffffff;
 }
 
@@ -1429,6 +1503,7 @@ p {
   background: var(--accent-gradient);
   opacity: 0;
   transition: opacity 0.35s ease, height 0.35s ease;
+  z-index: 2;
 }
 
 .service-card:hover::before {
@@ -1449,15 +1524,21 @@ p {
   border: 1.5px solid rgba(232, 37, 53, 0.2);
   color: var(--red2);
   box-shadow: 0 4px 14px rgba(232, 37, 53, 0.08);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: iconAmbientFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes iconAmbientFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-4px) rotate(1.5deg); }
 }
 
 .service-card:hover .service-icon {
   background: var(--accent-gradient);
   color: #ffffff;
   border-color: transparent;
-  transform: scale(1.1) rotate(4deg);
-  box-shadow: 0 8px 22px rgba(204, 17, 17, 0.35);
+  transform: scale(1.14) rotate(5deg) translateY(-2px);
+  box-shadow: 0 10px 24px rgba(204, 17, 17, 0.38), 0 0 12px rgba(229, 169, 60, 0.3);
 }
 
 .service-title {
@@ -1468,6 +1549,12 @@ p {
   letter-spacing: 0.04em;
   margin-bottom: 12px;
   color: #1A0408;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover .service-title {
+  color: var(--red2);
+  transform: translateY(-2px);
 }
 
 .service-body {
@@ -1475,6 +1562,11 @@ p {
   font-size: 0.95rem;
   line-height: 1.7;
   margin-bottom: 24px;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-body {
+  color: #3B0D18;
 }
 
 .service-features {
@@ -1491,11 +1583,22 @@ p {
   font-size: 0.88rem;
   color: #4A1828;
   font-weight: 600;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.service-card:hover .service-features li {
+  transform: translateX(4px);
+  color: #1A0408;
 }
 
 .service-features li svg {
   color: var(--red2);
   flex-shrink: 0;
+  transition: transform 0.28s ease;
+}
+
+.service-card:hover .service-features li svg {
+  transform: scale(1.15);
 }
 
 /* Projects Showcase */
@@ -1518,14 +1621,23 @@ p {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.filter-btn.active, .filter-btn:hover {
+.filter-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--red2);
+  color: var(--red2);
+  box-shadow: 0 6px 16px rgba(204, 17, 17, 0.15);
+}
+
+.filter-btn.active {
   background: var(--accent-gradient);
-  color: #ffffff;
+  color: #ffffff !important;
   border-color: transparent;
-  box-shadow: 0 4px 14px rgba(204, 17, 17, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(204, 17, 17, 0.35);
 }
 
 .projects-grid {
@@ -1538,20 +1650,21 @@ p {
   background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
-  border: 1.5px solid rgba(232, 37, 53, 0.12);
+  border: 1.5px solid rgba(232, 37, 53, 0.14);
   box-shadow: 0 8px 24px rgba(45, 8, 8, 0.04);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;
+  perspective: 1000px;
 }
 
 .project-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 45px -8px rgba(180, 10, 40, 0.2), 0 0 0 1px rgba(232, 37, 53, 0.28);
-  border-color: rgba(232, 37, 53, 0.35);
+  box-shadow: 0 22px 48px -8px rgba(180, 10, 40, 0.22), 0 0 0 1px rgba(232, 37, 53, 0.32);
+  border-color: rgba(232, 37, 53, 0.45);
 }
 
 .project-thumb {
@@ -1567,36 +1680,66 @@ p {
   position: relative;
 }
 
+/* Glossy Glare Reflection Sweep on Project Thumbnail */
+.project-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.45) 50%, transparent 75%);
+  transform: translateX(-120%);
+  transition: transform 0.8s ease-in-out;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.project-card:hover .project-thumb::after {
+  transform: translateX(120%);
+}
+
 .project-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .project-card:hover .project-thumb img {
   transform: scale(1.08);
+  filter: contrast(1.03) saturate(1.05);
+}
+
+.project-title {
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover .project-title {
+  color: var(--red2);
+  transform: translateY(-2px);
 }
 
 .project-zoom-badge {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(15, 2, 6, 0.78);
+  bottom: 12px;
+  right: 12px;
+  background: rgba(15, 2, 6, 0.82);
   color: #ffffff;
   font-size: 0.88rem;
   font-weight: 700;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 12px;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 3;
 }
 
 .project-card:hover .project-zoom-badge {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Portfolio Lightbox Modal */
@@ -1946,7 +2089,7 @@ p {
   border-radius: var(--radius-sm);
 }
 
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button with Radar Pulse Wave */
 .whatsapp-float {
   position: fixed;
   bottom: 30px;
@@ -1962,18 +2105,39 @@ p {
   box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
   text-decoration: none;
   color: white;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.whatsapp-float::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.45);
+  z-index: -1;
+  animation: waRadarPulse 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes waRadarPulse {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  100% { transform: scale(1.65); opacity: 0; }
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.65);
+  transform: scale(1.14) rotate(-6deg);
+  box-shadow: 0 14px 34px rgba(37, 211, 102, 0.7), 0 0 18px rgba(37, 211, 102, 0.4);
 }
 
 .whatsapp-float svg {
   width: 32px;
   height: 32px;
   fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover svg {
+  transform: scale(1.08);
 }
 
 @media (max-width: 768px) {
@@ -4046,19 +4210,75 @@ html {
 .gf-reveal-left,
 .gf-reveal-right,
 .gf-reveal-pop {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+  opacity: 1;
+  transform: none;
+  visibility: visible;
 }
 
-.gf-reveal.gf-revealed,
-.gf-reveal-scale.gf-revealed,
-.gf-reveal-left.gf-revealed,
-.gf-reveal-right.gf-revealed,
-.gf-reveal-pop.gf-revealed {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+/* When JavaScript is active, enable graceful hardware-accelerated reveal entrances */
+html.js-animations-active .gf-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js-animations-active .gf-reveal.gf-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.js-animations-active .gf-reveal-scale {
+  opacity: 0;
+  transform: scale(0.93) translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js-animations-active .gf-reveal-scale.gf-revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+html.js-animations-active .gf-reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js-animations-active .gf-reveal-left.gf-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+html.js-animations-active .gf-reveal-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+html.js-animations-active .gf-reveal-right.gf-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+html.js-animations-active .gf-reveal-pop {
+  opacity: 0;
+  transform: scale(0.88);
+  transition: opacity 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: opacity, transform;
+}
+
+html.js-animations-active .gf-reveal-pop.gf-revealed {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* 3. Red Accent Divider Line Expansion */
@@ -4448,11 +4668,12 @@ html {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s ease;
   box-sizing: border-box;
   width: 100%;
+  perspective: 1000px;
 }
 
 .statement-card::before {
@@ -4464,13 +4685,14 @@ html {
   height: 4px;
   background: var(--accent-gradient);
   opacity: 0.85;
-  transition: opacity 0.3s ease, height 0.3s ease;
+  transition: opacity 0.35s ease, height 0.35s ease;
+  z-index: 2;
 }
 
 .statement-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(232, 37, 53, 0.35);
-  box-shadow: 0 24px 50px -12px rgba(180, 10, 40, 0.22), 0 0 0 1px rgba(229, 169, 60, 0.3);
+  border-color: rgba(232, 37, 53, 0.45);
+  box-shadow: 0 24px 52px -12px rgba(180, 10, 40, 0.22), 0 0 0 1px rgba(229, 169, 60, 0.35);
 }
 
 .statement-card:hover::before {
@@ -4488,11 +4710,13 @@ html {
   font-size: 2rem;
   margin-bottom: 22px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: iconAmbientFloat 4.2s ease-in-out infinite alternate;
 }
 
 .statement-card:hover .statement-icon-wrap {
-  transform: scale(1.12) rotate(4deg);
+  transform: scale(1.15) rotate(6deg) translateY(-2px);
+  box-shadow: 0 10px 24px rgba(204, 17, 17, 0.3);
 }
 
 .statement-badge {
@@ -4503,6 +4727,11 @@ html {
   text-transform: uppercase;
   color: var(--red2);
   margin-bottom: 8px;
+  transition: letter-spacing 0.3s ease;
+}
+
+.statement-card:hover .statement-badge {
+  letter-spacing: 0.15em;
 }
 
 .statement-title {
@@ -4512,6 +4741,12 @@ html {
   color: #1A0408;
   margin-bottom: 14px;
   line-height: 1.3;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.statement-card:hover .statement-title {
+  color: var(--red2);
+  transform: translateY(-2px);
 }
 
 .statement-desc {
@@ -4520,6 +4755,11 @@ html {
   color: #5A2830;
   margin-bottom: 24px;
   flex-grow: 1;
+  transition: color 0.3s ease;
+}
+
+.statement-card:hover .statement-desc {
+  color: #3B0D18;
 }
 
 .statement-bullets {
@@ -4540,6 +4780,12 @@ html {
   font-size: 0.95rem;
   font-weight: 600;
   color: #2D0A14;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.statement-card:hover .statement-bullets li {
+  transform: translateX(4px);
+  color: #1A0408;
 }
 
 .statement-bullet-icon {
@@ -4553,6 +4799,11 @@ html {
   justify-content: center;
   font-size: 0.85rem;
   flex-shrink: 0;
+  transition: transform 0.28s ease;
+}
+
+.statement-card:hover .statement-bullet-icon {
+  transform: scale(1.15);
 }
 
 @media (max-width: 992px) {
@@ -5190,3 +5441,87 @@ html {
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   UNIVERSAL INTERACTIVE ANIMATION & SCROLL REVEAL ENGINE
+   ========================================================================== */
+
+/* 1. Scroll-Triggered Reveal Classes */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Staggered transition delays for grid items */
+.stagger-1 { transition-delay: 0.06s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.18s; }
+.stagger-4 { transition-delay: 0.24s; }
+
+/* 2. Button Click Ripple Animation */
+.btn, .menu-cta-btn, .slider-pill, .btn-step-next, .btn-step-prev, .filter-btn, .pricing-tab-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.click-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleSpread 0.65s cubic-bezier(0, 0, 0.2, 1);
+  background-color: rgba(255, 255, 255, 0.42);
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes rippleSpread {
+  to {
+    transform: scale(4.5);
+    opacity: 0;
+  }
+}
+
+/* 3. Interactive Card Glare & Depth */
+.interactive-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* 4. Global Image Hover Micro-interactions */
+img.gallery-img, .service-detail-card img, .about-card-box img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+img.gallery-img:hover, .service-detail-card:hover img, .about-card-box:hover img {
+  transform: scale(1.04);
+}
+
+/* 5. Interactive Stat Counter Pulse */
+.stat-item.counter-done .stat-num {
+  animation: statNumberPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes statNumberPop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.08); color: var(--red2); }
+  100% { transform: scale(1); }
+}
+
+/* 6. Text Highlight Shimmer */
+strong, .text-highlight {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+p:hover strong {
+  color: var(--red2);
+  text-shadow: 0 1px 6px rgba(204, 17, 17, 0.2);
+}
+
