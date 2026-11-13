@@ -2246,9 +2246,9 @@ footer.footer {
 /* 1. Website Design Tab (Sapphire & Tech Blue Theme) */
 .pricing-tab-btn[data-target="panel-web"] {
   background: linear-gradient(145deg, #FFFFFF 0%, #EFF6FF 100%);
-  border: 2px solid rgba(37, 99, 235, 0.32);
+  border: 2.5px solid #2563eb;
   color: #1e3a8a;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .pricing-tab-btn[data-target="panel-web"] .tab-btn-label {
   color: #1e3a8a;
@@ -2256,20 +2256,21 @@ footer.footer {
 .pricing-tab-btn[data-target="panel-web"] .tab-btn-badge {
   background: rgba(37, 99, 235, 0.09);
   color: #2563eb;
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  border: 1px solid rgba(37, 99, 235, 0.28);
 }
 .pricing-tab-btn[data-target="panel-web"]:hover {
-  border-color: #2563eb;
-  box-shadow: 0 10px 24px -3px rgba(37, 99, 235, 0.25);
+  border-color: #1d4ed8;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -3px rgba(37, 99, 235, 0.28);
 }
 .pricing-tab-btn[data-target="panel-web"]:hover .tab-btn-badge {
-  background: rgba(37, 99, 235, 0.16);
+  background: rgba(37, 99, 235, 0.18);
 }
 .pricing-tab-btn[data-target="panel-web"].active {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 55%, #1e3a8a 100%) !important;
-  border: 2px solid #93c5fd !important;
+  border: 2.5px solid #bfdbfe !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 28px -3px rgba(37, 99, 235, 0.50), 0 0 0 1px rgba(147, 197, 253, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 28px -3px rgba(37, 99, 235, 0.50), 0 0 0 2px #2563eb, inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
 .pricing-tab-btn[data-target="panel-web"].active .tab-btn-label {
@@ -2286,9 +2287,9 @@ footer.footer {
 /* 2. Media Buying & Ads Tab (Growth Emerald Mint Theme) */
 .pricing-tab-btn[data-target="panel-media"] {
   background: linear-gradient(145deg, #FFFFFF 0%, #ECFDF5 100%);
-  border: 2px solid rgba(5, 150, 105, 0.32);
+  border: 2.5px solid #059669;
   color: #064e3b;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .pricing-tab-btn[data-target="panel-media"] .tab-btn-label {
   color: #064e3b;
@@ -2296,20 +2297,21 @@ footer.footer {
 .pricing-tab-btn[data-target="panel-media"] .tab-btn-badge {
   background: rgba(5, 150, 105, 0.09);
   color: #059669;
-  border: 1px solid rgba(5, 150, 105, 0.25);
+  border: 1px solid rgba(5, 150, 105, 0.28);
 }
 .pricing-tab-btn[data-target="panel-media"]:hover {
-  border-color: #059669;
-  box-shadow: 0 10px 24px -3px rgba(5, 150, 105, 0.25);
+  border-color: #047857;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -3px rgba(5, 150, 105, 0.28);
 }
 .pricing-tab-btn[data-target="panel-media"]:hover .tab-btn-badge {
-  background: rgba(5, 150, 105, 0.16);
+  background: rgba(5, 150, 105, 0.18);
 }
 .pricing-tab-btn[data-target="panel-media"].active {
   background: linear-gradient(135deg, #059669 0%, #047857 55%, #064e3b 100%) !important;
-  border: 2px solid #a7f3d0 !important;
+  border: 2.5px solid #bbf7d0 !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 28px -3px rgba(5, 150, 105, 0.50), 0 0 0 1px rgba(167, 243, 208, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 28px -3px rgba(5, 150, 105, 0.50), 0 0 0 2px #059669, inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
 .pricing-tab-btn[data-target="panel-media"].active .tab-btn-label {
@@ -2326,9 +2328,9 @@ footer.footer {
 /* 3. Social Media Tab (Royal Violet & Lavender Theme) */
 .pricing-tab-btn[data-target="panel-social"] {
   background: linear-gradient(145deg, #FFFFFF 0%, #FAF5FF 100%);
-  border: 2px solid rgba(124, 58, 237, 0.32);
+  border: 2.5px solid #7c3aed;
   color: #4c1d95;
-  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .pricing-tab-btn[data-target="panel-social"] .tab-btn-label {
   color: #4c1d95;
@@ -2336,20 +2338,21 @@ footer.footer {
 .pricing-tab-btn[data-target="panel-social"] .tab-btn-badge {
   background: rgba(124, 58, 237, 0.09);
   color: #7c3aed;
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(124, 58, 237, 0.28);
 }
 .pricing-tab-btn[data-target="panel-social"]:hover {
-  border-color: #7c3aed;
-  box-shadow: 0 10px 24px -3px rgba(124, 58, 237, 0.25);
+  border-color: #6d28d9;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -3px rgba(124, 58, 237, 0.28);
 }
 .pricing-tab-btn[data-target="panel-social"]:hover .tab-btn-badge {
-  background: rgba(124, 58, 237, 0.16);
+  background: rgba(124, 58, 237, 0.18);
 }
 .pricing-tab-btn[data-target="panel-social"].active {
   background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 55%, #4c1d95 100%) !important;
-  border: 2px solid #ddd6fe !important;
+  border: 2.5px solid #e9d5ff !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 28px -3px rgba(124, 58, 237, 0.50), 0 0 0 1px rgba(221, 214, 254, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 28px -3px rgba(124, 58, 237, 0.50), 0 0 0 2px #7c3aed, inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
 .pricing-tab-btn[data-target="panel-social"].active .tab-btn-label {
@@ -2366,9 +2369,9 @@ footer.footer {
 /* 4. App Development Tab (Tech Cyan & Teal Theme) */
 .pricing-tab-btn[data-target="panel-app"] {
   background: linear-gradient(145deg, #FFFFFF 0%, #F0FDFA 100%);
-  border: 2px solid rgba(13, 148, 136, 0.32);
+  border: 2.5px solid #0d9488;
   color: #134e4a;
-  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.12), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .pricing-tab-btn[data-target="panel-app"] .tab-btn-label {
   color: #134e4a;
@@ -2376,20 +2379,21 @@ footer.footer {
 .pricing-tab-btn[data-target="panel-app"] .tab-btn-badge {
   background: rgba(13, 148, 136, 0.09);
   color: #0d9488;
-  border: 1px solid rgba(13, 148, 136, 0.25);
+  border: 1px solid rgba(13, 148, 136, 0.28);
 }
 .pricing-tab-btn[data-target="panel-app"]:hover {
-  border-color: #0d9488;
-  box-shadow: 0 10px 24px -3px rgba(13, 148, 136, 0.25);
+  border-color: #0f766e;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -3px rgba(13, 148, 136, 0.28);
 }
 .pricing-tab-btn[data-target="panel-app"]:hover .tab-btn-badge {
-  background: rgba(13, 148, 136, 0.16);
+  background: rgba(13, 148, 136, 0.18);
 }
 .pricing-tab-btn[data-target="panel-app"].active {
   background: linear-gradient(135deg, #0d9488 0%, #0f766e 55%, #134e4a 100%) !important;
-  border: 2px solid #99f6e4 !important;
+  border: 2.5px solid #a5f3fc !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 28px -3px rgba(13, 148, 136, 0.50), 0 0 0 1px rgba(153, 246, 228, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 28px -3px rgba(13, 148, 136, 0.50), 0 0 0 2px #0d9488, inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
 .pricing-tab-btn[data-target="panel-app"].active .tab-btn-label {
@@ -2406,9 +2410,9 @@ footer.footer {
 /* 5. CAC Registration Tab (Corporate Amber & Royal Gold Theme) */
 .pricing-tab-btn[data-target="panel-cac"] {
   background: linear-gradient(145deg, #FFFFFF 0%, #FFFBEB 100%);
-  border: 2px solid rgba(217, 119, 6, 0.36);
+  border: 2.5px solid #d97706;
   color: #78350f;
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.11), 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.14), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .pricing-tab-btn[data-target="panel-cac"] .tab-btn-label {
   color: #78350f;
@@ -2419,17 +2423,18 @@ footer.footer {
   border: 1px solid rgba(217, 119, 6, 0.28);
 }
 .pricing-tab-btn[data-target="panel-cac"]:hover {
-  border-color: #d97706;
+  border-color: #b45309;
+  transform: translateY(-3px);
   box-shadow: 0 10px 24px -3px rgba(217, 119, 6, 0.28);
 }
 .pricing-tab-btn[data-target="panel-cac"]:hover .tab-btn-badge {
-  background: rgba(217, 119, 6, 0.16);
+  background: rgba(217, 119, 6, 0.18);
 }
 .pricing-tab-btn[data-target="panel-cac"].active {
   background: linear-gradient(135deg, #d97706 0%, #b45309 55%, #78350f 100%) !important;
-  border: 2px solid #fde68a !important;
+  border: 2.5px solid #fef08a !important;
   color: #ffffff !important;
-  box-shadow: 0 10px 28px -3px rgba(217, 119, 6, 0.50), 0 0 0 1px rgba(253, 230, 138, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 10px 28px -3px rgba(217, 119, 6, 0.50), 0 0 0 2px #d97706, inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
 .pricing-tab-btn[data-target="panel-cac"].active .tab-btn-label {
@@ -2441,6 +2446,265 @@ footer.footer {
   color: #78350f !important;
   border-color: transparent !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+/* ==========================================================================
+   AESTHETIC & UNIQUE PRICING CARDS PER CATEGORY PANEL
+   ========================================================================== */
+
+/* 1. Website Design Panel Cards (#panel-web) */
+#panel-web .pricing-card {
+  border: 2px solid rgba(37, 99, 235, 0.24);
+  box-shadow: 0 12px 34px -4px rgba(37, 99, 235, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+#panel-web .pricing-card::before {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+}
+#panel-web .pricing-card:hover {
+  border-color: #2563eb;
+  box-shadow: 0 24px 50px -10px rgba(37, 99, 235, 0.24), 0 8px 20px -3px rgba(37, 99, 235, 0.12), 0 0 0 1px rgba(37, 99, 235, 0.35);
+}
+#panel-web .pricing-card .pricing-tier {
+  background: rgba(37, 99, 235, 0.08);
+  border: 1.5px solid rgba(37, 99, 235, 0.24);
+  color: #1d4ed8;
+}
+#panel-web .pricing-card .pricing-amt {
+  color: #1d4ed8;
+}
+#panel-web .pricing-card .pricing-check {
+  background: rgba(37, 99, 235, 0.10);
+  color: #1d4ed8;
+  border: 1.5px solid rgba(37, 99, 235, 0.28);
+}
+#panel-web .pricing-card .pricing-cta.btn-outline {
+  color: #1d4ed8;
+  border-color: #1d4ed8;
+}
+#panel-web .pricing-card .pricing-cta.btn-outline:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+#panel-web .pricing-card.featured {
+  border: 2.5px solid #2563eb;
+  box-shadow: 0 20px 50px -8px rgba(37, 99, 235, 0.26), 0 6px 18px -2px rgba(37, 99, 235, 0.16), 0 0 0 1px rgba(147, 197, 253, 0.5);
+}
+#panel-web .pricing-card.featured::before {
+  background: linear-gradient(90deg, #2563eb, #60a5fa, #2563eb);
+}
+#panel-web .pricing-card.featured .pricing-badge {
+  background: linear-gradient(135deg, #2563eb 0%, #1e3a8a 100%);
+  border-color: #93c5fd;
+}
+#panel-web .pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+/* 2. Media Buying & Ads Panel Cards (#panel-media) */
+#panel-media .pricing-card {
+  border: 2px solid rgba(5, 150, 105, 0.24);
+  box-shadow: 0 12px 34px -4px rgba(5, 150, 105, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+#panel-media .pricing-card::before {
+  background: linear-gradient(90deg, #10b981, #34d399, #10b981);
+}
+#panel-media .pricing-card:hover {
+  border-color: #059669;
+  box-shadow: 0 24px 50px -10px rgba(5, 150, 105, 0.24), 0 8px 20px -3px rgba(5, 150, 105, 0.12), 0 0 0 1px rgba(5, 150, 105, 0.35);
+}
+#panel-media .pricing-card .pricing-tier {
+  background: rgba(5, 150, 105, 0.08);
+  border: 1.5px solid rgba(5, 150, 105, 0.24);
+  color: #047857;
+}
+#panel-media .pricing-card .pricing-amt {
+  color: #047857;
+}
+#panel-media .pricing-card .pricing-check {
+  background: rgba(5, 150, 105, 0.10);
+  color: #047857;
+  border: 1.5px solid rgba(5, 150, 105, 0.28);
+}
+#panel-media .pricing-card .pricing-cta.btn-outline {
+  color: #047857;
+  border-color: #047857;
+}
+#panel-media .pricing-card .pricing-cta.btn-outline:hover {
+  background: #047857;
+  color: #ffffff;
+}
+#panel-media .pricing-card.featured {
+  border: 2.5px solid #059669;
+  box-shadow: 0 20px 50px -8px rgba(5, 150, 105, 0.26), 0 6px 18px -2px rgba(5, 150, 105, 0.16), 0 0 0 1px rgba(167, 243, 208, 0.5);
+}
+#panel-media .pricing-card.featured::before {
+  background: linear-gradient(90deg, #059669, #34d399, #059669);
+}
+#panel-media .pricing-card.featured .pricing-badge {
+  background: linear-gradient(135deg, #059669 0%, #064e3b 100%);
+  border-color: #a7f3d0;
+}
+#panel-media .pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-color: #059669;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+}
+
+/* 3. Social Media Panel Cards (#panel-social) */
+#panel-social .pricing-card {
+  border: 2px solid rgba(124, 58, 237, 0.24);
+  box-shadow: 0 12px 34px -4px rgba(124, 58, 237, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+#panel-social .pricing-card::before {
+  background: linear-gradient(90deg, #8b5cf6, #a78bfa, #8b5cf6);
+}
+#panel-social .pricing-card:hover {
+  border-color: #7c3aed;
+  box-shadow: 0 24px 50px -10px rgba(124, 58, 237, 0.24), 0 8px 20px -3px rgba(124, 58, 237, 0.12), 0 0 0 1px rgba(124, 58, 237, 0.35);
+}
+#panel-social .pricing-card .pricing-tier {
+  background: rgba(124, 58, 237, 0.08);
+  border: 1.5px solid rgba(124, 58, 237, 0.24);
+  color: #6d28d9;
+}
+#panel-social .pricing-card .pricing-amt {
+  color: #6d28d9;
+}
+#panel-social .pricing-card .pricing-check {
+  background: rgba(124, 58, 237, 0.10);
+  color: #6d28d9;
+  border: 1.5px solid rgba(124, 58, 237, 0.28);
+}
+#panel-social .pricing-card .pricing-cta.btn-outline {
+  color: #6d28d9;
+  border-color: #6d28d9;
+}
+#panel-social .pricing-card .pricing-cta.btn-outline:hover {
+  background: #6d28d9;
+  color: #ffffff;
+}
+#panel-social .pricing-card.featured {
+  border: 2.5px solid #7c3aed;
+  box-shadow: 0 20px 50px -8px rgba(124, 58, 237, 0.26), 0 6px 18px -2px rgba(124, 58, 237, 0.16), 0 0 0 1px rgba(221, 214, 254, 0.5);
+}
+#panel-social .pricing-card.featured::before {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa, #7c3aed);
+}
+#panel-social .pricing-card.featured .pricing-badge {
+  background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
+  border-color: #ddd6fe;
+}
+#panel-social .pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  border-color: #7c3aed;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+}
+
+/* 4. App Development Panel Cards (#panel-app) */
+#panel-app .pricing-card {
+  border: 2px solid rgba(13, 148, 136, 0.24);
+  box-shadow: 0 12px 34px -4px rgba(13, 148, 136, 0.08), 0 3px 10px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+#panel-app .pricing-card::before {
+  background: linear-gradient(90deg, #14b8a6, #2dd4bf, #14b8a6);
+}
+#panel-app .pricing-card:hover {
+  border-color: #0d9488;
+  box-shadow: 0 24px 50px -10px rgba(13, 148, 136, 0.24), 0 8px 20px -3px rgba(13, 148, 136, 0.12), 0 0 0 1px rgba(13, 148, 136, 0.35);
+}
+#panel-app .pricing-card .pricing-tier {
+  background: rgba(13, 148, 136, 0.08);
+  border: 1.5px solid rgba(13, 148, 136, 0.24);
+  color: #0f766e;
+}
+#panel-app .pricing-card .pricing-amt {
+  color: #0f766e;
+}
+#panel-app .pricing-card .pricing-check {
+  background: rgba(13, 148, 136, 0.10);
+  color: #0f766e;
+  border: 1.5px solid rgba(13, 148, 136, 0.28);
+}
+#panel-app .pricing-card .pricing-cta.btn-outline {
+  color: #0f766e;
+  border-color: #0f766e;
+}
+#panel-app .pricing-card .pricing-cta.btn-outline:hover {
+  background: #0f766e;
+  color: #ffffff;
+}
+#panel-app .pricing-card.featured {
+  border: 2.5px solid #0d9488;
+  box-shadow: 0 20px 50px -8px rgba(13, 148, 136, 0.26), 0 6px 18px -2px rgba(13, 148, 136, 0.16), 0 0 0 1px rgba(153, 246, 228, 0.5);
+}
+#panel-app .pricing-card.featured::before {
+  background: linear-gradient(90deg, #0d9488, #2dd4bf, #0d9488);
+}
+#panel-app .pricing-card.featured .pricing-badge {
+  background: linear-gradient(135deg, #0d9488 0%, #134e4a 100%);
+  border-color: #99f6e4;
+}
+#panel-app .pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+  border-color: #0d9488;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(13, 148, 136, 0.35);
+}
+
+/* 5. CAC Registration Panel Cards (#panel-cac) */
+#panel-cac .pricing-card {
+  border: 2px solid rgba(217, 119, 6, 0.26);
+  box-shadow: 0 12px 34px -4px rgba(217, 119, 6, 0.09), 0 3px 10px -2px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+#panel-cac .pricing-card::before {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b);
+}
+#panel-cac .pricing-card:hover {
+  border-color: #d97706;
+  box-shadow: 0 24px 50px -10px rgba(217, 119, 6, 0.24), 0 8px 20px -3px rgba(217, 119, 6, 0.12), 0 0 0 1px rgba(217, 119, 6, 0.35);
+}
+#panel-cac .pricing-card .pricing-tier {
+  background: rgba(217, 119, 6, 0.09);
+  border: 1.5px solid rgba(217, 119, 6, 0.28);
+  color: #b45309;
+}
+#panel-cac .pricing-card .pricing-amt {
+  color: #b45309;
+}
+#panel-cac .pricing-card .pricing-check {
+  background: rgba(217, 119, 6, 0.10);
+  color: #b45309;
+  border: 1.5px solid rgba(217, 119, 6, 0.28);
+}
+#panel-cac .pricing-card .pricing-cta.btn-outline {
+  color: #b45309;
+  border-color: #b45309;
+}
+#panel-cac .pricing-card .pricing-cta.btn-outline:hover {
+  background: #b45309;
+  color: #ffffff;
+}
+#panel-cac .pricing-card.featured {
+  border: 2.5px solid #d97706;
+  box-shadow: 0 20px 50px -8px rgba(217, 119, 6, 0.26), 0 6px 18px -2px rgba(217, 119, 6, 0.16), 0 0 0 1px rgba(253, 230, 138, 0.5);
+}
+#panel-cac .pricing-card.featured::before {
+  background: linear-gradient(90deg, #d97706, #fbbf24, #d97706);
+}
+#panel-cac .pricing-card.featured .pricing-badge {
+  background: linear-gradient(135deg, #d97706 0%, #78350f 100%);
+  border-color: #fde68a;
+}
+#panel-cac .pricing-card.featured .pricing-cta {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  border-color: #d97706;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
 }
 
 .pricing-category-panel {
@@ -2823,12 +3087,6 @@ footer.footer {
   .pricing-card {
     padding: 34px 22px 26px !important;
     border-radius: 20px !important;
-    border: 2px solid rgba(204, 17, 17, 0.2) !important;
-    box-shadow: 0 10px 30px rgba(45, 8, 8, 0.08) !important;
-  }
-  .pricing-card.featured {
-    border: 2.5px solid #CC1111 !important;
-    box-shadow: 0 14px 38px rgba(204, 17, 17, 0.22), 0 0 0 1px rgba(212, 175, 55, 0.35) !important;
   }
 }
 

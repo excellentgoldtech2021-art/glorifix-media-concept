@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing Plans & Packages | Glorifix Media Concept Limited</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1F0508">
+  <link rel="stylesheet" href="css/styles.css?v=33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-notice-bar">
+    <div class="container notice-inner">
+      <div><strong>Glorifix Media Concept Limited:</strong> CAC Registered &bull; RC 1790453 &bull; Abuja's Premier Growth Agency</div>
+      <div>
+        <a href="https://wa.me/2349050278999" target="_blank" rel="noopener noreferrer" class="notice-link">Chat on WhatsApp: 09050278999 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Header: Distinct Title Bar & Standalone Menu Bar -->
+  <header class="site-header">
+    <div class="title-bar">
+      <div class="container title-bar-wrap">
+        <a href="index.html" class="brand-logo" aria-label="Glorifix Media Concept Limited Home">
+          <img src="assets/logo.png" alt="Glorifix Media Concept Limited" class="site-logo">
+          <span class="brand-name">Glorifix Media Concept Limited</span>
+        </a>
+      </div>
+    </div>
+    <nav class="menu-bar">
+      <div class="container menu-bar-wrap">
+        <!-- Mobile Menu Toggle Button (Visible only on mobile) -->
+        <div class="menu-mobile-header">
+          <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
+            <span class="hamburger-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span>Menu</span>
+          </button>
+          <a href="https://wa.me/2349050278999" target="_blank" rel="noopener noreferrer" class="menu-mobile-cta">WhatsApp Us</a>
+        </div>
+
+        <!-- Navigation Links: Horizontal on Desktop, Vertical inside Hamburger on Mobile -->
+        <div class="menu-collapse" id="menu-collapse">
+          <ul class="menu-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html" class="active">Pricing</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <a href="https://wa.me/2349050278999" target="_blank" rel="noopener noreferrer" class="menu-cta-btn desktop-only">WhatsApp Us</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Full-Width Page Hero Banner Section -->
+  <section class="page-hero-section">
+    <div class="container">
+      <div class="page-hero-banner-wrap">
+        <img src="assets/banners/banner-pricing.svg" alt="Glorifix Media Concept - Transparent Pricing &amp; Investment Packages" class="page-hero-banner-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Header -->
+  <section class="section" style="padding: 50px 0 35px; background: #ffffff; border-bottom: 1px solid var(--border-light);">
+    <div class="container" style="text-align: center; max-width: 860px;">
+      <div class="section-kicker">Transparent Pricing</div>
+      <h1 class="section-title">Flexible Packages Built for <span style="color: var(--red2);">Real Growth</span></h1>
+      <p class="section-desc">
+        Transparent, affordable packages for every business tier. No hidden fees &mdash; with <strong>payment on delivery</strong> available for website design projects.
+      </p>
+
+      <!-- Trust Badges Strip -->
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+        <span style="background: #FFF0F4; border: 1px solid rgba(204, 17, 17, 0.25); color: #8B0A0A; padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;">
+          ✓ Pay Balance On Delivery (Websites)
+        </span>
+        <span style="background: #FFF0F4; border: 1px solid rgba(204, 17, 17, 0.25); color: #8B0A0A; padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;">
+          ✓ Free Hosting &amp; Domain (1 Year)
+        </span>
+        <span style="background: #FFF0F4; border: 1px solid rgba(204, 17, 17, 0.25); color: #8B0A0A; padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700;">
+          ✓ CAC Registered: RC 1790453
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Pricing Section -->
+  <section class="section" style="padding: 50px 0 80px;">
+    <div class="container">
+
+      <!-- Category Navigation Guide -->
+      <div class="pricing-tabs-guide">
+        <span class="pricing-tabs-badge">🎯 Package Navigation</span>
+        <h3 class="pricing-tabs-heading">Select a Service to View Full Packages</h3>
+        <p class="pricing-tabs-hint">Tap any button below to navigate between website design, ads, social media, app development, and CAC registration plans:</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="pricing-tabs-wrap">
+        <div class="pricing-tabs" role="tablist" aria-label="Pricing Package Categories">
+          <button type="button" class="pricing-tab-btn active" data-target="panel-web" aria-selected="true">
+            <span class="tab-btn-icon">🌐</span>
+            <span class="tab-btn-label">Website Design</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-media" aria-selected="false">
+            <span class="tab-btn-icon">📈</span>
+            <span class="tab-btn-label">Media Buying &amp; Ads</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-social" aria-selected="false">
+            <span class="tab-btn-icon">📱</span>
+            <span class="tab-btn-label">Social Media</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-app" aria-selected="false">
+            <span class="tab-btn-icon">💻</span>
+            <span class="tab-btn-label">App Development</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-cac" aria-selected="false">
+            <span class="tab-btn-icon">⚖️</span>
+            <span class="tab-btn-label">CAC Registration</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. Website Design Category Panel -->
+      <div class="pricing-category-panel active" id="panel-web">
+        <div style="text-align: center; margin-bottom: 35px;">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 6px;">Website Design <span style="color: var(--red2);">Packages</span></h2>
+          <p style="color: #6A3040; font-size: 0.95rem;">All packages include free hosting and domain for 1 year. Payment on delivery available.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Starter</div>
+            <h3 class="pricing-name">Basic Website</h3>
+            <div class="pricing-old-amt">₦200,000</div>
+            <div class="pricing-amt"><span>₦</span>100,000</div>
+            <div class="pricing-sub">One-time payment &bull; 4–6 days delivery</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 1–4 pages responsive website</li>
+              <li><span class="pricing-check">✓</span> Mobile-friendly design</li>
+              <li><span class="pricing-check">✓</span> Contact form integration</li>
+              <li><span class="pricing-check">✓</span> Free hosting &amp; domain (1 year)</li>
+              <li><span class="pricing-check">✓</span> Basic SEO setup</li>
+              <li><span class="pricing-check">✓</span> WhatsApp button integration</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Basic%20Website%20Package%20(₦100,000)" target="_blank" class="btn btn-outline pricing-cta">Order Basic Website</a>
+          </div>
+
+          <!-- Professional (Featured) -->
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-tier">Professional</div>
+            <h3 class="pricing-name">Business Website</h3>
+            <div class="pricing-old-amt">₦380,000</div>
+            <div class="pricing-amt"><span>₦</span>200,000</div>
+            <div class="pricing-sub">One-time payment &bull; 5–7 days delivery</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 1–8 pages responsive website</li>
+              <li><span class="pricing-check">✓</span> Mobile-friendly design</li>
+              <li><span class="pricing-check">✓</span> Contact &amp; WhatsApp integration</li>
+              <li><span class="pricing-check">✓</span> Blog / news section</li>
+              <li><span class="pricing-check">✓</span> Free hosting &amp; domain (1 year)</li>
+              <li><span class="pricing-check">✓</span> Advanced SEO optimization</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Business%20Website%20Package%20(₦150,000)" target="_blank" class="btn btn-primary pricing-cta">Order Business Website</a>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Enterprise</div>
+            <h3 class="pricing-name">Premium Website</h3>
+            <div class="pricing-old-amt">₦600,000</div>
+            <div class="pricing-amt"><span>₦</span>300,000</div>
+            <div class="pricing-sub">One-time payment &bull; 8–10 days delivery</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 1–12 pages responsive website</li>
+              <li><span class="pricing-check">✓</span> Mobile-friendly design</li>
+              <li><span class="pricing-check">✓</span> Blog / content section</li>
+              <li><span class="pricing-check">✓</span> E-commerce (up to 10 products)</li>
+              <li><span class="pricing-check">✓</span> Free hosting &amp; domain (1 year)</li>
+              <li><span class="pricing-check">✓</span> Full SEO &amp; analytics setup</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Premium%20Website%20Package%20(₦300,000)" target="_blank" class="btn btn-outline pricing-cta">Order Premium Website</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Media Buying & Paid Ads Panel -->
+      <div class="pricing-category-panel" id="panel-media">
+        <div style="text-align: center; margin-bottom: 35px;">
+          <div class="section-kicker" style="margin-bottom: 6px;">Facebook &amp; Instagram Advertising</div>
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 6px;">Let Your Business Reach <span style="color: var(--red2);">More People</span></h2>
+          <p style="color: #6A3040; font-size: 0.95rem; max-width: 720px; margin: 0 auto;">Promote your products and services to a laser-targeted audience, generate qualified leads, and increase your business visibility with our full Meta Ads service.</p>
+        </div>
+
+        <div class="pricing-grid grid-4col">
+          <!-- Basic Package -->
+          <div class="pricing-card">
+            <div class="pricing-tier">7 Days Campaign</div>
+            <h3 class="pricing-name">Basic Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>60,000</div>
+            <div class="pricing-sub">Full 7 Days Facebook &amp; Instagram Ads</div>
+
+            <!-- Budget Breakdown Box -->
+            <div class="pricing-budget-box">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Daily Ads Budget (Min):</span>
+                <strong style="color: #CC1111;">₦5,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Total 7-Day Ads Budget:</span>
+                <strong style="color: #1A0408;">₦35,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: #6A3040;">Our Service Charge:</span>
+                <strong style="color: #1A0408;">₦25,000</strong>
+              </div>
+            </div>
+
+            <ul class="pricing-features">
+              <li><span class="pricing-check">🎯</span> <strong>Est. Reach:</strong> 8,000 &ndash; 20,000 People Daily</li>
+              <li><span class="pricing-check">✓</span> <strong>Objectives:</strong> Sales, Leads, Awareness, Engagement, Conversion</li>
+              <li><span class="pricing-check">✓</span> Full Facebook &amp; Instagram Ads setup</li>
+              <li><span class="pricing-check">✓</span> Deep audience targeting &amp; buyer persona</li>
+              <li><span class="pricing-check">✓</span> Facebook Pixel installation</li>
+              <li><span class="pricing-check">✓</span> High-converting sales funnel</li>
+              <li><span class="pricing-check">✓</span> A/B ads creative testing &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Facebook Page optimisation</li>
+              <li><span class="pricing-check">✓</span> Daily monitoring &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Weekly performance report</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20get%20started%20with%20the%20Basic%20Ads%20Package%20(₦60,000%20for%207%20Days)" target="_blank" class="btn btn-outline pricing-cta">Get Basic Package</a>
+          </div>
+
+          <!-- Silver Package -->
+          <div class="pricing-card">
+            <div class="pricing-tier">14 Days Campaign</div>
+            <h3 class="pricing-name">Silver Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>120,000</div>
+            <div class="pricing-sub">Full 14 Days (2 Weeks) Campaign</div>
+
+            <!-- Budget Breakdown Box -->
+            <div class="pricing-budget-box">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Daily Ads Budget (Min):</span>
+                <strong style="color: #CC1111;">₦5,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Total 14-Day Ads Budget:</span>
+                <strong style="color: #1A0408;">₦70,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: #6A3040;">Our Service Charge:</span>
+                <strong style="color: #1A0408;">₦60,000</strong>
+              </div>
+            </div>
+
+            <ul class="pricing-features">
+              <li><span class="pricing-check">🎯</span> <strong>Est. Reach:</strong> 8,000 &ndash; 20,000 People Daily</li>
+              <li><span class="pricing-check">✓</span> <strong>Objectives:</strong> Sales, Leads, Awareness, Engagement, Conversion</li>
+              <li><span class="pricing-check">✓</span> Full Facebook &amp; Instagram Ads setup</li>
+              <li><span class="pricing-check">✓</span> Deep audience targeting &amp; buyer persona</li>
+              <li><span class="pricing-check">✓</span> Facebook Pixel installation</li>
+              <li><span class="pricing-check">✓</span> High-converting sales funnel</li>
+              <li><span class="pricing-check">✓</span> A/B ads creative testing &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Facebook Page optimisation</li>
+              <li><span class="pricing-check">✓</span> Daily monitoring &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Weekly performance report</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20get%20started%20with%20the%20Silver%20Ads%20Package%20(₦120,000%20for%2014%20Days)" target="_blank" class="btn btn-outline pricing-cta">Get Silver Package</a>
+          </div>
+
+          <!-- Gold Package (Featured) -->
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Most Popular</div>
+            <div class="pricing-tier">21 Days Campaign</div>
+            <h3 class="pricing-name">Gold Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>180,000</div>
+            <div class="pricing-sub">Full 21 Days (3 Weeks) Campaign</div>
+
+            <!-- Budget Breakdown Box -->
+            <div class="pricing-budget-box">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Daily Ads Budget (Min):</span>
+                <strong style="color: #CC1111;">₦5,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Total 21-Day Ads Budget:</span>
+                <strong style="color: #1A0408;">₦105,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: #6A3040;">Our Service Charge:</span>
+                <strong style="color: #1A0408;">₦75,000</strong>
+              </div>
+            </div>
+
+            <ul class="pricing-features">
+              <li><span class="pricing-check">🎯</span> <strong>Est. Reach:</strong> 8,000 &ndash; 20,000 People Daily</li>
+              <li><span class="pricing-check">✓</span> <strong>Objectives:</strong> Sales, Leads, Awareness, Engagement, Conversion</li>
+              <li><span class="pricing-check">✓</span> Full Facebook &amp; Instagram Ads setup</li>
+              <li><span class="pricing-check">✓</span> Deep audience targeting &amp; buyer persona</li>
+              <li><span class="pricing-check">✓</span> Facebook Pixel installation</li>
+              <li><span class="pricing-check">✓</span> High-converting sales funnel</li>
+              <li><span class="pricing-check">✓</span> A/B ads creative testing &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Facebook Page optimisation</li>
+              <li><span class="pricing-check">✓</span> Daily monitoring &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Weekly performance report</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20get%20started%20with%20the%20Gold%20Ads%20Package%20(₦180,000%20for%2021%20Days)" target="_blank" class="btn btn-primary pricing-cta">Get Gold Package</a>
+          </div>
+
+          <!-- Diamond Package -->
+          <div class="pricing-card">
+            <div class="pricing-tier">28 Days Campaign</div>
+            <h3 class="pricing-name">Diamond Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>240,000</div>
+            <div class="pricing-sub">Full 28 Days (4 Weeks) Campaign</div>
+
+            <!-- Budget Breakdown Box -->
+            <div class="pricing-budget-box">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Daily Ads Budget (Min):</span>
+                <strong style="color: #CC1111;">₦5,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                <span style="color: #6A3040;">Total 28-Day Ads Budget:</span>
+                <strong style="color: #1A0408;">₦140,000</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: #6A3040;">Our Service Charge:</span>
+                <strong style="color: #1A0408;">₦100,000</strong>
+              </div>
+            </div>
+
+            <ul class="pricing-features">
+              <li><span class="pricing-check">🎯</span> <strong>Est. Reach:</strong> 8,000 &ndash; 20,000 People Daily</li>
+              <li><span class="pricing-check">✓</span> <strong>Objectives:</strong> Sales, Leads, Awareness, Engagement, Conversion</li>
+              <li><span class="pricing-check">✓</span> Full Facebook &amp; Instagram Ads setup</li>
+              <li><span class="pricing-check">✓</span> Deep audience targeting &amp; buyer persona</li>
+              <li><span class="pricing-check">✓</span> Facebook Pixel installation</li>
+              <li><span class="pricing-check">✓</span> High-converting sales funnel</li>
+              <li><span class="pricing-check">✓</span> A/B ads creative testing &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Facebook Page optimisation</li>
+              <li><span class="pricing-check">✓</span> Daily monitoring &amp; optimisation</li>
+              <li><span class="pricing-check">✓</span> Weekly performance report</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20get%20started%20with%20the%20Diamond%20Ads%20Package%20(₦240,000%20for%2028%20Days)" target="_blank" class="btn btn-outline pricing-cta">Get Diamond Package</a>
+          </div>
+        </div>
+
+        <!-- Disclaimer & Direct Channel Strip -->
+        <div style="margin-top: 35px; background: #FFF8FA; border: 1px solid rgba(204, 17, 17, 0.18); border-radius: 14px; padding: 22px 26px; text-align: center;">
+          <p style="font-size: 0.88rem; color: #6A3040; margin-bottom: 14px; line-height: 1.6;">
+            <strong>*Note:</strong> Reach figures are estimated platform benchmarks based on targeted algorithms, not guaranteed sales or revenue.
+          </p>
+          <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20discuss%20my%20advertising%20needs" target="_blank" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">
+              Chat / Call WhatsApp: 09050278999
+            </a>
+            <a href="mailto:glorifixmediaconcept@gmail.com" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.88rem;">
+              Email: glorifixmediaconcept@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Social Media Management Panel -->
+      <div class="pricing-category-panel" id="panel-social">
+        <div style="text-align: center; margin-bottom: 35px;">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 6px;">Social Media <span style="color: var(--red2);">Management</span></h2>
+          <p style="color: #6A3040; font-size: 0.95rem;">Consistent posting, audience engagement, and community building every single month.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Starter -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Starter</div>
+            <h3 class="pricing-name">Starter Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>60,000</div>
+            <div class="pricing-sub">Billed monthly &bull; Ongoing management</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 1 platforms managed</li>
+              <li><span class="pricing-check">✓</span> 12 posts per month</li>
+              <li><span class="pricing-check">✓</span> Basic content creation</li>
+              <li><span class="pricing-check">✓</span> Monthly analytics report</li>
+              <li><span class="pricing-check">✓</span> Comment management</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Starter%20Social%20Media%20Package%20(₦60,000/mo)" target="_blank" class="btn btn-outline pricing-cta">Start Starter Plan</a>
+          </div>
+
+          <!-- Growth (Featured) -->
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Best Value</div>
+            <div class="pricing-tier">Growth</div>
+            <h3 class="pricing-name">Growth Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>120,000</div>
+            <div class="pricing-sub">Billed monthly &bull; Accelerated reach</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 2 platforms managed</li>
+              <li><span class="pricing-check">✓</span> 20 posts per month</li>
+              <li><span class="pricing-check">✓</span> Custom graphics &amp; videos</li>
+              <li><span class="pricing-check">✓</span> Community engagement</li>
+              <li><span class="pricing-check">✓</span> Bi-weekly analytics report</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Growth%20Social%20Media%20Package%20(₦120,000/mo)" target="_blank" class="btn btn-primary pricing-cta">Start Growth Plan</a>
+          </div>
+
+          <!-- Premium -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Premium</div>
+            <h3 class="pricing-name">Premium Package</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>240,000</div>
+            <div class="pricing-sub">Billed monthly &bull; Full digital dominance</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> 3 platforms managed</li>
+              <li><span class="pricing-check">✓</span> 30+ posts per month</li>
+              <li><span class="pricing-check">✓</span> Premium content &amp; video</li>
+              <li><span class="pricing-check">✓</span> Influencer collaboration</li>
+              <li><span class="pricing-check">✓</span> Weekly analytics &amp; strategy call</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20am%20interested%20in%20the%20Premium%20Social%20Media%20Package%20(₦240,000/mo)" target="_blank" class="btn btn-outline pricing-cta">Start Premium Plan</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. App Development Panel -->
+      <div class="pricing-category-panel" id="panel-app">
+        <div style="text-align: center; margin-bottom: 35px;">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 6px;">App Development <span style="color: var(--red2);">Packages</span></h2>
+          <p style="color: #6A3040; font-size: 0.95rem;">Custom web and mobile applications engineered for reliability and scale.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Web App -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Basic</div>
+            <h3 class="pricing-name">Web Application</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>200,000</div>
+            <div class="pricing-sub">Starting from &bull; 14–21 days delivery</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> Custom web application</li>
+              <li><span class="pricing-check">✓</span> User authentication system</li>
+              <li><span class="pricing-check">✓</span> Database integration</li>
+              <li><span class="pricing-check">✓</span> Responsive design</li>
+              <li><span class="pricing-check">✓</span> 3 months support</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20develop%20a%20Web%20Application%20(From%20₦200,000)" target="_blank" class="btn btn-outline pricing-cta">Build Web App</a>
+          </div>
+
+          <!-- Mobile App (Featured) -->
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Popular</div>
+            <div class="pricing-tier">Standard</div>
+            <h3 class="pricing-name">Mobile App</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>400,000</div>
+            <div class="pricing-sub">Starting from &bull; 21–30 days delivery</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> iOS &amp; Android app</li>
+              <li><span class="pricing-check">✓</span> React Native cross-platform</li>
+              <li><span class="pricing-check">✓</span> API integration</li>
+              <li><span class="pricing-check">✓</span> Push notifications</li>
+              <li><span class="pricing-check">✓</span> 6 months support</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20develop%20a%20Mobile%20App%20(From%20₦400,000)" target="_blank" class="btn btn-primary pricing-cta">Build Mobile App</a>
+          </div>
+
+          <!-- Full Platform -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Enterprise</div>
+            <h3 class="pricing-name">Full Platform</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt">Custom Quote</div>
+            <div class="pricing-sub">Price on request &bull; Timeline varies</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> Full-stack custom platform</li>
+              <li><span class="pricing-check">✓</span> Web + mobile app combo</li>
+              <li><span class="pricing-check">✓</span> Admin dashboard &amp; analytics</li>
+              <li><span class="pricing-check">✓</span> Advanced API &amp; cloud integrations</li>
+              <li><span class="pricing-check">✓</span> 12 months dedicated support</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20need%20a%20custom%20Full%20Platform%20Quote" target="_blank" class="btn btn-outline pricing-cta">Request Custom Quote</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. CAC Registration Panel -->
+      <div class="pricing-category-panel" id="panel-cac">
+        <div style="text-align: center; margin-bottom: 35px;">
+          <h2 style="font-family: var(--font-display); font-size: 1.8rem; color: #1A0408; margin-bottom: 6px;">CAC Corporate <span style="color: var(--red2);">Registration</span></h2>
+          <p style="color: #6A3040; font-size: 0.95rem;">Official government documentation and certification with zero delays.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Business Name -->
+          <div class="pricing-card">
+            <div class="pricing-tier">Solo</div>
+            <h3 class="pricing-name">Business Name</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>35,000</div>
+            <div class="pricing-sub">One-time payment &bull; 3–5 working days</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> Business name registration</li>
+              <li><span class="pricing-check">✓</span> CAC Certificate &amp; documents</li>
+              <li><span class="pricing-check">✓</span> Name search &amp; reservation</li>
+              <li><span class="pricing-check">✓</span> Digital &amp; hard copy delivery</li>
+              <li><span class="pricing-check">✓</span> Free corporate advisory</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20register%20a%20Business%20Name%20(₦35,000)" target="_blank" class="btn btn-outline pricing-cta">Register Business Name</a>
+          </div>
+
+          <!-- Limited Company (Featured) -->
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Most Chosen</div>
+            <div class="pricing-tier">Company</div>
+            <h3 class="pricing-name">Limited Company (LLC)</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>75,000</div>
+            <div class="pricing-sub">One-time payment &bull; 5–7 working days</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> LLC registration (up to 2 directors)</li>
+              <li><span class="pricing-check">✓</span> CAC Certificate &amp; Status Report</li>
+              <li><span class="pricing-check">✓</span> Memorandum &amp; Articles (MEMART)</li>
+              <li><span class="pricing-check">✓</span> Official Company Seal</li>
+              <li><span class="pricing-check">✓</span> Tax Identification Number (TIN) included</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20register%20a%20Limited%20Company%20(₦75,000)" target="_blank" class="btn btn-primary pricing-cta">Register Limited Company</a>
+          </div>
+
+          <!-- Incorporated Trustee / NGO -->
+          <div class="pricing-card">
+            <div class="pricing-tier">NGO / Foundation</div>
+            <h3 class="pricing-name">Incorporated Trustee</h3>
+            <div class="pricing-old-amt"></div>
+            <div class="pricing-amt"><span>₦</span>150,000</div>
+            <div class="pricing-sub">One-time payment &bull; 7–14 working days</div>
+            <ul class="pricing-features">
+              <li><span class="pricing-check">✓</span> NGO / Church / Foundation registration</li>
+              <li><span class="pricing-check">✓</span> Full legal documentation</li>
+              <li><span class="pricing-check">✓</span> Constitution drafting</li>
+              <li><span class="pricing-check">✓</span> Mandatory newspaper publication</li>
+              <li><span class="pricing-check">✓</span> Post-registration compliance guidance</li>
+            </ul>
+            <a href="https://wa.me/2349050278999?text=Hello%20Glorifix!%20I%20want%20to%20register%20an%20Incorporated%20Trustee/NGO%20(₦150,000)" target="_blank" class="btn btn-outline pricing-cta">Register Trustee/NGO</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ / Payment Terms Callout -->
+  <section class="section" style="background: #ffffff; border-top: 1px solid var(--border-light); padding: 60px 0;">
+    <div class="container" style="max-width: 860px;">
+      <div class="section-head">
+        <div class="section-kicker">Confidence &amp; Security</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: var(--bg-card-alt); border-radius: 12px; padding: 22px; border: 1px solid var(--border-light);">
+          <h4 style="font-family: var(--font-accent); font-size: 1.05rem; color: #1A0408; margin-bottom: 8px;">How does "Payment on Delivery" work for websites?</h4>
+          <p style="color: #5A2830; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            For all website design packages, you pay an initial commitment deposit to commence design and hosting setup. The final remaining balance is only paid upon full project delivery and your complete satisfaction.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card-alt); border-radius: 12px; padding: 22px; border: 1px solid var(--border-light);">
+          <h4 style="font-family: var(--font-accent); font-size: 1.05rem; color: #1A0408; margin-bottom: 8px;">Are there any recurring or hidden charges?</h4>
+          <p style="color: #5A2830; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Zero hidden charges. Every website project comes with 1-Year Free Domain Registration (.com, .com.ng, or .ng subject to package) and 1-Year High-Speed SSD Cloud Hosting with free SSL security.
+          </p>
+        </div>
+
+        <div style="background: var(--bg-card-alt); border-radius: 12px; padding: 22px; border: 1px solid var(--border-light);">
+          <h4 style="font-family: var(--font-accent); font-size: 1.05rem; color: #1A0408; margin-bottom: 8px;">Can I get a custom quote for a bespoke project?</h4>
+          <p style="color: #5A2830; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Absolutely. If your business requires a custom combination of branding, mobile apps, CAC registration, and media buying, we will assemble a tailored retainer package at discounted corporate rates.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Banner -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 16px; color: #ffffff;">Ready to Elevate Your Business?</h2>
+      <p style="font-size: 1.15rem; max-width: 650px; margin: 0 auto 30px; color: #ffffff; opacity: 0.95; line-height: 1.7;">Speak directly with our team in Abuja. We will evaluate your business, analyze your market, and build a tailored roadmap.</p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="services.html" class="btn" style="background: white; color: #CC1111; font-weight: 800;">Explore All 7 Services &rarr;</a>
+        <a href="https://wa.me/2349050278999" target="_blank" class="btn" style="background: #25D366; color: white;">Chat on WhatsApp: 09050278999</a>
+        <a href="contact.html" class="btn" style="background: transparent; color: white; border: 1.5px solid white;">Book a Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating WhatsApp Action -->
+  <a href="https://wa.me/2349050278999" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.15c-.24.68-1.41 1.26-1.95 1.34-.52.08-1.2.11-3.48-.84-2.73-1.13-4.48-3.9-4.62-4.08-.13-.19-1.12-1.49-1.12-2.85 0-1.35.71-2.02.96-2.29.25-.28.56-.35.75-.35.19 0 .37 0 .54.01.17.01.4-.07.62.47.24.57.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.29.48-.15.17-.31.37-.44.5-.15.15-.31.31-.13.62.17.31.78 1.29 1.68 2.09 1.16 1.03 2.13 1.35 2.44 1.5.31.15.48.13.66-.08.19-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.29.11 1.83.86 2.14 1.02.31.15.52.23.6.35.08.13.08.76-.16 1.44z"/></svg>
+  </a>
+
+  <!-- Footer -->
+  <!-- Footer (Structured 2-Column Layout) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid-2col">
+        
+        <!-- Column 1: Brand Info & Contact -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="brand-logo" aria-label="Glorifix Media Concept Limited Home" style="margin-bottom: 4px;">
+            <img src="assets/logo.png" alt="Glorifix Media Concept Limited" class="site-logo">
+            <span class="brand-name">Glorifix Media Concept Limited</span>
+          </a>
+          <p class="footer-brand-desc">
+            CAC Registered &bull; RC 1790453. Abuja's premier digital marketing, web design, and branding agency delivering verified revenue growth across Nigeria.
+          </p>
+
+          <div class="footer-contact-items">
+            <a href="tel:09050278999" class="footer-contact-item">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              </span>
+              <span>09050278999 / 08057957891</span>
+            </a>
+            <a href="https://wa.me/2349050278999" target="_blank" rel="noopener noreferrer" class="footer-contact-item">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.15c-.24.68-1.41 1.26-1.95 1.34-.52.08-1.2.11-3.48-.84-2.73-1.13-4.48-3.9-4.62-4.08-.13-.19-1.12-1.49-1.12-2.85 0-1.35.71-2.02.96-2.29.25-.28.56-.35.75-.35.19 0 .37 0 .54.01.17.01.4-.07.62.47.24.57.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.29.48-.15.17-.31.37-.44.5-.15.15-.31.31-.13.62.17.31.78 1.29 1.68 2.09 1.16 1.03 2.13 1.35 2.44 1.5.31.15.48.13.66-.08.19-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.29.11 1.83.86 2.14 1.02.31.15.52.23.6.35.08.13.08.76-.16 1.44z"/></svg>
+              </span>
+              <span>WhatsApp Direct: +234 905 027 8999</span>
+            </a>
+            <a href="mailto:glorifixmediaconcept@gmail.com" class="footer-contact-item">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </span>
+              <span>glorifixmediaconcept@gmail.com</span>
+            </a>
+            <div class="footer-contact-item">
+              <span class="footer-contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+              </span>
+              <span>Phase 2, Shop 7, Opp. UniAbuja Mini-Campus, Gwagwalada, Abuja</span>
+            </div>
+          </div>
+
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/share/1BDQSsoEZQ/" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/glorifixmediaconcept?igsh=M2JsMHhkOHV3MnJ3" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://wa.me/2349050278999" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.164.577 4.195 1.583 5.952l-1.683 6.148 6.308-1.654c1.701.93 3.653 1.464 5.792 1.464 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/glorifix-media-concept-594783257" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Navigation Menus (Arranged in 2 Columns) -->
+        <div class="footer-nav-2col">
+          
+          <!-- Menu Column A: Quick Links -->
+          <div class="footer-nav-col">
+            <h4>Quick Links</h4>
+            <ul class="footer-menu-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Glorifix</a></li>
+              <li><a href="services.html">Our Services</a></li>
+              <li><a href="pricing.html">Pricing Plans</a></li>
+              <li><a href="gallery.html">Portfolio Gallery</a></li>
+              <li><a href="contact.html">Contact &amp; Bookings</a></li>
+            </ul>
+          </div>
+
+          <!-- Menu Column B: Our Services -->
+          <div class="footer-nav-col">
+            <h4>Our Services</h4>
+            <ul class="footer-menu-list">
+              <li><a href="services.html">Website Design</a></li>
+              <li><a href="services.html">Media Buying &amp; Ads</a></li>
+              <li><a href="services.html">Social Media Mgmt</a></li>
+              <li><a href="services.html">Graphics &amp; Branding</a></li>
+              <li><a href="services.html">App Development</a></li>
+              <li><a href="services.html">CAC Registration</a></li>
+              <li><a href="services.html">Video Editing &amp; UGC</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Glorifix Media Concept Limited. RC 1790453. All rights reserved.</div>
+        <div>CAC Registered Business &bull; Gwagwalada, Abuja, Nigeria &bull; <a href="admin/login.php" class="footer-bottom-admin">🔐 Admin Login</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js?v=24"></script>
+  <script src="js/voice-agent.js?v=24" defer></script>
+</body>
+</html>
