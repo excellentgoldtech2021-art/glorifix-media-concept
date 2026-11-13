@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // 2. Mobile Sidebar & Backdrop Toggle
+  // 2. Mobile Sidebar, Close Button & Floating Bottom Dock
   const toggleBtn = document.querySelector('.mobile-toggle');
   const sidebar = document.querySelector('.admin-sidebar');
   let backdrop = document.querySelector('.sidebar-backdrop');
@@ -73,26 +73,129 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.appendChild(backdrop);
   }
 
+  function closeSidebar() {
+    if (sidebar) sidebar.classList.remove('open');
+    if (backdrop) backdrop.classList.remove('active');
+  }
+
+  function openSidebar() {
+    if (sidebar) sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('active');
+  }
+
+  // Ensure close button exists and has click listener attached
+  const sidebarHeader = document.querySelector('.sidebar-header');
+  let closeBtn = sidebarHeader ? sidebarHeader.querySelector('.sidebar-close-btn') : null;
+  if (!closeBtn && sidebarHeader) {
+    closeBtn = document.createElement('button');
+    closeBtn.className = 'sidebar-close-btn';
+    closeBtn.setAttribute('aria-label', 'Close Menu');
+    closeBtn.innerHTML = '<svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/></svg>';
+    sidebarHeader.appendChild(closeBtn);
+  }
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      closeSidebar();
+    });
+  }
+
   if (toggleBtn && sidebar) {
     toggleBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      const isOpen = sidebar.classList.toggle('open');
-      if (backdrop) backdrop.classList.toggle('active', isOpen);
+      if (sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
     });
 
     if (backdrop) {
-      backdrop.addEventListener('click', function() {
-        sidebar.classList.remove('open');
-        backdrop.classList.remove('active');
-      });
+      backdrop.addEventListener('click', closeSidebar);
     }
 
     document.addEventListener('click', function(e) {
-      if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-        sidebar.classList.remove('open');
-        if (backdrop) backdrop.classList.remove('active');
+      if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && !toggleBtn.contains(e.target) && !e.target.closest('.admin-dock-menu-btn')) {
+        closeSidebar();
       }
     });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+        closeSidebar();
+      }
+    });
+
+    // Touch swipe left to dismiss drawer
+    let touchStartX = 0;
+    let touchEndX = 0;
+    sidebar.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    sidebar.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) {
+        closeSidebar();
+      }
+    }, { passive: true });
+
+    // Close sidebar on mobile when a nav item is clicked
+    sidebar.querySelectorAll('.nav-item').forEach(link => {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 991) {
+          closeSidebar();
+        }
+      });
+    });
+  }
+
+  // Auto-inject Mobile Floating Bottom Dock (Dashboard, Inquiries, Content, Menu)
+  if (!document.querySelector('.admin-mobile-dock') && sidebar) {
+    const currentPath = window.location.pathname;
+    const isDash = currentPath.endsWith('index.php') || currentPath.endsWith('/admin/');
+    const isInq = currentPath.includes('inquiries.php');
+    const isContent = currentPath.includes('content-manager.php') || currentPath.includes('pages.php') || currentPath.includes('edit-page.php');
+    
+    // Find unread inquiries badge if present
+    const unreadEl = document.querySelector('.sidebar-nav a[href*="inquiries.php"] span[style*="background"], .badge-unread');
+    const badgeText = unreadEl ? unreadEl.textContent.trim() : '';
+
+    const dock = document.createElement('nav');
+    dock.className = 'admin-mobile-dock';
+    dock.setAttribute('aria-label', 'Mobile Navigation Dock');
+    dock.innerHTML = `
+      <a href="index.php" class="admin-dock-item ${isDash ? 'active' : ''}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="inquiries.php" class="admin-dock-item ${isInq ? 'active' : ''}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <span>Inquiries</span>
+        ${badgeText ? `<span class="admin-dock-badge">${badgeText}</span>` : ''}
+      </a>
+      <a href="content-manager.php" class="admin-dock-item ${isContent ? 'active' : ''}">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+        <span>Content</span>
+      </a>
+      <button type="button" class="admin-dock-item admin-dock-menu-btn">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <span>Menu</span>
+      </button>
+    `;
+
+    document.body.appendChild(dock);
+
+    const menuDockBtn = dock.querySelector('.admin-dock-menu-btn');
+    if (menuDockBtn) {
+      menuDockBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+    }
   }
 
   // 3. Quick Visual Content Editor Tab Switcher

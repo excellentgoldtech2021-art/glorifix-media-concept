@@ -124,7 +124,7 @@ usort($scanned_items, function($a, $b) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Media & Uploads — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=<?= filemtime(__DIR__ . '/css/admin.css') ?>">
 </head>
 <body>
 
@@ -300,6 +300,6 @@ usort($scanned_items, function($a, $b) {
 
 </div>
 
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=<?= filemtime(__DIR__ . '/js/admin.js') ?>"></script>
 </body>
 </html>

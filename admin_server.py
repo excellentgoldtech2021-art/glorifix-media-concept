@@ -511,7 +511,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login — Glorifix Media Concept Limited</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body class="login-body">
   <div class="login-card">
@@ -539,7 +539,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
       <p style="margin-top: 6px; font-size: 0.75rem; color: var(--text-muted);">&copy; {time.strftime('%Y')} Glorifix Media Concept Limited. All rights reserved.</p>
     </div>
   </div>
-  <script src="js/admin.js"></script>
+  <script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1001,7 +1001,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Pages — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1024,7 +1024,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1067,7 +1067,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editing {clean_page} — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
   <style>
     .editor-tabs {{ display: flex; gap: 8px; margin-bottom: 1.25rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; }}
     .tab-btn {{ background: transparent; border: none; color: var(--text-muted); padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600; font-size: 0.95rem; }}
@@ -1155,7 +1155,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 <script>
 function switchTab(tabId, btn) {{
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -1226,7 +1226,7 @@ function switchTab(tabId, btn) {{
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Media & Uploads — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1258,7 +1258,7 @@ function switchTab(tabId, btn) {{
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1290,7 +1290,7 @@ function switchTab(tabId, btn) {{
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Manager — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1353,7 +1353,7 @@ function switchTab(tabId, btn) {{
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1368,7 +1368,7 @@ function switchTab(tabId, btn) {{
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Account Settings — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1463,7 +1463,7 @@ function switchTab(tabId, btn) {{
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1570,7 +1570,7 @@ function switchTab(tabId, btn) {{
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Inquiries &amp; Bookings — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1595,17 +1595,17 @@ function switchTab(tabId, btn) {{
         <div class="stat-card"><div class="stat-info"><h3>{direct_count}</h3><p>Direct Notes</p></div></div>
         <div class="stat-card"><div class="stat-info"><h3>{len(inquiries)}</h3><p>Total Inquiries</p></div></div>
       </div>
-      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
-        <a href="inquiries.php?type=all" class="btn btn-sm btn-outline">All ({len(inquiries)})</a>
-        <a href="inquiries.php?type=unread" class="btn btn-sm btn-outline">Unread ({unread_count})</a>
-        <a href="inquiries.php?type=booking" class="btn btn-sm btn-outline">📅 Bookings ({booking_count})</a>
-        <a href="inquiries.php?type=inquiry" class="btn btn-sm btn-outline">📩 Direct Notes ({direct_count})</a>
+      <div class="filter-tabs">
+        <a href="inquiries.php?type=all" class="filter-btn {'active' if filter_type=='all' else ''}">All ({len(inquiries)})</a>
+        <a href="inquiries.php?type=unread" class="filter-btn {'active' if filter_type=='unread' else ''}">Unread ({unread_count})</a>
+        <a href="inquiries.php?type=booking" class="filter-btn {'active' if filter_type=='booking' else ''}">📅 Bookings ({booking_count})</a>
+        <a href="inquiries.php?type=inquiry" class="filter-btn {'active' if filter_type=='inquiry' else ''}">📩 Direct Notes ({direct_count})</a>
       </div>
       {cards}
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1737,7 +1737,7 @@ function switchTab(tabId, btn) {{
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website Content Editor — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v={int(time.time())}">
 </head>
 <body>
 <div class="admin-wrapper">
@@ -1756,18 +1756,18 @@ function switchTab(tabId, btn) {{
         <h1 style="font-size: 1.75rem; margin-bottom: 0.35rem;">Visual Website Content Editor</h1>
         <p style="color: var(--text-muted); font-size: 0.95rem;">Edit website texts, pricing rates, and contact details in plain text. Zero HTML code needed!</p>
       </div>
-      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
-        <a href="content-manager.php?tab=company" class="btn btn-sm {'btn-primary' if tab=='company' else 'btn-outline'}">🏢 Company &amp; Contact</a>
-        <a href="content-manager.php?tab=pricing" class="btn btn-sm {'btn-primary' if tab=='pricing' else 'btn-outline'}">💰 Pricing &amp; Packages</a>
-        <a href="content-manager.php?tab=hero" class="btn btn-sm {'btn-primary' if tab=='hero' else 'btn-outline'}">🌟 Home &amp; Hero</a>
-        <a href="content-manager.php?tab=about" class="btn btn-sm {'btn-primary' if tab=='about' else 'btn-outline'}">📖 About Us &amp; Founder</a>
-        <a href="content-manager.php?tab=voice" class="btn btn-sm {'btn-primary' if tab=='voice' else 'btn-outline'}">🤖 Voice Assistant Answers</a>
+      <div class="content-nav-tabs">
+        <a href="content-manager.php?tab=company" class="c-tab-btn {'active' if tab=='company' else ''}">🏢 Company &amp; Contact</a>
+        <a href="content-manager.php?tab=pricing" class="c-tab-btn {'active' if tab=='pricing' else ''}">💰 Pricing &amp; Packages</a>
+        <a href="content-manager.php?tab=hero" class="c-tab-btn {'active' if tab=='hero' else ''}">🌟 Home &amp; Hero</a>
+        <a href="content-manager.php?tab=about" class="c-tab-btn {'active' if tab=='about' else ''}">📖 About Us &amp; Founder</a>
+        <a href="content-manager.php?tab=voice" class="c-tab-btn {'active' if tab=='voice' else ''}">🤖 Voice Assistant Answers</a>
       </div>
       {tab_body}
     </div>
   </main>
 </div>
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v={int(time.time())}"></script>
 </body>
 </html>"""
         self.send_html(html)
@@ -1794,6 +1794,7 @@ function switchTab(tabId, btn) {{
         <span class="brand-title">Glorifix Admin</span>
         <span class="brand-sub">Management Suite</span>
       </div>
+      <button class="sidebar-close-btn" aria-label="Close Menu"><svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12"/></svg></button>
     </div>
     <nav class="sidebar-nav">
       <span class="nav-section-title">Navigation</span>

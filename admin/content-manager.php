@@ -158,7 +158,7 @@ if (file_exists($inquiries_file)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Website Content Manager — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=<?= filemtime(__DIR__ . '/css/admin.css') ?>">
   <style>
     .content-nav-tabs {
       display: flex;
@@ -622,6 +622,6 @@ if (file_exists($inquiries_file)) {
   </main>
 </div>
 
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=<?= filemtime(__DIR__ . '/js/admin.js') ?>"></script>
 </body>
 </html>

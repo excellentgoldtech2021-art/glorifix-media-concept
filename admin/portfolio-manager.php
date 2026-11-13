@@ -92,7 +92,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['idx']
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Manager — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=<?= filemtime(__DIR__ . '/css/admin.css') ?>">
 </head>
 <body>
 
@@ -281,6 +281,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['idx']
 
 </div>
 
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=<?= filemtime(__DIR__ . '/js/admin.js') ?>"></script>
 </body>
 </html>

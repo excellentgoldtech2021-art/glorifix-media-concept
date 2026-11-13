@@ -79,7 +79,7 @@ $page_backups = list_backups($selected_page);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editing <?= htmlspecialchars($selected_page) ?> — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=<?= filemtime(__DIR__ . '/css/admin.css') ?>">
   <style>
     .editor-tabs {
       display: flex;
@@ -347,7 +347,7 @@ $page_backups = list_backups($selected_page);
 
 </div>
 
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=<?= filemtime(__DIR__ . '/js/admin.js') ?>"></script>
 <script>
 function switchTab(tabId, btn) {
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));

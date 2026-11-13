@@ -71,7 +71,7 @@ $filtered_inquiries = array_filter($inquiries, function($inq) use ($filter_type,
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Inquiries &amp; Bookings — Glorifix Admin</title>
   <link rel="icon" type="image/png" href="../assets/logo.png">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin.css?v=<?= filemtime(__DIR__ . '/css/admin.css') ?>">
   <style>
     .badge-unread {
       background: var(--red2);
@@ -470,6 +470,6 @@ $filtered_inquiries = array_filter($inquiries, function($inq) use ($filter_type,
   </main>
 </div>
 
-<script src="js/admin.js"></script>
+<script src="js/admin.js?v=<?= filemtime(__DIR__ . '/js/admin.js') ?>"></script>
 </body>
 </html>
