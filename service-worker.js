@@ -3,7 +3,7 @@
  * Provides offline support & instant asset caching for fast mobile performance.
  */
 
-const CACHE_NAME = 'glorifix-pwa-v13';
+const CACHE_NAME = 'glorifix-pwa-v14';
 const PRECACHE_ASSETS = [
   './',
   'index.html',

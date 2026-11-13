@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1F0508">
-  <link rel="stylesheet" href="css/styles.css?v=28">
+  <link rel="stylesheet" href="css/styles.css?v=29">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
@@ -102,14 +102,41 @@
   <section class="section" style="padding: 50px 0 80px;">
     <div class="container">
 
+      <!-- Category Navigation Guide -->
+      <div class="pricing-tabs-guide">
+        <span class="pricing-tabs-badge">🎯 Package Navigation</span>
+        <h3 class="pricing-tabs-heading">Select a Service to View Full Packages</h3>
+        <p class="pricing-tabs-hint">Tap any button below to navigate between website design, ads, social media, app development, and CAC registration plans:</p>
+      </div>
+
       <!-- Category Filter Tabs -->
       <div class="pricing-tabs-wrap">
-        <div class="pricing-tabs" role="tablist">
-          <button type="button" class="pricing-tab-btn active" data-target="panel-web">Website Design</button>
-          <button type="button" class="pricing-tab-btn" data-target="panel-media">Media Buying &amp; Ads</button>
-          <button type="button" class="pricing-tab-btn" data-target="panel-social">Social Media</button>
-          <button type="button" class="pricing-tab-btn" data-target="panel-app">App Development</button>
-          <button type="button" class="pricing-tab-btn" data-target="panel-cac">CAC Registration</button>
+        <div class="pricing-tabs" role="tablist" aria-label="Pricing Package Categories">
+          <button type="button" class="pricing-tab-btn active" data-target="panel-web" aria-selected="true">
+            <span class="tab-btn-icon">🌐</span>
+            <span class="tab-btn-label">Website Design</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-media" aria-selected="false">
+            <span class="tab-btn-icon">📈</span>
+            <span class="tab-btn-label">Media Buying &amp; Ads</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-social" aria-selected="false">
+            <span class="tab-btn-icon">📱</span>
+            <span class="tab-btn-label">Social Media</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-app" aria-selected="false">
+            <span class="tab-btn-icon">💻</span>
+            <span class="tab-btn-label">App Development</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
+          <button type="button" class="pricing-tab-btn" data-target="panel-cac" aria-selected="false">
+            <span class="tab-btn-icon">⚖️</span>
+            <span class="tab-btn-label">CAC Registration</span>
+            <span class="tab-btn-badge">View Plans &rarr;</span>
+          </button>
         </div>
       </div>
 
