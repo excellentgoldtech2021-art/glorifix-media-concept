@@ -2199,17 +2199,14 @@ footer.footer {
   gap: 10px;
   padding: 13px 22px;
   border-radius: 16px;
-  border: 2px solid rgba(204, 17, 17, 0.22);
-  background: #ffffff;
-  color: #380A14;
   font-family: var(--font-accent);
   font-weight: 700;
   font-size: 0.92rem;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px rgba(139, 10, 10, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
   white-space: nowrap;
   position: relative;
+  text-decoration: none;
 }
 
 .pricing-tab-btn .tab-btn-icon {
@@ -2221,7 +2218,6 @@ footer.footer {
 
 .pricing-tab-btn .tab-btn-label {
   font-weight: 800;
-  color: #380A14;
   transition: color 0.25s ease;
 }
 
@@ -2230,54 +2226,221 @@ footer.footer {
   font-weight: 800;
   padding: 3px 10px;
   border-radius: 20px;
-  background: rgba(204, 17, 17, 0.08);
-  color: var(--red2);
-  border: 1px solid rgba(204, 17, 17, 0.20);
   transition: all 0.25s ease;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
 .pricing-tab-btn:hover {
-  border-color: var(--red2);
-  color: var(--red2);
   transform: translateY(-3px);
-  box-shadow: 0 8px 22px -3px rgba(204, 17, 17, 0.22), 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .pricing-tab-btn:hover .tab-btn-icon {
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
-.pricing-tab-btn:hover .tab-btn-label {
-  color: var(--red2);
-}
+/* ==========================================================================
+   UNIQUE BACKGROUNDS & THEMES FOR EACH PRICING TAB (5 CATEGORIES)
+   ========================================================================== */
 
-.pricing-tab-btn:hover .tab-btn-badge {
-  background: rgba(204, 17, 17, 0.14);
-  border-color: rgba(204, 17, 17, 0.30);
+/* 1. Website Design Tab (Sapphire & Tech Blue Theme) */
+.pricing-tab-btn[data-target="panel-web"] {
+  background: linear-gradient(145deg, #FFFFFF 0%, #EFF6FF 100%);
+  border: 2px solid rgba(37, 99, 235, 0.32);
+  color: #1e3a8a;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
 }
-
-.pricing-tab-btn.active {
-  background: linear-gradient(135deg, #E51A1A 0%, #A80D0D 55%, #7A0606 100%);
-  border: 2px solid #E5A93C;
-  border-radius: 16px;
-  color: #ffffff;
-  box-shadow: 0 10px 28px -3px rgba(204, 17, 17, 0.46), 0 0 0 1px rgba(229, 169, 60, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+.pricing-tab-btn[data-target="panel-web"] .tab-btn-label {
+  color: #1e3a8a;
+}
+.pricing-tab-btn[data-target="panel-web"] .tab-btn-badge {
+  background: rgba(37, 99, 235, 0.09);
+  color: #2563eb;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+.pricing-tab-btn[data-target="panel-web"]:hover {
+  border-color: #2563eb;
+  box-shadow: 0 10px 24px -3px rgba(37, 99, 235, 0.25);
+}
+.pricing-tab-btn[data-target="panel-web"]:hover .tab-btn-badge {
+  background: rgba(37, 99, 235, 0.16);
+}
+.pricing-tab-btn[data-target="panel-web"].active {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 55%, #1e3a8a 100%) !important;
+  border: 2px solid #93c5fd !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px -3px rgba(37, 99, 235, 0.50), 0 0 0 1px rgba(147, 197, 253, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
   transform: translateY(-3px);
 }
-
-.pricing-tab-btn.active .tab-btn-label {
-  color: #ffffff;
+.pricing-tab-btn[data-target="panel-web"].active .tab-btn-label {
+  color: #ffffff !important;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
-
-.pricing-tab-btn.active .tab-btn-badge {
-  background: #ffffff;
-  color: #8B0A0A;
-  border-color: transparent;
+.pricing-tab-btn[data-target="panel-web"].active .tab-btn-badge {
+  background: #ffffff !important;
+  color: #1e3a8a !important;
+  border-color: transparent !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
-  font-weight: 800;
+}
+
+/* 2. Media Buying & Ads Tab (Growth Emerald Mint Theme) */
+.pricing-tab-btn[data-target="panel-media"] {
+  background: linear-gradient(145deg, #FFFFFF 0%, #ECFDF5 100%);
+  border: 2px solid rgba(5, 150, 105, 0.32);
+  color: #064e3b;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.pricing-tab-btn[data-target="panel-media"] .tab-btn-label {
+  color: #064e3b;
+}
+.pricing-tab-btn[data-target="panel-media"] .tab-btn-badge {
+  background: rgba(5, 150, 105, 0.09);
+  color: #059669;
+  border: 1px solid rgba(5, 150, 105, 0.25);
+}
+.pricing-tab-btn[data-target="panel-media"]:hover {
+  border-color: #059669;
+  box-shadow: 0 10px 24px -3px rgba(5, 150, 105, 0.25);
+}
+.pricing-tab-btn[data-target="panel-media"]:hover .tab-btn-badge {
+  background: rgba(5, 150, 105, 0.16);
+}
+.pricing-tab-btn[data-target="panel-media"].active {
+  background: linear-gradient(135deg, #059669 0%, #047857 55%, #064e3b 100%) !important;
+  border: 2px solid #a7f3d0 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px -3px rgba(5, 150, 105, 0.50), 0 0 0 1px rgba(167, 243, 208, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px);
+}
+.pricing-tab-btn[data-target="panel-media"].active .tab-btn-label {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.pricing-tab-btn[data-target="panel-media"].active .tab-btn-badge {
+  background: #ffffff !important;
+  color: #064e3b !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+/* 3. Social Media Tab (Royal Violet & Lavender Theme) */
+.pricing-tab-btn[data-target="panel-social"] {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FAF5FF 100%);
+  border: 2px solid rgba(124, 58, 237, 0.32);
+  color: #4c1d95;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.pricing-tab-btn[data-target="panel-social"] .tab-btn-label {
+  color: #4c1d95;
+}
+.pricing-tab-btn[data-target="panel-social"] .tab-btn-badge {
+  background: rgba(124, 58, 237, 0.09);
+  color: #7c3aed;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+}
+.pricing-tab-btn[data-target="panel-social"]:hover {
+  border-color: #7c3aed;
+  box-shadow: 0 10px 24px -3px rgba(124, 58, 237, 0.25);
+}
+.pricing-tab-btn[data-target="panel-social"]:hover .tab-btn-badge {
+  background: rgba(124, 58, 237, 0.16);
+}
+.pricing-tab-btn[data-target="panel-social"].active {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 55%, #4c1d95 100%) !important;
+  border: 2px solid #ddd6fe !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px -3px rgba(124, 58, 237, 0.50), 0 0 0 1px rgba(221, 214, 254, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px);
+}
+.pricing-tab-btn[data-target="panel-social"].active .tab-btn-label {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.pricing-tab-btn[data-target="panel-social"].active .tab-btn-badge {
+  background: #ffffff !important;
+  color: #4c1d95 !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+/* 4. App Development Tab (Tech Cyan & Teal Theme) */
+.pricing-tab-btn[data-target="panel-app"] {
+  background: linear-gradient(145deg, #FFFFFF 0%, #F0FDFA 100%);
+  border: 2px solid rgba(13, 148, 136, 0.32);
+  color: #134e4a;
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.09), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.pricing-tab-btn[data-target="panel-app"] .tab-btn-label {
+  color: #134e4a;
+}
+.pricing-tab-btn[data-target="panel-app"] .tab-btn-badge {
+  background: rgba(13, 148, 136, 0.09);
+  color: #0d9488;
+  border: 1px solid rgba(13, 148, 136, 0.25);
+}
+.pricing-tab-btn[data-target="panel-app"]:hover {
+  border-color: #0d9488;
+  box-shadow: 0 10px 24px -3px rgba(13, 148, 136, 0.25);
+}
+.pricing-tab-btn[data-target="panel-app"]:hover .tab-btn-badge {
+  background: rgba(13, 148, 136, 0.16);
+}
+.pricing-tab-btn[data-target="panel-app"].active {
+  background: linear-gradient(135deg, #0d9488 0%, #0f766e 55%, #134e4a 100%) !important;
+  border: 2px solid #99f6e4 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px -3px rgba(13, 148, 136, 0.50), 0 0 0 1px rgba(153, 246, 228, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px);
+}
+.pricing-tab-btn[data-target="panel-app"].active .tab-btn-label {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.pricing-tab-btn[data-target="panel-app"].active .tab-btn-badge {
+  background: #ffffff !important;
+  color: #134e4a !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+/* 5. CAC Registration Tab (Corporate Amber & Royal Gold Theme) */
+.pricing-tab-btn[data-target="panel-cac"] {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFFBEB 100%);
+  border: 2px solid rgba(217, 119, 6, 0.36);
+  color: #78350f;
+  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.11), 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.pricing-tab-btn[data-target="panel-cac"] .tab-btn-label {
+  color: #78350f;
+}
+.pricing-tab-btn[data-target="panel-cac"] .tab-btn-badge {
+  background: rgba(217, 119, 6, 0.09);
+  color: #d97706;
+  border: 1px solid rgba(217, 119, 6, 0.28);
+}
+.pricing-tab-btn[data-target="panel-cac"]:hover {
+  border-color: #d97706;
+  box-shadow: 0 10px 24px -3px rgba(217, 119, 6, 0.28);
+}
+.pricing-tab-btn[data-target="panel-cac"]:hover .tab-btn-badge {
+  background: rgba(217, 119, 6, 0.16);
+}
+.pricing-tab-btn[data-target="panel-cac"].active {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 55%, #78350f 100%) !important;
+  border: 2px solid #fde68a !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 28px -3px rgba(217, 119, 6, 0.50), 0 0 0 1px rgba(253, 230, 138, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px);
+}
+.pricing-tab-btn[data-target="panel-cac"].active .tab-btn-label {
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.pricing-tab-btn[data-target="panel-cac"].active .tab-btn-badge {
+  background: #ffffff !important;
+  color: #78350f !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
 }
 
 .pricing-category-panel {
@@ -2565,21 +2728,12 @@ footer.footer {
     min-height: 84px !important;
     padding: 12px 10px !important;
     border-radius: 16px !important;
-    border: 2px solid rgba(204, 17, 17, 0.25) !important;
-    background: #ffffff !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
-    box-shadow: 0 4px 14px rgba(139, 10, 10, 0.08), 0 1px 3px rgba(0,0,0,0.05) !important;
     box-sizing: border-box !important;
-  }
-  .pricing-tab-btn.active {
-    background: linear-gradient(135deg, #E51A1A 0%, #A80D0D 55%, #7A0606 100%) !important;
-    border: 2px solid #E5A93C !important;
-    border-radius: 16px !important;
-    box-shadow: 0 8px 25px rgba(204, 17, 17, 0.46), 0 0 0 1px rgba(229, 169, 60, 0.35) !important;
   }
   .pricing-tab-btn .tab-btn-icon {
     font-size: 1.35rem !important;
@@ -2631,20 +2785,12 @@ footer.footer {
     min-height: 88px !important;
     padding: 12px 8px !important;
     border-radius: 16px !important;
-    border: 2px solid rgba(204, 17, 17, 0.25) !important;
-    background: #ffffff !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 6px !important;
-    box-shadow: 0 4px 14px rgba(139, 10, 10, 0.08), 0 1px 3px rgba(0,0,0,0.05) !important;
-  }
-  .pricing-tab-btn.active {
-    background: linear-gradient(135deg, #E51A1A 0%, #A80D0D 55%, #7A0606 100%) !important;
-    border: 2px solid #E5A93C !important;
-    border-radius: 16px !important;
-    box-shadow: 0 8px 25px rgba(204, 17, 17, 0.46), 0 0 0 1px rgba(229, 169, 60, 0.35) !important;
+    box-sizing: border-box !important;
   }
   .pricing-tab-btn .tab-btn-icon {
     font-size: 1.35rem !important;
