@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.querySelector('.slider-btn.next');
   const prevBtn = document.querySelector('.slider-btn.prev');
   const dots = document.querySelectorAll('.slider-dots .dot');
+  const pills = document.querySelectorAll('.slider-pill');
+  const sliderWrap = document.querySelector('.hero-slider-wrap');
+  const glare = document.querySelector('.slider-glare');
 
   if (track && slides.length > 0) {
     let currentIndex = 0;
@@ -22,11 +25,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
+      // Update Dots
       dots.forEach((dot, idx) => {
         if (idx === currentIndex) {
           dot.classList.add('active');
         } else {
           dot.classList.remove('active');
+        }
+      });
+
+      // Update Active Slide Class for Ken Burns Zoom
+      slides.forEach((slide, idx) => {
+        if (idx === currentIndex) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // Update Category Quick-Pills
+      pills.forEach((pill, idx) => {
+        if (idx === currentIndex) {
+          pill.classList.add('active');
+          pill.setAttribute('aria-selected', 'true');
+        } else {
+          pill.classList.remove('active');
+          pill.setAttribute('aria-selected', 'false');
         }
       });
     }
@@ -35,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stopAutoSlide();
       autoSlideInterval = setInterval(() => {
         goToSlide(currentIndex + 1);
-      }, 4000);
+      }, 4200);
     }
 
     function stopAutoSlide() {
@@ -66,10 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const targetIndex = parseInt(pill.getAttribute('data-slide'), 10);
+        if (!isNaN(targetIndex)) {
+          goToSlide(targetIndex);
+          startAutoSlide();
+        }
+      });
+    });
+
     // Touch Swipe Support for Mobile Screens
     let startX = 0;
     let endX = 0;
-    const sliderWrap = document.querySelector('.hero-slider-wrap');
 
     if (sliderWrap) {
       sliderWrap.addEventListener('touchstart', (e) => {
@@ -89,7 +122,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
       sliderWrap.addEventListener('mouseenter', stopAutoSlide);
       sliderWrap.addEventListener('mouseleave', startAutoSlide);
+
+      // Interactive 3D Perspective Tilt & Specular Glare Tracking
+      let isHovered = false;
+
+      sliderWrap.addEventListener('mouseenter', () => {
+        isHovered = true;
+        sliderWrap.style.transition = 'transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
+      });
+
+      sliderWrap.addEventListener('mousemove', (e) => {
+        if (!isHovered) return;
+        const rect = sliderWrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = ((x - centerX) / centerX) * 3.2;
+        const rotateX = -((y - centerY) / centerY) * 3.2;
+
+        sliderWrap.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+
+        if (glare) {
+          const glareX = ((x / rect.width) * 100).toFixed(1);
+          const glareY = ((y / rect.height) * 100).toFixed(1);
+          glare.style.setProperty('--glare-x', `${glareX}%`);
+          glare.style.setProperty('--glare-y', `${glareY}%`);
+        }
+      });
+
+      sliderWrap.addEventListener('mouseleave', () => {
+        isHovered = false;
+        sliderWrap.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease';
+        sliderWrap.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
     }
+
+    // Subpage Page-Hero 3D Tilt
+    const pageHeroWraps = document.querySelectorAll('.page-hero-banner-wrap');
+    pageHeroWraps.forEach(wrap => {
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateY = ((x - centerX) / centerX) * 2.5;
+        const rotateX = -((y - centerY) / centerY) * 2.5;
+        wrap.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-2px)`;
+      });
+      wrap.addEventListener('mouseleave', () => {
+        wrap.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
 
     // Initialize first slide and start autoplay
     goToSlide(0);
