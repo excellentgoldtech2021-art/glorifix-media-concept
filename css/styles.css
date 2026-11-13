@@ -2183,12 +2183,9 @@ footer.footer {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  background: #FFF5F7;
-  padding: 8px;
-  border-radius: 40px;
-  border: 1.5px solid rgba(204, 17, 17, 0.16);
-  box-shadow: 0 4px 20px rgba(139, 10, 10, 0.06);
+  gap: 12px;
+  background: transparent;
+  padding: 4px;
   max-width: 100%;
 }
 
@@ -2196,23 +2193,23 @@ footer.footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: 30px;
-  border: 1.5px solid rgba(204, 17, 17, 0.16);
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 16px;
+  border: 2px solid rgba(204, 17, 17, 0.24);
   background: #ffffff;
   color: #4A1520;
   font-family: var(--font-accent);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.90rem;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(139, 10, 10, 0.07), 0 1px 3px rgba(0, 0, 0, 0.04);
   white-space: nowrap;
 }
 
 .pricing-tab-btn .tab-btn-icon {
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   line-height: 1;
 }
 
@@ -2223,21 +2220,23 @@ footer.footer {
 }
 
 .pricing-tab-btn .tab-btn-badge {
-  font-size: 0.72rem;
+  font-size: 0.70rem;
   font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 12px;
+  padding: 3px 9px;
+  border-radius: 20px;
   background: rgba(204, 17, 17, 0.08);
   color: var(--red2);
-  border: 1px solid rgba(204, 17, 17, 0.18);
+  border: 1px solid rgba(204, 17, 17, 0.20);
   transition: all 0.25s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .pricing-tab-btn:hover {
   border-color: var(--red2);
   color: var(--red2);
   transform: translateY(-2px);
-  box-shadow: 0 5px 14px rgba(204, 17, 17, 0.16);
+  box-shadow: 0 6px 20px rgba(204, 17, 17, 0.18);
 }
 
 .pricing-tab-btn:hover .tab-btn-label {
@@ -2249,11 +2248,12 @@ footer.footer {
 }
 
 .pricing-tab-btn.active {
-  background: var(--accent-gradient);
-  border-color: transparent;
+  background: linear-gradient(135deg, #D41414 0%, #8B0A0A 100%);
+  border: 2px solid #D4AF37;
+  border-radius: 16px;
   color: #ffffff;
-  box-shadow: 0 6px 20px rgba(204, 17, 17, 0.38);
-  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(204, 17, 17, 0.42), 0 0 0 1px rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
 }
 
 .pricing-tab-btn.active .tab-btn-label {
@@ -2262,9 +2262,9 @@ footer.footer {
 
 .pricing-tab-btn.active .tab-btn-badge {
   background: #ffffff;
-  color: var(--red2);
+  color: #8B0A0A;
   border-color: transparent;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
 }
 
 .pricing-category-panel {
@@ -2478,38 +2478,51 @@ footer.footer {
   .pricing-tabs {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
+    gap: 12px !important;
     width: 100% !important;
     max-width: 100% !important;
-    border-radius: 20px !important;
-    padding: 10px !important;
+    border-radius: 0 !important;
+    padding: 0 4px !important;
     box-sizing: border-box !important;
-    background: #FFF5F7 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   .pricing-tab-btn {
     width: 100% !important;
-    min-height: 68px !important;
-    padding: 10px 8px !important;
-    border-radius: 12px !important;
+    min-height: 84px !important;
+    padding: 12px 10px !important;
+    border-radius: 16px !important;
+    border: 2px solid rgba(204, 17, 17, 0.25) !important;
+    background: #ffffff !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
+    box-shadow: 0 4px 14px rgba(139, 10, 10, 0.08), 0 1px 3px rgba(0,0,0,0.05) !important;
     box-sizing: border-box !important;
   }
+  .pricing-tab-btn.active {
+    background: linear-gradient(135deg, #D41414 0%, #8B0A0A 100%) !important;
+    border: 2px solid #D4AF37 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 25px rgba(204, 17, 17, 0.42), 0 0 0 1px rgba(212, 175, 55, 0.3) !important;
+  }
   .pricing-tab-btn .tab-btn-icon {
-    font-size: 1.25rem !important;
+    font-size: 1.35rem !important;
   }
   .pricing-tab-btn .tab-btn-label {
-    font-size: 0.82rem !important;
+    font-size: 0.84rem !important;
     font-weight: 800 !important;
     text-align: center !important;
+    line-height: 1.25 !important;
   }
   .pricing-tab-btn .tab-btn-badge {
     font-size: 0.70rem !important;
-    font-weight: 700 !important;
-    padding: 2px 8px !important;
+    font-weight: 800 !important;
+    padding: 3px 10px !important;
+    border-radius: 20px !important;
   }
   .pricing-tab-btn:last-child {
     grid-column: 1 / -1 !important;
@@ -2518,7 +2531,7 @@ footer.footer {
 
 @media (max-width: 600px) {
   .pricing-tabs-guide {
-    margin-bottom: 16px !important;
+    margin-bottom: 18px !important;
     padding: 0 4px !important;
   }
   .pricing-tabs-heading {
@@ -2530,40 +2543,51 @@ footer.footer {
   .pricing-tabs-wrap {
     width: 100% !important;
     padding: 0 4px !important;
-    margin-bottom: 24px !important;
+    margin-bottom: 26px !important;
   }
   .pricing-tabs {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
-    border-radius: 16px !important;
-    padding: 8px !important;
+    gap: 10px !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
   }
   .pricing-tab-btn {
     width: 100% !important;
-    min-height: 70px !important;
-    padding: 10px 6px !important;
-    border-radius: 12px !important;
+    min-height: 88px !important;
+    padding: 12px 8px !important;
+    border-radius: 16px !important;
+    border: 2px solid rgba(204, 17, 17, 0.25) !important;
+    background: #ffffff !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 4px !important;
+    gap: 6px !important;
+    box-shadow: 0 4px 14px rgba(139, 10, 10, 0.08), 0 1px 3px rgba(0,0,0,0.05) !important;
+  }
+  .pricing-tab-btn.active {
+    background: linear-gradient(135deg, #D41414 0%, #8B0A0A 100%) !important;
+    border: 2px solid #D4AF37 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 25px rgba(204, 17, 17, 0.42), 0 0 0 1px rgba(212, 175, 55, 0.3) !important;
   }
   .pricing-tab-btn .tab-btn-icon {
-    font-size: 1.25rem !important;
+    font-size: 1.35rem !important;
   }
   .pricing-tab-btn .tab-btn-label {
-    font-size: 0.80rem !important;
+    font-size: 0.82rem !important;
     font-weight: 800 !important;
     text-align: center !important;
     line-height: 1.2 !important;
   }
   .pricing-tab-btn .tab-btn-badge {
     font-size: 0.68rem !important;
-    font-weight: 700 !important;
-    padding: 2px 7px !important;
-    border-radius: 10px !important;
+    font-weight: 800 !important;
+    padding: 3px 9px !important;
+    border-radius: 20px !important;
   }
   .pricing-tab-btn:last-child {
     grid-column: 1 / -1 !important;
