@@ -56,5 +56,14 @@
     "cac_response": "CAC Business Name registration is ₦35,000, Limited Liability Company is ₦75,000, and NGO Trustee is ₦150,000.",
     "social_response": "Our monthly Social Media Management packages are: Starter ₦50,000 (2 platforms), Growth ₦120,000 (3 platforms), and Premium ₦240,000 (4 platforms).",
     "web_response": "Our website packages start at ₦100,000 for Basic, ₦150,000 for Business, and ₦300,000 for Premium."
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/share/1BDQSsoEZQ/",
+    "instagram": "https://www.instagram.com/glorifixmediaconcept?igsh=M2JsMHhkOHV3MnJ3",
+    "whatsapp": "https://wa.me/2349050278999",
+    "linkedin": "https://www.linkedin.com/in/glorifix-media-concept-594783257",
+    "twitter": "",
+    "tiktok": "",
+    "youtube": ""
   }
 }

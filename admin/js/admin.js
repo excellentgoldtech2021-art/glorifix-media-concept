@@ -225,10 +225,12 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       const formData = new FormData(this);
+      const urlEncoded = new URLSearchParams(formData);
       
       fetch(this.action || 'content-manager.php', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: urlEncoded
       })
       .then(response => {
         if (!response.ok) throw new Error('Network error');

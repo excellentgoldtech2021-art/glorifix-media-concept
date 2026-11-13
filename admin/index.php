@@ -36,6 +36,7 @@ $site_content = file_exists($content_file) ? (json_decode(file_get_contents($con
 $comp = $site_content['company'] ?? [];
 $hero = $site_content['hero'] ?? [];
 $pri = $site_content['pricing'] ?? [];
+$soc = $site_content['socials'] ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -216,6 +217,7 @@ $pri = $site_content['pricing'] ?? [];
           <button type="button" class="v-tab-btn active" data-panel="v-panel-company">📍 Company &amp; Studios</button>
           <button type="button" class="v-tab-btn" data-panel="v-panel-hero">🎯 Hero &amp; Metrics</button>
           <button type="button" class="v-tab-btn" data-panel="v-panel-pricing">💰 Core Pricing</button>
+          <button type="button" class="v-tab-btn" data-panel="v-panel-socials">📱 Social Media</button>
         </div>
 
         <!-- Panel 1: Company Details & Studios -->
@@ -343,6 +345,50 @@ $pri = $site_content['pricing'] ?? [];
               <span style="font-size: 0.84rem; color: var(--text-muted);">Instantly synchronizes prices on `pricing.html` and booking estimators.</span>
               <button type="submit" class="btn btn-primary" style="padding: 10px 22px;">
                 <span>💾 Save &amp; Sync Pricing Plans</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel 4: Social Media Icons & Channels -->
+        <div class="v-editor-panel" id="v-panel-socials">
+          <form class="v-editor-form" method="POST" action="content-manager.php">
+            <input type="hidden" name="tab" value="socials">
+            <div class="v-editor-grid">
+              <div class="v-form-group">
+                <label>📘 Facebook Page URL</label>
+                <input type="url" name="facebook" value="<?= htmlspecialchars($soc['facebook'] ?? 'https://www.facebook.com/share/1BDQSsoEZQ/') ?>" placeholder="https://www.facebook.com/yourpage">
+              </div>
+              <div class="v-form-group">
+                <label>📸 Instagram Profile URL</label>
+                <input type="url" name="instagram" value="<?= htmlspecialchars($soc['instagram'] ?? 'https://www.instagram.com/glorifixmediaconcept?igsh=M2JsMHhkOHV3MnJ3') ?>" placeholder="https://www.instagram.com/yourhandle">
+              </div>
+              <div class="v-form-group">
+                <label>💬 WhatsApp Hotline Link</label>
+                <input type="text" name="whatsapp" value="<?= htmlspecialchars($soc['whatsapp'] ?? 'https://wa.me/2349050278999') ?>" placeholder="https://wa.me/2349050278999">
+              </div>
+              <div class="v-form-group">
+                <label>💼 LinkedIn Company URL</label>
+                <input type="url" name="linkedin" value="<?= htmlspecialchars($soc['linkedin'] ?? 'https://www.linkedin.com/in/glorifix-media-concept-594783257') ?>" placeholder="https://www.linkedin.com/in/yourcompany">
+              </div>
+              <div class="v-form-group">
+                <label>🐦 Twitter / X Profile URL (Optional)</label>
+                <input type="url" name="twitter" value="<?= htmlspecialchars($soc['twitter'] ?? '') ?>" placeholder="https://x.com/yourhandle">
+              </div>
+              <div class="v-form-group">
+                <label>🎵 TikTok Profile URL (Optional)</label>
+                <input type="url" name="tiktok" value="<?= htmlspecialchars($soc['tiktok'] ?? '') ?>" placeholder="https://www.tiktok.com/@yourhandle">
+              </div>
+              <div class="v-form-group" style="grid-column: 1 / -1;">
+                <label>▶️ YouTube Channel URL (Optional)</label>
+                <input type="url" name="youtube" value="<?= htmlspecialchars($soc['youtube'] ?? '') ?>" placeholder="https://www.youtube.com/@yourchannel">
+              </div>
+            </div>
+
+            <div class="v-save-bar">
+              <span style="font-size: 0.84rem; color: var(--text-muted);">Instantly synchronizes social icons across the footer and contact links of all 6 live pages.</span>
+              <button type="submit" class="btn btn-primary" style="padding: 10px 22px;">
+                <span>💾 Save &amp; Sync Social Icons</span>
               </button>
             </div>
           </form>

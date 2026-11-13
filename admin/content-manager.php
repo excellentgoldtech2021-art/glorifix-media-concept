@@ -73,6 +73,56 @@ function sync_content_to_html($content) {
         }
         file_put_contents($va_path, $va_js);
     }
+    
+    // 4. Sync Social Media Links across all HTML pages
+    $socials = $content['socials'] ?? [];
+    if (!empty($socials)) {
+        $social_items = [];
+        if (!empty($socials['facebook'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['facebook']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Facebook">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['instagram'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['instagram']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Instagram">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['whatsapp'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['whatsapp']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="WhatsApp">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.78 14.15c-.24.68-1.41 1.26-1.95 1.34-.52.08-1.2.11-3.48-.84-2.73-1.13-4.48-3.9-4.62-4.08-.13-.19-1.12-1.49-1.12-2.85 0-1.35.71-2.02.96-2.29.25-.28.56-.35.75-.35.19 0 .37 0 .54.01.17.01.4-.07.62.47.24.57.82 2 .89 2.15.07.15.12.33.02.53-.1.19-.15.31-.29.48-.15.17-.31.37-.44.5-.15.15-.31.31-.13.62.17.31.78 1.29 1.68 2.09 1.16 1.03 2.13 1.35 2.44 1.5.31.15.48.13.66-.08.19-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.29.11 1.83.86 2.14 1.02.31.15.52.23.6.35.08.13.08.76-.16 1.44z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['linkedin'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['linkedin']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="LinkedIn">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['twitter'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['twitter']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Twitter">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['tiktok'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['tiktok']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="TikTok">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c0 1.7-.42 3.4-1.35 4.81-1.22 1.83-3.19 3.03-5.38 3.32-2.19.29-4.47-.28-6.28-1.57-1.81-1.29-2.99-3.3-3.23-5.51-.25-2.21.43-4.48 1.87-6.17 1.44-1.69 3.55-2.67 5.75-2.71.55-.01 1.1.04 1.64.16v4.13c-.49-.16-1.02-.23-1.54-.18-1.15.11-2.23.75-2.84 1.72-.61.97-.68 2.21-.21 3.25.47 1.04 1.48 1.78 2.62 1.91 1.14.13 2.31-.35 2.99-1.28.43-.59.66-1.32.66-2.05V.02z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        if (!empty($socials['youtube'])) {
+            $social_items[] = '            <a href="' . htmlspecialchars($socials['youtube']) . '" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="YouTube">' . "\n"
+                            . '              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' . "\n"
+                            . '            </a>';
+        }
+        $new_footer_socials = '<div class="footer-socials">' . "\n" . implode("\n", $social_items) . "\n          </div>";
+
+        foreach ($html_files as $hf) {
+            $file_path = $root . '/' . $hf;
+            if (!file_exists($file_path)) continue;
+            $html = file_get_contents($file_path);
+            $html = preg_replace('/<div class="footer-socials">.*?<\/div>/s', $new_footer_socials, $html);
+            file_put_contents($file_path, $html);
+        }
+    }
 }
 
 // Handle Form Save
@@ -132,6 +182,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $site_content['voice_agent']['cac_response'] = trim($_POST['va_cac_response'] ?? '');
         $site_content['voice_agent']['social_response'] = trim($_POST['va_social_response'] ?? '');
         $site_content['voice_agent']['web_response'] = trim($_POST['va_web_response'] ?? '');
+    } elseif ($tab === 'socials') {
+        $site_content['socials']['facebook'] = trim($_POST['facebook'] ?? '');
+        $site_content['socials']['instagram'] = trim($_POST['instagram'] ?? '');
+        $site_content['socials']['whatsapp'] = trim($_POST['whatsapp'] ?? '');
+        $site_content['socials']['linkedin'] = trim($_POST['linkedin'] ?? '');
+        $site_content['socials']['twitter'] = trim($_POST['twitter'] ?? '');
+        $site_content['socials']['tiktok'] = trim($_POST['tiktok'] ?? '');
+        $site_content['socials']['youtube'] = trim($_POST['youtube'] ?? '');
     }
     
     // Save to JSON
@@ -353,7 +411,8 @@ if (file_exists($inquiries_file)) {
         <a href="content-manager.php?tab=pricing" class="c-tab-btn <?= $active_tab === 'pricing' ? 'active' : '' ?>">💰 Pricing &amp; Packages</a>
         <a href="content-manager.php?tab=hero" class="c-tab-btn <?= $active_tab === 'hero' ? 'active' : '' ?>">🌟 Homepage &amp; Hero</a>
         <a href="content-manager.php?tab=about" class="c-tab-btn <?= $active_tab === 'about' ? 'active' : '' ?>">📖 About Us &amp; Ezekiel</a>
-        <a href="content-manager.php?tab=voice" class="c-tab-btn <?= $active_tab === 'voice' ? 'active' : '' ?>">🤖 AI Voice Assistant Answers</a>
+        <a href="content-manager.php?tab=voice" class="c-tab-btn <?= $active_tab === 'voice' ? 'active' : '' ?>">🤖 AI Voice Assistant</a>
+        <a href="content-manager.php?tab=socials" class="c-tab-btn <?= $active_tab === 'socials' ? 'active' : '' ?>">📱 Social Media Links</a>
       </div>
 
       <!-- Tab 1: Company & Contact -->
@@ -636,6 +695,69 @@ if (file_exists($inquiries_file)) {
 
             <div style="margin-top: 1.5rem;">
               <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-size: 1rem;">💾 Save Voice Agent Answers</button>
+            </div>
+          </div>
+        </form>
+      <?php endif; ?>
+ 
+      <!-- Tab 6: Social Media Icons & Profiles -->
+      <?php if ($active_tab === 'socials'): 
+        $soc = $site_content['socials'] ?? [];
+      ?>
+        <form method="POST">
+          <input type="hidden" name="tab" value="socials">
+          <div class="field-card">
+            <div class="field-card-title">📱 Social Media Icons &amp; Channels</div>
+            <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem;">
+              Manage the links for the social media icons displayed in the website footer and contact channels. Empty fields will automatically hide that icon on the live site.
+            </p>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label>📘 Facebook Page URL</label>
+                <input type="url" name="facebook" value="<?= htmlspecialchars($soc['facebook'] ?? '') ?>" placeholder="https://www.facebook.com/yourpage">
+                <div class="field-hint">Your official Facebook page or profile link</div>
+              </div>
+
+              <div class="form-group">
+                <label>📸 Instagram Profile URL</label>
+                <input type="url" name="instagram" value="<?= htmlspecialchars($soc['instagram'] ?? '') ?>" placeholder="https://www.instagram.com/yourhandle">
+                <div class="field-hint">Your brand's Instagram handle link</div>
+              </div>
+
+              <div class="form-group">
+                <label>💬 WhatsApp Direct Chat Link</label>
+                <input type="text" name="whatsapp" value="<?= htmlspecialchars($soc['whatsapp'] ?? '') ?>" placeholder="https://wa.me/2349050278999">
+                <div class="field-hint">Full link with country code (e.g. https://wa.me/2349050278999)</div>
+              </div>
+
+              <div class="form-group">
+                <label>💼 LinkedIn Company Profile URL</label>
+                <input type="url" name="linkedin" value="<?= htmlspecialchars($soc['linkedin'] ?? '') ?>" placeholder="https://www.linkedin.com/in/yourcompany">
+                <div class="field-hint">Corporate business page or executive profile</div>
+              </div>
+
+              <div class="form-group">
+                <label>🐦 Twitter / X Profile URL (Optional)</label>
+                <input type="url" name="twitter" value="<?= htmlspecialchars($soc['twitter'] ?? '') ?>" placeholder="https://x.com/yourhandle">
+                <div class="field-hint">Enter link to display the Twitter / X icon in footer</div>
+              </div>
+
+              <div class="form-group">
+                <label>🎵 TikTok Profile URL (Optional)</label>
+                <input type="url" name="tiktok" value="<?= htmlspecialchars($soc['tiktok'] ?? '') ?>" placeholder="https://www.tiktok.com/@yourhandle">
+                <div class="field-hint">Enter link to display the TikTok icon in footer</div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 1.25rem;">
+              <label>▶️ YouTube Channel URL (Optional)</label>
+              <input type="url" name="youtube" value="<?= htmlspecialchars($soc['youtube'] ?? '') ?>" placeholder="https://www.youtube.com/@yourchannel">
+              <div class="field-hint">Enter link to display the YouTube icon in footer</div>
+            </div>
+
+            <div style="margin-top: 1.75rem;">
+              <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-size: 1rem;">💾 Save &amp; Sync Social Icons</button>
             </div>
           </div>
         </form>

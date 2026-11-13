@@ -447,8 +447,21 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
         # Content Manager POST
         if path == '/admin/content-manager.php':
             length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(length).decode('utf-8', errors='ignore')
-            post_data = urllib.parse.parse_qs(body)
+            content_type = self.headers.get('Content-Type', '')
+            post_data = {}
+            if 'multipart/form-data' in content_type and 'boundary=' in content_type:
+                boundary = content_type.split('boundary=')[1].strip().encode()
+                raw_body = self.rfile.read(length)
+                parts = raw_body.split(b'--' + boundary)
+                for part in parts:
+                    if b'name="' in part:
+                        header_part, _, val_part = part.partition(b'\r\n\r\n')
+                        name = header_part.split(b'name="')[1].split(b'"')[0].decode('utf-8')
+                        val = val_part.rstrip(b'\r\n-').decode('utf-8', errors='ignore')
+                        post_data[name] = [val]
+            else:
+                body = self.rfile.read(length).decode('utf-8', errors='ignore')
+                post_data = urllib.parse.parse_qs(body, keep_blank_values=True)
             tab = post_data.get('tab', ['company'])[0]
             content_file = os.path.join(BASE_DIR, 'admin', 'data', 'site_content.json')
             site_content = {}
@@ -458,7 +471,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                         site_content = json.load(f)
                 except Exception:
                     site_content = {}
-            for sec in ['company', 'pricing', 'hero', 'about', 'voice_agent']:
+            for sec in ['company', 'pricing', 'hero', 'about', 'voice_agent', 'socials']:
                 if sec not in site_content: site_content[sec] = {}
             if tab == 'company':
                 for k in ['company_name', 'tagline', 'phone_primary', 'phone_display', 'whatsapp_number', 'email_address', 'office_address', 'support_hub', 'working_hours']:
@@ -476,6 +489,9 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
                 if 'va_cac_response' in post_data: site_content['voice_agent']['cac_response'] = post_data['va_cac_response'][0].strip()
                 if 'va_social_response' in post_data: site_content['voice_agent']['social_response'] = post_data['va_social_response'][0].strip()
                 if 'va_web_response' in post_data: site_content['voice_agent']['web_response'] = post_data['va_web_response'][0].strip()
+            elif tab == 'socials':
+                for k in ['facebook', 'instagram', 'whatsapp', 'linkedin', 'twitter', 'tiktok', 'youtube']:
+                    if k in post_data: site_content['socials'][k] = post_data[k][0].strip()
             with open(content_file, 'w', encoding='utf-8') as f:
                 json.dump(site_content, f, indent=2, ensure_ascii=False)
             self.sync_site_content(site_content)
@@ -588,6 +604,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
         comp = site_content.get('company', {})
         hero = site_content.get('hero', {})
         pri = site_content.get('pricing', {})
+        soc = site_content.get('socials', {})
 
         rows = ""
         mobile_cards = ""
@@ -720,6 +737,7 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
           <button type="button" class="v-tab-btn active" data-panel="v-panel-company">📍 Company &amp; Studios</button>
           <button type="button" class="v-tab-btn" data-panel="v-panel-hero">🎯 Hero &amp; Metrics</button>
           <button type="button" class="v-tab-btn" data-panel="v-panel-pricing">💰 Core Pricing</button>
+          <button type="button" class="v-tab-btn" data-panel="v-panel-socials">📱 Social Media</button>
         </div>
 
         <!-- Panel 1: Company Details & Studios -->
@@ -847,6 +865,50 @@ class AdminHandler(http.server.SimpleHTTPRequestHandler):
               <span style="font-size: 0.84rem; color: var(--text-muted);">Instantly synchronizes prices on `pricing.html` and booking estimators.</span>
               <button type="submit" class="btn btn-primary" style="padding: 10px 22px;">
                 <span>💾 Save &amp; Sync Pricing Plans</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel 4: Social Media Icons & Channels -->
+        <div class="v-editor-panel" id="v-panel-socials">
+          <form class="v-editor-form" method="POST" action="content-manager.php">
+            <input type="hidden" name="tab" value="socials">
+            <div class="v-editor-grid">
+              <div class="v-form-group">
+                <label>📘 Facebook Page URL</label>
+                <input type="url" name="facebook" value="{html_escape(soc.get('facebook', 'https://www.facebook.com/share/1BDQSsoEZQ/'))}" placeholder="https://www.facebook.com/yourpage">
+              </div>
+              <div class="v-form-group">
+                <label>📸 Instagram Profile URL</label>
+                <input type="url" name="instagram" value="{html_escape(soc.get('instagram', 'https://www.instagram.com/glorifixmediaconcept?igsh=M2JsMHhkOHV3MnJ3'))}" placeholder="https://www.instagram.com/yourhandle">
+              </div>
+              <div class="v-form-group">
+                <label>💬 WhatsApp Hotline Link</label>
+                <input type="text" name="whatsapp" value="{html_escape(soc.get('whatsapp', 'https://wa.me/2349050278999'))}" placeholder="https://wa.me/2349050278999">
+              </div>
+              <div class="v-form-group">
+                <label>💼 LinkedIn Company URL</label>
+                <input type="url" name="linkedin" value="{html_escape(soc.get('linkedin', 'https://www.linkedin.com/in/glorifix-media-concept-594783257'))}" placeholder="https://www.linkedin.com/in/yourcompany">
+              </div>
+              <div class="v-form-group">
+                <label>🐦 Twitter / X Profile URL (Optional)</label>
+                <input type="url" name="twitter" value="{html_escape(soc.get('twitter', ''))}" placeholder="https://x.com/yourhandle">
+              </div>
+              <div class="v-form-group">
+                <label>🎵 TikTok Profile URL (Optional)</label>
+                <input type="url" name="tiktok" value="{html_escape(soc.get('tiktok', ''))}" placeholder="https://www.tiktok.com/@yourhandle">
+              </div>
+              <div class="v-form-group" style="grid-column: 1 / -1;">
+                <label>▶️ YouTube Channel URL (Optional)</label>
+                <input type="url" name="youtube" value="{html_escape(soc.get('youtube', ''))}" placeholder="https://www.youtube.com/@yourchannel">
+              </div>
+            </div>
+
+            <div class="v-save-bar">
+              <span style="font-size: 0.84rem; color: var(--text-muted);">Instantly synchronizes social icons across the footer and contact links of all 6 live pages.</span>
+              <button type="submit" class="btn btn-primary" style="padding: 10px 22px;">
+                <span>💾 Save &amp; Sync Social Icons</span>
               </button>
             </div>
           </form>
@@ -1469,8 +1531,27 @@ function switchTab(tabId, btn) {{
         self.send_html(html)
 
     def sync_site_content(self, content):
+        import re
         phone_pri = content.get('company', {}).get('phone_primary', '09050278999')
         email_addr = content.get('company', {}).get('email_address', 'glorifixmediaconcept@gmail.com')
+        socials = content.get('socials', {})
+        social_items = []
+        if socials.get('facebook'):
+            social_items.append(f'            <a href="{html_escape(socials["facebook"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Facebook">\n              <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>\n            </a>')
+        if socials.get('instagram'):
+            social_items.append(f'            <a href="{html_escape(socials["instagram"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Instagram">\n              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>\n            </a>')
+        if socials.get('whatsapp'):
+            social_items.append(f'            <a href="{html_escape(socials["whatsapp"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="WhatsApp">\n              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.164.577 4.195 1.583 5.952l-1.683 6.148 6.308-1.654c1.701.93 3.653 1.464 5.792 1.464 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>\n            </a>')
+        if socials.get('linkedin'):
+            social_items.append(f'            <a href="{html_escape(socials["linkedin"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="LinkedIn">\n              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>\n            </a>')
+        if socials.get('twitter'):
+            social_items.append(f'            <a href="{html_escape(socials["twitter"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="Twitter">\n              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>\n            </a>')
+        if socials.get('tiktok'):
+            social_items.append(f'            <a href="{html_escape(socials["tiktok"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="TikTok">\n              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c0 1.7-.42 3.4-1.35 4.81-1.22 1.83-3.19 3.03-5.38 3.32-2.19.29-4.47-.28-6.28-1.57-1.81-1.29-2.99-3.3-3.23-5.51-.25-2.21.43-4.48 1.87-6.17 1.44-1.69 3.55-2.67 5.75-2.71.55-.01 1.1.04 1.64.16v4.13c-.49-.16-1.02-.23-1.54-.18-1.15.11-2.23.75-2.84 1.72-.61.97-.68 2.21-.21 3.25.47 1.04 1.48 1.78 2.62 1.91 1.14.13 2.31-.35 2.99-1.28.43-.59.66-1.32.66-2.05V.02z"/></svg>\n            </a>')
+        if socials.get('youtube'):
+            social_items.append(f'            <a href="{html_escape(socials["youtube"])}" target="_blank" rel="noopener noreferrer" class="soc-icon" aria-label="YouTube">\n              <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>\n            </a>')
+        new_footer_socials = '<div class="footer-socials">\n' + '\n'.join(social_items) + '\n          </div>'
+
         for hf in ['index.html', 'about.html', 'services.html', 'pricing.html', 'gallery.html', 'contact.html']:
             fp = os.path.join(BASE_DIR, hf)
             if os.path.exists(fp):
@@ -1478,6 +1559,7 @@ function switchTab(tabId, btn) {{
                     with open(fp, 'r', encoding='utf-8') as f:
                         text = f.read()
                     text = text.replace('glorifixmediaconcept@gmail.com', email_addr)
+                    text = re.sub(r'<div class="footer-socials">.*?</div>', new_footer_socials, text, flags=re.DOTALL)
                     with open(fp, 'w', encoding='utf-8') as f:
                         f.write(text)
                 except Exception:
@@ -1629,6 +1711,7 @@ function switchTab(tabId, btn) {{
         hero = site_content.get('hero', {})
         abt = site_content.get('about', {})
         va = site_content.get('voice_agent', {})
+        soc = site_content.get('socials', {})
 
         tab_body = ''
         if tab == 'company':
@@ -1729,6 +1812,34 @@ function switchTab(tabId, btn) {{
               </div>
             </form>
             """
+        elif tab == 'socials':
+            tab_body = f"""
+            <form method="POST">
+              <input type="hidden" name="tab" value="socials">
+              <div class="admin-card">
+                <div class="card-header"><h3 class="card-title">📱 Social Media Icons &amp; Channels</h3></div>
+                <div class="card-body">
+                  <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.25rem;">
+                    Manage the links for the social media icons displayed in the website footer and contact channels. Empty fields will automatically hide that icon on the live site.
+                  </p>
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">📘 Facebook Page URL</label><input type="url" name="facebook" class="form-control" value="{html_escape(soc.get('facebook',''))}" placeholder="https://www.facebook.com/yourpage"></div>
+                    <div class="form-group"><label class="form-label">📸 Instagram Profile URL</label><input type="url" name="instagram" class="form-control" value="{html_escape(soc.get('instagram',''))}" placeholder="https://www.instagram.com/yourhandle"></div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">💬 WhatsApp Direct Chat Link</label><input type="text" name="whatsapp" class="form-control" value="{html_escape(soc.get('whatsapp',''))}" placeholder="https://wa.me/2349050278999"></div>
+                    <div class="form-group"><label class="form-label">💼 LinkedIn Company Profile URL</label><input type="url" name="linkedin" class="form-control" value="{html_escape(soc.get('linkedin',''))}" placeholder="https://www.linkedin.com/in/yourcompany"></div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group"><label class="form-label">🐦 Twitter / X Profile URL (Optional)</label><input type="url" name="twitter" class="form-control" value="{html_escape(soc.get('twitter',''))}" placeholder="https://x.com/yourhandle"></div>
+                    <div class="form-group"><label class="form-label">🎵 TikTok Profile URL (Optional)</label><input type="url" name="tiktok" class="form-control" value="{html_escape(soc.get('tiktok',''))}" placeholder="https://www.tiktok.com/@yourhandle"></div>
+                  </div>
+                  <div class="form-group"><label class="form-label">▶️ YouTube Channel URL (Optional)</label><input type="url" name="youtube" class="form-control" value="{html_escape(soc.get('youtube',''))}" placeholder="https://www.youtube.com/@yourchannel"></div>
+                  <button type="submit" class="btn btn-primary">💾 Save &amp; Sync Social Icons</button>
+                </div>
+              </div>
+            </form>
+            """
 
         html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1762,6 +1873,7 @@ function switchTab(tabId, btn) {{
         <a href="content-manager.php?tab=hero" class="c-tab-btn {'active' if tab=='hero' else ''}">🌟 Home &amp; Hero</a>
         <a href="content-manager.php?tab=about" class="c-tab-btn {'active' if tab=='about' else ''}">📖 About Us &amp; Founder</a>
         <a href="content-manager.php?tab=voice" class="c-tab-btn {'active' if tab=='voice' else ''}">🤖 Voice Assistant Answers</a>
+        <a href="content-manager.php?tab=socials" class="c-tab-btn {'active' if tab=='socials' else ''}">📱 Social Media Links</a>
       </div>
       {tab_body}
     </div>
